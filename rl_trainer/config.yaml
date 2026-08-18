@@ -1,0 +1,94 @@
+# PyTorch MAPPO validation config for Stage-1 multi-crane scheduling
+num_cranes: 3
+num_lifts: 24
+fixed_duration: 25.0
+setup_time: 10.0
+teardown_time: 5.0
+crane_radius: 18.0
+# setup 후보로 사용할 양중물 허용반경 디스크의 비율입니다.
+# 0.85 = 최대 허용반경 테두리보다 안쪽 85% 반경의 면적에서 setup 후보를 선택.
+lift_setup_inner_fraction: 0.85
+# setup 후보는 양중물별 허용반경 원의 둘레뿐 아니라 내부 면적까지 동심 링으로 샘플링합니다.
+# rings/angles 값이 클수록 내부 후보가 촘촘해지지만 학습/계획 계산량도 늘어납니다.
+lift_setup_area_rings: 4
+lift_setup_area_angles: 16
+default_lift_weight_t: 15.0
+lift_weight_min_t: 5.0
+lift_weight_max_t: 30.0
+# 50t급 단일 크레인 타입의 정격하중 곡선 예시입니다.
+# 실제 현장/장비 제조사 chart 값으로 교체해서 사용하세요.
+# 각 점은 {radius: 작업반경(m), capacityT: 해당 반경 정격하중(t)} 입니다.
+crane_capacity_curve:
+  - {radius: 3.0, capacityT: 50.0}
+  - {radius: 5.0, capacityT: 45.0}
+  - {radius: 8.0, capacityT: 32.0}
+  - {radius: 10.0, capacityT: 25.0}
+  - {radius: 12.0, capacityT: 20.0}
+  - {radius: 15.0, capacityT: 14.0}
+  - {radius: 18.0, capacityT: 10.0}
+# 관측에 크레인 타입 능력치 4차원(정격 최대하중 + 시간비율 3종)을 추가합니다 (obs 17→21).
+# 이 플래그로 학습한 모델은 21차원 actor가 되며, 17차원 구모델과 이어 학습이 불가합니다.
+# AI 양중계획은 각 모델의 학습 당시 값(체크포인트 cfg)을 자동으로 따릅니다.
+obs_type_features: true
+candidate_k: 5
+max_steps: 220
+base_seed: 101
+seed_runs: 10
+train_episodes: 150
+seen_seed_start: 101
+seen_seed_count: 10
+validation_seed_start: 201
+validation_seed_count: 20
+unseen_seed_start: 301
+unseen_seed_count: 30
+
+reward:
+  r_single: 10.0
+  r_all: 100.0
+  r_same: 3.0
+  p_idle: -0.5
+  p_inter_soft: -3.0
+  p_time: -0.1
+  p_move: -0.02
+
+# Multi-type crane framework. Tag a crane with `type: <name>` (anchor_layout /
+# plan request payload) to give it that type's spec. A type with
+# `capacity_curve` rates loads with its own curve (the global curve/chart is
+# ignored for that crane); a type without one — and untyped cranes — keep the
+# global `crane_capacity_curve` above. Reward keys left out inherit the global
+# `reward` block. Cranes of undefined types behave exactly like single-type.
+#
+# ⚠ mobile_100t 의 capacity_curve 는 대표값(임시)입니다.
+#   실제 100t급 제조사 정격하중표로 교체하세요.
+crane_types:
+  mobile_100t:
+    capacity_curve:
+      - {radius: 3.0, capacityT: 100.0}
+      - {radius: 6.0, capacityT: 72.0}
+      - {radius: 10.0, capacityT: 50.0}
+      - {radius: 14.0, capacityT: 36.0}
+      - {radius: 18.0, capacityT: 27.0}
+      - {radius: 24.0, capacityT: 18.0}
+      - {radius: 30.0, capacityT: 12.0}
+    # reward: {}   # 타입별 보상 계수는 RL Trainer 탭의 '크레인 타입' 칸에서도 지정 가능
+#
+# 다른 타입 예시:
+#   tower:
+#     reward:
+#       p_move: 0.0        # tower cranes don't traverse
+#       r_same: 6.0        # bigger bonus for staying in the same radius slot
+
+mappo:
+  gamma: 0.92
+  gae_lambda: 0.95
+  actor_lr: 0.001
+  critic_lr: 0.002
+  clip_eps: 0.20
+  entropy_coef: 0.01
+  value_coef: 0.5
+  max_grad_norm: 0.5
+  update_epochs: 4
+  minibatch_size: 256
+  hidden_dim: 96
+  eps_start: 0.35
+  eps_end: 0.05

@@ -1,0 +1,52 @@
+{
+  "runs": [
+    {
+      "candidateK": 5,
+      "pMove": -0.05,
+      "pTime": -0.1,
+      "pInterSoft": -3.0,
+      "episodes": 200,
+      "outdir": "python_mappo/outputs_sensitivity_k5_pmove005_long/K5_pMovem0p05_pTimem0p1_pSoftm3p0",
+      "seenMAPPO": 297.3646,
+      "seenNearest": 347.8401,
+      "seenRandom": 358.88989999999995,
+      "seenImproveVsNearestPct": 14.511121633187205,
+      "unseenMAPPO": 321.2801333333333,
+      "unseenNearest": 348.0688333333333,
+      "unseenRandom": 344.59103333333337,
+      "unseenImproveVsNearestPct": 7.69637997848127,
+      "unseenImproveVsRandomPct": 6.764801676499434,
+      "completionUnseen": 100.0,
+      "hardExecutedUnseen": 0.0,
+      "hardMaskUnseen": 15.666666666666666,
+      "softUnseen": 3.566666666666667,
+      "moveUnseen": 177.47947021066102,
+      "setupUnseen": 92.33333333333333
+    }
+  ],
+  "ranked": [
+    {
+      "candidateK": 5,
+      "pMove": -0.05,
+      "pTime": -0.1,
+      "pInterSoft": -3.0,
+      "episodes": 200,
+      "outdir": "python_mappo/outputs_sensitivity_k5_pmove005_long/K5_pMovem0p05_pTimem0p1_pSoftm3p0",
+      "seenMAPPO": 297.3646,
+      "seenNearest": 347.8401,
+      "seenRandom": 358.88989999999995,
+      "seenImproveVsNearestPct": 14.511121633187205,
+      "unseenMAPPO": 321.2801333333333,
+      "unseenNearest": 348.0688333333333,
+      "unseenRandom": 344.59103333333337,
+      "unseenImproveVsNearestPct": 7.69637997848127,
+      "unseenImproveVsRandomPct": 6.764801676499434,
+      "completionUnseen": 100.0,
+      "hardExecutedUnseen": 0.0,
+      "hardMaskUnseen": 15.666666666666666,
+      "softUnseen": 3.566666666666667,
+      "moveUnseen": 177.47947021066102,
+      "setupUnseen": 92.33333333333333
+    }
+  ]
+}

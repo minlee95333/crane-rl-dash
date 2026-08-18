@@ -1,0 +1,16 @@
+# Runtime deps for the local-only game-IRL build.
+# Base game / IRL / scorer / cross-validation dependencies. CPU-only PyTorch
+# is declared separately below. There is no database driver: this build
+# stores everything as JSON files on the local disk.
+pyyaml>=6.0
+numpy>=1.24
+# CPU-only torch so /api/plan/run can serve the bundled baseline model
+# (python_mappo/baselines/restricted_detour_mappo_150ep_valaware_baseline/).
+# Pinned to the CPU wheel index to skip the multi-gigabyte CUDA build —
+# a laptop can't host GPU stacks, and we don't need
+# acceleration for single-request inference. Version matches the local
+# environment used to train pytorch_mappo_model.pt so torch.load() doesn't
+# trip on a pickle format mismatch. If runtime OOMs, the fallback is to
+# drop these two lines and surface the 503 in _handle_plan_run.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.11.0+cpu

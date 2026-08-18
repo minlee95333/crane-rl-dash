@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    name: Python tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt pytest
+      - name: Compile check
+        run: python -m compileall -q app.py crane_core crane_db crane_web game_irl rl_trainer
+      - name: Run tests
+        run: python -m pytest -q
+
+  frontend:
+    name: Frontend lint, test, audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint frontend
+        run: npm run lint
+      - name: Frontend smoke tests
+        run: npm test
+      - name: Dependency audit
+        run: npm audit --audit-level=high
+

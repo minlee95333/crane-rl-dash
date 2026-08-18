@@ -1,0 +1,25 @@
+{
+  "name": "crane_rl_dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "lint": "node scripts/lint_frontend.mjs",
+    "test": "node --check curriculum_runs/crane_script.js && node --check curriculum_runs/smoke_async.js && node curriculum_runs/smoke_async.js && node tests/frontend/dom_token_bootstrap.test.mjs && node tests/frontend/game_event_logging.test.mjs && node tests/frontend/play_detail_sequence.test.mjs && node tests/frontend/restricted_zone_warn.test.mjs && node tests/frontend/results_no_baseline_compare.test.mjs && node tests/frontend/plan_spec_readonly.test.mjs && node tests/frontend/plan_lift_xy_edit.test.mjs && node tests/frontend/plan_crane_table.test.mjs && node tests/frontend/plan_row_delete.test.mjs && node tests/frontend/plan_zone_edit.test.mjs && node tests/frontend/plan_height_order_ui.test.mjs && node tests/frontend/plan_capacity_view.test.mjs && node tests/frontend/plan_crane_type.test.mjs && node tests/frontend/mobile_first_scenario_tutorial.test.mjs && node tests/frontend/mobile_win_no_category_bars.test.mjs && node tests/frontend/research_mode_mobile.test.mjs && node tests/frontend/research_completion_notice.test.mjs && node tests/frontend/research_completion_notice_mobile.test.mjs && node tests/frontend/admin_research_views.test.mjs && node tests/frontend/consent_signature_pad.test.mjs && node tests/frontend/research_signature_topup.test.mjs &&node tests/frontend/result_screen_all_scenarios.test.mjs && node tests/frontend/crane_blocked_reason.test.mjs && node tests/frontend/leaderboard_no_polling.test.mjs && node tests/frontend/irl_run_async.test.mjs",
+    "serve": "python3 app.py",
+    "train:pytorch-mappo": "python3 -m rl_trainer.train --episodes 150 --outdir rl_trainer/outputs",
+    "eval:pytorch-mappo": "python3 -m rl_trainer.evaluate --model rl_trainer/outputs/pytorch_mappo_model.pt --seed-start 201 --seed-count 30",
+    "experiment:pytorch-mappo": "python3 -m rl_trainer.experiments --episodes 300 500 --outroot rl_trainer/outputs_experiments",
+    "sweep:pytorch-reward": "python3 -m rl_trainer.reward_sweep --episodes 120 --outroot rl_trainer/outputs_sweep",
+    "auto-reward": "python3 -m rl_trainer.auto_reward_opt --layout rl_trainer/site_example.json --n-trials 30 --outroot rl_trainer/auto_reward_runs",
+    "repeat:pytorch-mappo": "python3 -m rl_trainer.repeated_validation --episodes 120 --outroot rl_trainer/outputs_repeated",
+    "curriculum:pytorch-mappo": "python3 -m rl_trainer.curriculum --episodes 60 90 120 --outdir rl_trainer/outputs_curriculum",
+    "curriculum:stabilize": "python3 -m rl_trainer.curriculum --episodes 90 150 210 --outdir rl_trainer/outputs_curriculum_stable"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "jsdom": "^29.1.1"
+  }
+}

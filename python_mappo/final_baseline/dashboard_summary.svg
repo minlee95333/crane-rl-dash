@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="560" viewBox="0 0 1100 560">
+<rect width="100%" height="100%" fill="#0b1020"/>
+<text x="36" y="48" fill="#e5e7eb" font-size="26" font-family="Arial" font-weight="700">PyTorch Curriculum MAPPO 대시보드 캡처용 요약</text>
+<text x="36" y="78" fill="#94a3b8" font-size="15" font-family="Arial">final_baseline · completion 100% · executed hard overlap 0.0 · HardMask는 차단 count</text>
+<text x="36" y="122" fill="#93c5fd" font-size="15" font-family="Arial" font-weight="700">Level</text>
+<text x="220" y="122" fill="#93c5fd" font-size="15" font-family="Arial" font-weight="700">Split</text>
+<text x="360" y="122" fill="#93c5fd" font-size="15" font-family="Arial" font-weight="700">MAPPO</text>
+<text x="500" y="122" fill="#93c5fd" font-size="15" font-family="Arial" font-weight="700">Nearest</text>
+<text x="650" y="122" fill="#93c5fd" font-size="15" font-family="Arial" font-weight="700">개선율</text>
+<text x="790" y="122" fill="#93c5fd" font-size="15" font-family="Arial" font-weight="700">완료율</text>
+<text x="930" y="122" fill="#93c5fd" font-size="15" font-family="Arial" font-weight="700">실행Hard</text>
+<rect x="28" y="126" width="1030" height="34" rx="8" fill="#111827"/>
+<text x="36" y="148" fill="#f8fafc" font-size="15" font-family="Arial">L1_2C12L</text>
+<text x="220" y="148" fill="#f8fafc" font-size="15" font-family="Arial">seen</text>
+<text x="360" y="148" fill="#f8fafc" font-size="15" font-family="Arial">212.1</text>
+<text x="500" y="148" fill="#f8fafc" font-size="15" font-family="Arial">224.8</text>
+<text x="650" y="148" fill="#86efac" font-size="15" font-family="Arial">+5.65%</text>
+<text x="790" y="148" fill="#f8fafc" font-size="15" font-family="Arial">100%</text>
+<text x="930" y="148" fill="#f8fafc" font-size="15" font-family="Arial">0.0</text>
+<rect x="28" y="168" width="1030" height="34" rx="8" fill="#172033"/>
+<text x="36" y="190" fill="#f8fafc" font-size="15" font-family="Arial">L1_2C12L</text>
+<text x="220" y="190" fill="#f8fafc" font-size="15" font-family="Arial">unseen</text>
+<text x="360" y="190" fill="#f8fafc" font-size="15" font-family="Arial">232.4</text>
+<text x="500" y="190" fill="#f8fafc" font-size="15" font-family="Arial">241.1</text>
+<text x="650" y="190" fill="#86efac" font-size="15" font-family="Arial">+3.62%</text>
+<text x="790" y="190" fill="#f8fafc" font-size="15" font-family="Arial">100%</text>
+<text x="930" y="190" fill="#f8fafc" font-size="15" font-family="Arial">0.0</text>
+<rect x="28" y="210" width="1030" height="34" rx="8" fill="#111827"/>
+<text x="36" y="232" fill="#f8fafc" font-size="15" font-family="Arial">L2_3C24L</text>
+<text x="220" y="232" fill="#f8fafc" font-size="15" font-family="Arial">seen</text>
+<text x="360" y="232" fill="#f8fafc" font-size="15" font-family="Arial">333.1</text>
+<text x="500" y="232" fill="#f8fafc" font-size="15" font-family="Arial">347.8</text>
+<text x="650" y="232" fill="#86efac" font-size="15" font-family="Arial">+4.23%</text>
+<text x="790" y="232" fill="#f8fafc" font-size="15" font-family="Arial">100%</text>
+<text x="930" y="232" fill="#f8fafc" font-size="15" font-family="Arial">0.0</text>
+<rect x="28" y="252" width="1030" height="34" rx="8" fill="#172033"/>
+<text x="36" y="274" fill="#f8fafc" font-size="15" font-family="Arial">L2_3C24L</text>
+<text x="220" y="274" fill="#f8fafc" font-size="15" font-family="Arial">validation</text>
+<text x="360" y="274" fill="#f8fafc" font-size="15" font-family="Arial">317.3</text>
+<text x="500" y="274" fill="#f8fafc" font-size="15" font-family="Arial">355.5</text>
+<text x="650" y="274" fill="#86efac" font-size="15" font-family="Arial">+10.73%</text>
+<text x="790" y="274" fill="#f8fafc" font-size="15" font-family="Arial">100%</text>
+<text x="930" y="274" fill="#f8fafc" font-size="15" font-family="Arial">0.0</text>
+<rect x="28" y="294" width="1030" height="34" rx="8" fill="#111827"/>
+<text x="36" y="316" fill="#f8fafc" font-size="15" font-family="Arial">L2_3C24L</text>
+<text x="220" y="316" fill="#f8fafc" font-size="15" font-family="Arial">unseen</text>
+<text x="360" y="316" fill="#f8fafc" font-size="15" font-family="Arial">322.9</text>
+<text x="500" y="316" fill="#f8fafc" font-size="15" font-family="Arial">338.0</text>
+<text x="650" y="316" fill="#86efac" font-size="15" font-family="Arial">+4.48%</text>
+<text x="790" y="316" fill="#f8fafc" font-size="15" font-family="Arial">100%</text>
+<text x="930" y="316" fill="#f8fafc" font-size="15" font-family="Arial">0.0</text>
+<rect x="28" y="336" width="1030" height="34" rx="8" fill="#172033"/>
+<text x="36" y="358" fill="#f8fafc" font-size="15" font-family="Arial">L3_4C36L</text>
+<text x="220" y="358" fill="#f8fafc" font-size="15" font-family="Arial">seen</text>
+<text x="360" y="358" fill="#f8fafc" font-size="15" font-family="Arial">372.0</text>
+<text x="500" y="358" fill="#f8fafc" font-size="15" font-family="Arial">401.1</text>
+<text x="650" y="358" fill="#86efac" font-size="15" font-family="Arial">+7.25%</text>
+<text x="790" y="358" fill="#f8fafc" font-size="15" font-family="Arial">100%</text>
+<text x="930" y="358" fill="#f8fafc" font-size="15" font-family="Arial">0.0</text>
+<rect x="28" y="378" width="1030" height="34" rx="8" fill="#111827"/>
+<text x="36" y="400" fill="#f8fafc" font-size="15" font-family="Arial">L3_4C36L</text>
+<text x="220" y="400" fill="#f8fafc" font-size="15" font-family="Arial">unseen</text>
+<text x="360" y="400" fill="#f8fafc" font-size="15" font-family="Arial">374.0</text>
+<text x="500" y="400" fill="#f8fafc" font-size="15" font-family="Arial">399.5</text>
+<text x="650" y="400" fill="#86efac" font-size="15" font-family="Arial">+6.36%</text>
+<text x="790" y="400" fill="#f8fafc" font-size="15" font-family="Arial">100%</text>
+<text x="930" y="400" fill="#f8fafc" font-size="15" font-family="Arial">0.0</text>
+<text x="36" y="520" fill="#cbd5e1" font-size="14" font-family="Arial">대시보드 import/replay smoke: Level selector, split selector, baseline rows, representative events/radius fields, replay slider 검증 완료</text>
+</svg>

@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>LIFT-OPS — 사람의 직관이 AI의 보상이 된다</title>
+<meta name="description" content="크레인 양중 퍼즐을 풀면 당신의 판단이 IRL로 보상함수 계수가 되고, Optuna와 MAPPO가 그 위에서 최적 양중 계획을 학습합니다." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap">
+<style>
+/* ============================================================
+   LIFT-OPS 홍보 랜딩 — Industrial Safety (앰버-on-스틸)
+   메타포: 작업표지판 · 무전기 LCD · 안전 게시판
+   3D 히어로는 게임 리플레이 엔진의 축약판(자체 구동, 백엔드 불필요)
+   ============================================================ */
+:root{
+  --surface-0:#15171c;--surface-1:#1c1f24;--surface-2:#2a2f37;--surface-input:#11141a;
+  --text-primary:#f5efe6;--text-secondary:#94a3b8;--text-tertiary:#8b98aa;
+  --text-on-amber:#1c1f24;
+  --accent:#f59e0b;--accent-hover:#fbbf24;--accent-dim:#b45309;--accent-faint:rgba(245,158,11,.10);
+  --info:#7dd3fc;--danger:#dc2626;--danger-text:#fca5a5;--success:#16a34a;--success-soft:#4ade80;
+  --border:#2a2f37;--border-strong:#3b424d;--border-amber:#b45309;
+  --shadow-1:0 1px 2px rgba(7,12,20,.45),0 1px 1px rgba(7,12,20,.30);
+  --shadow-2:0 4px 12px rgba(7,12,20,.55),0 2px 4px rgba(7,12,20,.35);
+  --shadow-3:0 16px 40px rgba(7,12,20,.65),0 6px 14px rgba(7,12,20,.40);
+  --dur-fast:120ms;--dur-std:280ms;--dur-slow:480ms;
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+  --font-sans:"Pretendard Variable","Pretendard","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+  --font-mono:"JetBrains Mono","Cascadia Code",Consolas,monospace;
+  --text-xs:12px;--text-sm:14px;--text-md:16px;--text-lg:21px;--text-xl:28px;--text-2xl:37px;--text-3xl:49px;
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:36px;--s7:54px;
+  --radius-sm:6px;--radius-md:10px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--surface-0);color:var(--text-primary);
+  font-family:var(--font-sans);font-size:var(--text-md);line-height:1.5;
+  word-break:keep-all;overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent-hover)}
+
+.hazard{height:8px;background:repeating-linear-gradient(-45deg,var(--accent) 0,var(--accent) 12px,var(--surface-0) 12px,var(--surface-0) 24px)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--s5)}
+
+/* ── 헤더 ── */
+header.site{position:sticky;top:0;z-index:30;background:var(--surface-1);border-bottom:3px solid var(--border-amber);box-shadow:var(--shadow-2)}
+.hd-row{display:flex;align-items:center;gap:var(--s4);padding:var(--s3) 0}
+.brand{display:inline-flex;align-items:center;gap:var(--s3);color:var(--text-primary)}
+.brand .badge{font-family:var(--font-mono);font-weight:800;font-size:var(--text-sm);letter-spacing:.14em;color:var(--text-on-amber);background:var(--accent);border:2px solid var(--accent-dim);border-radius:var(--radius-sm);padding:3px 10px}
+.brand small{font-size:var(--text-xs);color:var(--text-secondary);letter-spacing:.04em}
+nav.top{margin-left:auto;display:flex;gap:var(--s4);align-items:center}
+nav.top a{font-size:var(--text-sm);font-weight:500;color:var(--text-secondary)}
+nav.top a:hover{color:var(--text-primary)}
+.btn{display:inline-flex;align-items:center;gap:8px;cursor:pointer;border-radius:var(--radius-sm);font-weight:700;font-size:var(--text-sm);padding:10px 18px;border:2px solid var(--accent-dim);background:var(--accent);color:var(--text-on-amber)!important;transition:background var(--dur-fast),transform 80ms}
+.btn:hover{background:var(--accent-hover)}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:transparent;border-color:var(--border-strong);color:var(--text-primary)!important}
+.btn.ghost:hover{background:var(--surface-2)}
+.btn.lg{font-size:var(--text-md);padding:13px 24px}
+
+/* ── 히어로 ── */
+.hero{position:relative;min-height:min(92vh,860px);display:flex;align-items:stretch;overflow:hidden;border-bottom:3px solid var(--border-amber)}
+#heroStage{position:absolute;inset:0;background:#020617}
+#heroStage canvas{display:block;width:100%;height:100%}
+.hero-shade{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(2,6,23,.88) 0%,rgba(2,6,23,.62) 34%,rgba(2,6,23,.12) 62%,rgba(2,6,23,0) 80%),
+             linear-gradient(0deg,rgba(2,6,23,.85) 0%,rgba(2,6,23,0) 30%)}
+.hero-inner{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;gap:var(--s5);padding:96px 0 120px;max-width:620px}
+.kicker{font-family:var(--font-mono);font-weight:700;font-size:var(--text-xs);letter-spacing:.22em;color:var(--accent);text-transform:uppercase}
+.kicker::before{content:"// "}
+h1{margin:0;font-size:clamp(34px,5.2vw,var(--text-3xl));line-height:1.16;letter-spacing:-.015em;font-weight:800}
+h1 .amber{color:var(--accent)}
+.hero-sub{margin:0;font-size:clamp(15px,1.4vw,18px);color:var(--text-secondary);line-height:1.62;max-width:54ch}
+.hero-sub b{color:var(--text-primary);font-weight:600}
+.hero-cta{display:flex;gap:var(--s3);flex-wrap:wrap}
+.hero-note{font-size:var(--text-xs);color:var(--text-tertiary)}
+/* 무전기 LCD 텔레메트리 칩 — 3D 데모와 실시간 동기 */
+.telemetry{
+  position:absolute;right:max(16px,3vw);bottom:18px;z-index:3;
+  background:rgba(2,6,23,.78);border:1px solid var(--border-strong);border-left:4px solid var(--accent);
+  border-radius:var(--radius-sm);padding:10px 14px;box-shadow:var(--shadow-2);
+  font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-size:var(--text-xs);line-height:1.7;color:var(--text-secondary);
+  min-width:248px;
+}
+.telemetry .t-head{display:flex;justify-content:space-between;gap:12px;color:var(--text-tertiary);letter-spacing:.12em;font-size:10px;border-bottom:1px solid var(--border);padding-bottom:4px;margin-bottom:5px}
+.telemetry .row{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.telemetry .dot{width:7px;height:7px;border-radius:50%;background:var(--text-tertiary);flex:none}
+.telemetry .row.on .dot{background:var(--accent)}
+.telemetry .row b{color:var(--text-primary);font-weight:700}
+.telemetry .lmi-g{color:var(--success-soft)}
+.telemetry .lmi-a{color:var(--accent)}
+.telemetry .lmi-r{color:var(--danger-text)}
+#heroFallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:
+  repeating-linear-gradient(-45deg,rgba(245,158,11,.05) 0,rgba(245,158,11,.05) 22px,transparent 22px,transparent 44px),#020617;
+  color:var(--text-tertiary);font-size:var(--text-sm)}
+
+/* ── 스탯 스트립 ── */
+.stats{background:var(--surface-1);border-bottom:1px solid var(--border)}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s4);padding:var(--s5) 0}
+.stat{border-left:3px solid var(--border-amber);padding-left:var(--s4)}
+.stat b{display:block;font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-weight:800;font-size:var(--text-xl);color:var(--accent);line-height:1.2}
+.stat span{font-size:var(--text-xs);color:var(--text-secondary)}
+
+/* ── 섹션 공통 ── */
+section.block{padding:var(--s7) 0}
+.sec-kicker{font-family:var(--font-mono);font-weight:700;font-size:var(--text-xs);letter-spacing:.22em;color:var(--accent);margin:0 0 var(--s2)}
+.sec-kicker .no{display:inline-block;background:var(--accent);color:var(--text-on-amber);border-radius:4px;padding:1px 7px;margin-right:8px}
+h2{margin:0 0 var(--s3);font-size:clamp(24px,3vw,var(--text-2xl));font-weight:800;letter-spacing:-.01em;line-height:1.25}
+.sec-sub{margin:0 0 var(--s5);color:var(--text-secondary);max-width:64ch}
+
+/* 파이프라인 레일 */
+.rail{display:grid;grid-template-columns:1fr 44px 1fr 44px 1fr 44px 1fr;align-items:stretch}
+.station{background:var(--surface-1);border:2px solid var(--border-strong);border-radius:var(--radius-md);padding:var(--s4);box-shadow:var(--shadow-1);display:flex;flex-direction:column;gap:var(--s2)}
+.station .no{font-family:var(--font-mono);font-weight:800;font-size:var(--text-lg);color:var(--text-on-amber);background:var(--accent);border:2px solid var(--accent-dim);width:34px;height:34px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center}
+.station h3{margin:2px 0 0;font-size:var(--text-md);font-weight:700}
+.station h3 small{display:block;font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;color:var(--text-tertiary);font-weight:500;margin-top:2px}
+.station p{margin:0;font-size:var(--text-xs);color:var(--text-secondary);line-height:1.6}
+.belt{display:flex;align-items:center;justify-content:center;color:var(--accent);font-family:var(--font-mono);font-weight:800;letter-spacing:-2px}
+
+/* 3D 피처 그리드 */
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4)}
+.feat{background:var(--surface-1);border:1px solid var(--border-strong);border-left:4px solid var(--border-amber);border-radius:var(--radius-sm);padding:var(--s4);transition:border-color var(--dur-fast),transform var(--dur-fast),box-shadow var(--dur-fast)}
+.feat:hover{border-left-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow-2)}
+.feat .tag{display:inline-block;font-family:var(--font-mono);font-weight:800;font-size:10px;letter-spacing:.18em;color:var(--accent);border:1px solid var(--border-amber);border-radius:4px;padding:2px 8px;margin-bottom:var(--s3)}
+.feat h3{margin:0 0 6px;font-size:var(--text-md);font-weight:700}
+.feat p{margin:0;font-size:var(--text-xs);color:var(--text-secondary);line-height:1.65}
+.feat p code{font-family:var(--font-mono);color:var(--info);font-size:var(--text-xs)}
+
+/* 듀얼 트랙 */
+.tracks2{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4)}
+.track-card{background:var(--surface-1);border:2px solid var(--border-strong);border-radius:var(--radius-md);padding:var(--s5);box-shadow:var(--shadow-1)}
+.track-card.amber{border-color:var(--accent-dim)}
+.track-card h3{margin:0 0 4px;font-size:var(--text-lg);font-weight:800}
+.track-card .who{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;color:var(--text-tertiary);margin-bottom:var(--s4)}
+.track-card ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.track-card li{position:relative;padding-left:22px;font-size:var(--text-sm);color:var(--text-secondary);line-height:1.6}
+.track-card li::before{content:"";position:absolute;left:0;top:8px;width:10px;height:10px;background:var(--accent);transform:rotate(45deg)}
+.track-card li b{color:var(--text-primary)}
+.track-card .foot{margin-top:var(--s4)}
+
+/* CTA 밴드 */
+.cta-band{background:var(--surface-1);border-top:3px solid var(--border-amber);border-bottom:3px solid var(--border-amber)}
+.cta-inner{display:flex;align-items:center;gap:var(--s5);padding:var(--s6) 0;flex-wrap:wrap}
+.cta-inner h2{margin:0;flex:1;min-width:280px}
+footer.site{padding:var(--s5) 0 var(--s6);color:var(--text-tertiary);font-size:var(--text-xs)}
+footer.site .row{display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:wrap}
+
+/* 스크롤 리빌 */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity var(--dur-slow) var(--ease-out),transform var(--dur-slow) var(--ease-out)}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:960px){
+  .rail{grid-template-columns:1fr;gap:0}
+  .belt{height:36px;transform:rotate(90deg)}
+  .features{grid-template-columns:1fr 1fr}
+  .stats-row{grid-template-columns:1fr 1fr;gap:var(--s5)}
+  .tracks2{grid-template-columns:1fr}
+}
+@media (max-width:620px){
+  .features{grid-template-columns:1fr}
+  nav.top a.hide-m{display:none}
+  .telemetry{left:16px;right:16px;min-width:0}
+  .hero-inner{padding:72px 0 150px}
+}
+</style>
+</head>
+<body>
+
+<div class="hazard" aria-hidden="true"></div>
+<header class="site">
+  <div class="wrap hd-row">
+    <a class="brand" href="#top">
+      <span class="badge">LIFT-OPS</span>
+      <small>크레인 양중 RL 플랫폼</small>
+    </a>
+    <nav class="top">
+      <a href="#pipeline" class="hide-m">공정</a>
+      <a href="#replay3d" class="hide-m">3D 리플레이</a>
+      <a href="#tracks" class="hide-m">대상</a>
+      <a class="btn" href="/game">게임 시작</a>
+      <a class="btn ghost" href="/sim">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg>
+        3D 시뮬레이터
+      </a>
+      <a class="btn ghost" href="/game/mobile">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+        모바일로 플레이
+      </a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── 히어로: 자체 구동 3D 데모 ── -->
+<section class="hero" id="top">
+  <div id="heroStage" aria-hidden="true"></div>
+  <div id="heroFallback">3D 데모를 불러오지 못했습니다 — 네트워크 연결을 확인하세요.</div>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="wrap" style="position:relative;z-index:2;display:flex">
+    <div class="hero-inner">
+      <p class="kicker">HUMAN-IN-THE-LOOP REWARD LEARNING</p>
+      <h1>사람의 직관이<br /><span class="amber">AI의 보상</span>이 된다</h1>
+      <p class="hero-sub"><b>60초짜리 크레인 양중 퍼즐</b>을 풀어보세요. 당신의 판단은
+        MaxEnt <b>IRL</b>로 보상함수 계수가 되고, 그 신뢰구간 위에서
+        <b>Optuna</b>가 탐색하고 <b>MAPPO</b>가 최적 양중 계획을 학습합니다.</p>
+      <div class="hero-cta">
+        <a class="btn lg" href="/game">지금 한 판 풀기</a>
+        <a class="btn lg ghost" href="/game/mobile">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+          모바일로 플레이하기
+        </a>
+        <a class="btn lg ghost" href="/sim">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg>
+          3D 시뮬레이터 열기
+        </a>
+        <a class="btn lg ghost" href="#pipeline">공정 살펴보기</a>
+      </div>
+      <p class="hero-note">뒤에서 돌고 있는 장면이 실제 게임의 3D 리플레이 엔진입니다 — 영상이 아닙니다.</p>
+    </div>
+  </div>
+  <div class="telemetry" id="telemetry" aria-hidden="true">
+    <div class="t-head"><span>LIVE TELEMETRY</span><span id="tClock">00.0s</span></div>
+    <div class="row" id="tC1"><span class="dot"></span><span>C1 대기</span></div>
+    <div class="row" id="tC2"><span class="dot"></span><span>C2 대기</span></div>
+  </div>
+</section>
+
+<!-- ── 스탯 스트립 ── -->
+<div class="stats">
+  <div class="wrap stats-row">
+    <div class="stat reveal"><b>7차원</b><span>역추정되는 보상함수 계수</span></div>
+    <div class="stat reveal" style="transition-delay:60ms"><b>~60초</b><span>한 판 플레이 — 데이터 1건</span></div>
+    <div class="stat reveal" style="transition-delay:120ms"><b>95% CI</b><span>IRL 신뢰구간 = Optuna 탐색 범위</span></div>
+    <div class="stat reveal" style="transition-delay:180ms"><b>MAPPO</b><span>다중 크레인 협조 정책 학습</span></div>
+  </div>
+</div>
+
+<!-- ── 공정(파이프라인) ── -->
+<section class="block" id="pipeline">
+  <div class="wrap">
+    <p class="sec-kicker reveal"><span class="no">01</span>PIPELINE</p>
+    <h2 class="reveal">플레이가 정책이 되기까지, 4단계 자동 공정</h2>
+    <p class="sec-sub reveal">게임은 입구일 뿐입니다. 모든 플레이는 행동 로그로 기록되어 보상 학습 파이프라인을 통과합니다.</p>
+    <div class="rail reveal">
+      <div class="station">
+        <span class="no">1</span>
+        <h3>데이터 수집<small>HUMAN PLAYS</small></h3>
+        <p>사람이 양중 순서·크레인 배정·셋업 위치를 직접 결정합니다. 선택과 타이밍이 전부 기록됩니다.</p>
+      </div>
+      <div class="belt">&gt;&gt;</div>
+      <div class="station">
+        <span class="no">2</span>
+        <h3>IRL 계수 복원<small>MAXENT IRL</small></h3>
+        <p>플레이 로그에서 7차원 보상 계수를 역추정하고, 부트스트랩으로 95% 신뢰구간을 만듭니다.</p>
+      </div>
+      <div class="belt">&gt;&gt;</div>
+      <div class="station">
+        <span class="no">3</span>
+        <h3>Optuna 탐색<small>AUTO REWARD</small></h3>
+        <p>IRL 신뢰구간을 탐색 공간 삼아 보상 계수 조합을 자동 시험하고 점수화합니다.</p>
+      </div>
+      <div class="belt">&gt;&gt;</div>
+      <div class="station">
+        <span class="no">4</span>
+        <h3>MAPPO 정책<small>FINAL POLICY</small></h3>
+        <p>최적 계수로 본 학습을 돌려 다중 크레인 협조 양중 계획을 생성하는 정책을 만듭니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 3D 리플레이 피처 ── -->
+<section class="block" id="replay3d" style="background:var(--surface-1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="wrap">
+    <p class="sec-kicker reveal"><span class="no">02</span>3D REPLAY</p>
+    <h2 class="reveal">제출하는 순간, 당신의 계획이 현장이 됩니다</h2>
+    <p class="sec-sub reveal">플레이 중에는 정보가 균등한 2D 도면 — 제출 후에는 실제 양중 절차를 따라가는 3D 시네마틱. 보상 신호를 오염시키지 않으면서 몰입을 만듭니다.</p>
+    <div class="features">
+      <div class="feat reveal"><span class="tag">LMI</span><h3>정격하중 실시간 판독</h3><p>붐이 뻗는 동안 현재 반경의 정격 대비 하중이 계산되어 붐과 반경 링이 <code>초록 → 앰버 → 빨강</code>으로 바뀝니다. 실제 크레인 LMI 계기판과 같은 문법.</p></div>
+      <div class="feat reveal" style="transition-delay:50ms"><span class="tag">TAIL</span><h3>테일 스윙 위험 반경</h3><p>상부체가 선회할 때 카운터웨이트 후미가 그리는 원을 빨강 점선으로 표시 — 현장 사망사고 1순위 위험 구역입니다.</p></div>
+      <div class="feat reveal" style="transition-delay:100ms"><span class="tag">RIG</span><h3>리깅 + 진자 스윙</h3><p>케이블이 훅 블록까지 내려와 4가닥 슬링으로 화물을 묶고, 이륙 직후엔 감쇠 진자처럼 흔들리다 잦아듭니다.</p></div>
+      <div class="feat reveal" style="transition-delay:150ms"><span class="tag">TELE</span><h3>3단 텔레스코픽 + 처짐</h3><p>붐 섹션이 실제로 슬라이드되어 뻗고, 하중이 매달리면 무게에 비례해 끝단이 휘어 내려갑니다.</p></div>
+      <div class="feat reveal" style="transition-delay:200ms"><span class="tag">PATH</span><h3>이동 경로 추적</h3><p>제한구역을 우회하는 실제 주행 경로가 지면에 그려지고, 지나간 step은 흐릿한 흔적으로 누적됩니다.</p></div>
+      <div class="feat reveal" style="transition-delay:250ms"><span class="tag">CAM</span><h3>시네마틱 카메라</h3><p>작업 중인 크레인을 따라가는 저공 추적 샷과 현장 전체 궤도 샷을 버튼 하나로 전환합니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 듀얼 트랙 ── -->
+<section class="block" id="tracks">
+  <div class="wrap">
+    <p class="sec-kicker reveal"><span class="no">03</span>FOR WHOM</p>
+    <h2 class="reveal">한 화면, 두 사용자</h2>
+    <div class="tracks2">
+      <div class="track-card amber reveal">
+        <h3>플레이어에게는 — 진짜 현장 퍼즐</h3>
+        <p class="who">GENERAL / TUTORIAL TRACK</p>
+        <ul>
+          <li><b>60초 한 판.</b> 클릭으로 배정하고, 드래그로 셋업 위치를 미세 조정합니다.</li>
+          <li><b>간섭·정격하중이 곧 난이도.</b> 무거운 화물일수록 가까이 붙어야 합니다.</li>
+          <li><b>제출하면 세리머니.</b> 카테고리 게이지가 차오르고 등급 도장이 찍히고, 3D 리플레이가 열립니다.</li>
+          <li><b>리더보드·신기록.</b> 시나리오별 베스트가 남습니다.</li>
+        </ul>
+        <div class="foot"><a class="btn" href="/game">플레이 하기</a></div>
+      </div>
+      <div class="track-card reveal" style="transition-delay:80ms">
+        <h3>연구자에게는 — 보상 학습 데이터셋</h3>
+        <p class="who">EXPERT / RESEARCH TRACK</p>
+        <ul>
+          <li><b>행동 로그 그대로.</b> step별 결정·undo·셋업 좌표·소요 시간이 구조화 저장됩니다.</li>
+          <li><b>MaxEnt IRL.</b> 7차원 계수 + 부트스트랩 95% CI를 산출합니다.</li>
+          <li><b>CI → Optuna 탐색 공간.</b> 자동 보상 탐색이 사람 사전분포 위에서 돕니다.</li>
+          <li><b>A/B·교차검증 내장.</b> prior 유/무 비교 리포트까지 한 번에.</li>
+        </ul>
+        <div class="foot"><a class="btn ghost" href="/hub">연구 대시보드 열기</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<div class="cta-band">
+  <div class="wrap cta-inner">
+    <h2 class="reveal">당신의 60초가, 다음 모델의 보상함수가 됩니다.</h2>
+    <a class="btn lg reveal" href="/game" style="transition-delay:80ms">지금 한 판 풀기</a>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="wrap row">
+    <span>LIFT-OPS — PyTorch MAPPO 다중 크레인 양중 스케줄링 · MaxEnt IRL · Optuna</span>
+    <span class="mono">amber = 주의 · red = 정지 · 모든 수치는 tabular-nums</span>
+  </div>
+</footer>
+
+<script>
+'use strict';
+/* ── 스크롤 리빌 ── */
+(() => {
+  const els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){ els.forEach(e => e.classList.add('in')); return; }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => { if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, {threshold: 0.12});
+  els.forEach(e => io.observe(e));
+})();
+
+/* ============================================================
+   히어로 3D 데모 — 게임 리플레이 엔진의 축약판.
+   백엔드·로그인 불필요: 합성 시나리오 2대×2양중이 26초 주기로 루프.
+   크레인 지오메트리·붐/아웃리거/리깅/LMI 로직은 index.html의
+   _g3dBuildCrane 계열과 동일한 수치를 사용한다.
+   ============================================================ */
+const REDUCED = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+const ease = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+const lerpAngle = (a, b, u) => { let d = b - a; while(d > Math.PI) d -= 2*Math.PI; while(d < -Math.PI) d += 2*Math.PI; return a + d * u; };
+
+const CURVE = [{r:5,c:40},{r:9,c:28},{r:13,c:20},{r:17,c:14},{r:21,c:10}];
+function capAt(r){
+  if(r <= CURVE[0].r) return CURVE[0].c;
+  for(let i = 1; i < CURVE.length; i++) if(CURVE[i-1].r < r && r <= CURVE[i].r) return CURVE[i].c;
+  return null;
+}
+
+async function bootHero(){
+  const stage = document.getElementById('heroStage');
+  let T;
+  try{ T = await import('https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js'); }
+  catch(e){ document.getElementById('heroFallback').style.display = 'flex'; return; }
+
+  const W = 80, H = 80;
+  const scene = new T.Scene();
+  scene.background = new T.Color(0x020617);
+  scene.fog = new T.Fog(0x020617, 120, 320);
+  const site = new T.Group();
+  site.position.set(-W/2, -H/2, 0);
+  scene.add(site);
+
+  /* 지면 — 절차적 콘크리트 스페클 */
+  const gcnv = document.createElement('canvas'); gcnv.width = gcnv.height = 256;
+  const gc = gcnv.getContext('2d');
+  gc.fillStyle = '#11141b'; gc.fillRect(0,0,256,256);
+  for(let i = 0; i < 1100; i++){
+    const v = 120 + Math.random()*50|0;
+    gc.fillStyle = `rgba(${v},${v+8},${v+22},${0.03 + Math.random()*0.06})`;
+    gc.fillRect(Math.random()*256, Math.random()*256, 1.6, 1.6);
+  }
+  const gtex = new T.CanvasTexture(gcnv);
+  gtex.wrapS = gtex.wrapT = T.RepeatWrapping; gtex.repeat.set(9,9);
+  const ground = new T.Mesh(new T.PlaneGeometry(W*3, H*3), new T.MeshLambertMaterial({color:0xb8c0cc, map:gtex}));
+  ground.position.set(W/2, H/2, -0.05); site.add(ground);
+  const grid = new T.GridHelper(W, W/10, 0x334155, 0x1e293b);
+  grid.rotation.x = Math.PI/2; grid.position.set(W/2, H/2, 0); site.add(grid);
+  scene.add(new T.HemisphereLight(0xe2e8f0, 0x0b1220, 1.0));
+  const sun = new T.DirectionalLight(0xfff7ed, 1.4); sun.position.set(64, -40, 80); scene.add(sun);
+
+  /* 제한구역 + 소품 */
+  const rz = new T.Mesh(new T.BoxGeometry(14, 10, 4), new T.MeshLambertMaterial({color:0xdc2626, transparent:true, opacity:0.22}));
+  rz.position.set(40, 14, 2); site.add(rz);
+  const coneMat = new T.MeshLambertMaterial({color:0xf97316});
+  for(let i = 0; i < 6; i++){
+    const cone = new T.Mesh(new T.CylinderGeometry(0.05, 0.34, 0.95, 8), coneMat);
+    cone.rotation.x = Math.PI/2; cone.position.set(8 + i*13, 3, 0.48); site.add(cone);
+  }
+  const cont = new T.Mesh(new T.BoxGeometry(6, 2.6, 2.6), new T.MeshLambertMaterial({color:0x475569}));
+  cont.position.set(6, H-4, 1.3); site.add(cont);
+  const beamMat = new T.MeshLambertMaterial({color:0x64748b});
+  for(let i = 0; i < 3; i++){
+    const b = new T.Mesh(new T.BoxGeometry(7, 0.5, 0.45), beamMat);
+    b.position.set(W-7, H-3.5, 0.25 + i*0.5); b.rotation.z = 0.16; site.add(b);
+  }
+
+  /* 크레인 빌더 — 리플레이 엔진과 동일 지오메트리 */
+  function buildCrane(colorHex){
+    const root = new T.Group();
+    const mat = new T.MeshLambertMaterial({color: colorHex});
+    const dark = new T.MeshLambertMaterial({color: 0x1f2937});
+    const gray = new T.MeshLambertMaterial({color: 0x94a3b8});
+    const carrier = new T.Group(); root.add(carrier);
+    const chassis = new T.Mesh(new T.BoxGeometry(7,2.4,1.1), mat); chassis.position.z = 1.05; carrier.add(chassis);
+    const cab = new T.Mesh(new T.BoxGeometry(1.7,2.2,1.4), mat); cab.position.set(2.9,0,2.0); carrier.add(cab);
+    [-2.6,-0.9,0.8,2.5].forEach(wx => {
+      const ax = new T.Mesh(new T.CylinderGeometry(0.55,0.55,2.9,10), dark);
+      ax.position.set(wx,0,0.55); carrier.add(ax);
+    });
+    const outriggers = new T.Group(); const outParts = [];
+    [[-2.4,1],[-2.4,-1],[2.4,1],[2.4,-1]].forEach(([ox,sgn]) => {
+      const bg = new T.BoxGeometry(0.45,1.7,0.32); bg.translate(0,0.85,0);
+      const beam = new T.Mesh(bg, gray); beam.position.set(ox, sgn*1.15, 0.75);
+      if(sgn < 0) beam.rotation.z = Math.PI;
+      outriggers.add(beam);
+      const pad = new T.Mesh(new T.CylinderGeometry(0.5,0.5,0.5,8), gray);
+      pad.rotation.x = Math.PI/2; pad.position.set(ox, sgn*2.9, 0.28);
+      outriggers.add(pad);
+      outParts.push({beam, pad, sgn});
+    });
+    carrier.add(outriggers);
+    const sup = new T.Group(); sup.position.set(-0.8,0,2.0); carrier.add(sup);
+    const cwt = new T.Mesh(new T.BoxGeometry(1.6,2.0,1.3), mat); cwt.position.set(-1.9,0,0.4); sup.add(cwt);
+    const supCab = new T.Mesh(new T.BoxGeometry(2.1,1.1,1.0), mat); supCab.position.set(0.7,-0.85,0.35); sup.add(supCab);
+    const boomPivot = new T.Group(); boomPivot.position.set(0.3,0,0.7); sup.add(boomPivot);
+    const boomMat = new T.MeshLambertMaterial({color: colorHex});
+    const boomSecs = [];
+    [0.78,0.62,0.48].forEach(w => {
+      const sg = new T.BoxGeometry(1,w,w); sg.translate(0.5,0,0);
+      const m = new T.Mesh(sg, boomMat); boomPivot.add(m); boomSecs.push(m);
+    });
+    const tip = new T.Object3D(); tip.position.x = 1; boomSecs[2].add(tip);
+    const beacon = new T.Mesh(new T.CylinderGeometry(0.24,0.24,0.4,8),
+      new T.MeshLambertMaterial({color:0x7c5806, emissive:0xf59e0b, emissiveIntensity:0}));
+    beacon.rotation.x = Math.PI/2; beacon.position.set(0.7,-0.85,1.05); sup.add(beacon);
+    const tailPts = [];
+    for(let k = 0; k <= 56; k++){ const a = k/56*Math.PI*2; tailPts.push(new T.Vector3(Math.cos(a)*3.6, Math.sin(a)*3.6, 0.1)); }
+    const tailRing = new T.Line(new T.BufferGeometry().setFromPoints(tailPts),
+      new T.LineDashedMaterial({color:0xef4444, dashSize:1.1, gapSize:0.8, transparent:true, opacity:0.75}));
+    tailRing.computeLineDistances(); tailRing.visible = false; root.add(tailRing);
+    const cable = new T.Line(new T.BufferGeometry().setFromPoints([new T.Vector3(), new T.Vector3()]),
+      new T.LineBasicMaterial({color:0xe2e8f0}));
+    cable.visible = false;
+    const hook = new T.Mesh(new T.BoxGeometry(0.5,0.5,0.7), dark); hook.visible = false;
+    const slings = new T.LineSegments(
+      new T.BufferGeometry().setFromPoints(Array.from({length:8}, () => new T.Vector3())),
+      new T.LineBasicMaterial({color:0x94a3b8, transparent:true, opacity:0.9}));
+    slings.visible = false;
+    const shadow = new T.Mesh(new T.CircleGeometry(3.8,24), new T.MeshBasicMaterial({color:0x020617, transparent:true, opacity:0.4, depthWrite:false}));
+    shadow.position.z = 0.04; root.add(shadow);
+    /* 반경 링 (LMI 색) */
+    const disc = new T.Mesh(new T.CircleGeometry(1,48), new T.MeshBasicMaterial({color:colorHex, transparent:true, opacity:0.08, depthWrite:false}));
+    disc.position.z = 0.06; disc.visible = false; site.add(disc);
+    const rPts = [];
+    for(let k = 0; k <= 48; k++){ const a = k/48*Math.PI*2; rPts.push(new T.Vector3(Math.cos(a), Math.sin(a), 0)); }
+    const ring = new T.Line(new T.BufferGeometry().setFromPoints(rPts), new T.LineBasicMaterial({color:0x22c55e, transparent:true, opacity:0.85}));
+    ring.position.z = 0.08; ring.visible = false; site.add(ring);
+    site.add(root); site.add(cable); site.add(hook); site.add(slings);
+    return {root, carrier, sup, boomPivot, boomSecs, boomMat, tip, outriggers, outParts, cable, hook, slings, beacon, tailRing, disc, ring, baseColor: colorHex};
+  }
+  function setBoom(cr, L, defl){
+    const segL = L/3; let x = 0, z = 0, a = 0;
+    for(let i = 0; i < 3; i++){
+      const m = cr.boomSecs[i];
+      m.position.set(x, 0, z); m.rotation.y = a;
+      m.scale.x = segL + (i < 2 ? 0.5 : 0);
+      a += defl/3; x += Math.cos(a)*segL; z += -Math.sin(a)*segL;
+    }
+  }
+  function deployOut(cr, k){
+    if(cr._outK === k) return; cr._outK = k;
+    cr.outriggers.visible = k > 0.02;
+    cr.outParts.forEach(p => {
+      p.beam.scale.y = Math.max(0.08, k);
+      p.pad.position.y = p.sgn*(1.15 + 1.75*k);
+      p.pad.position.z = 0.95 - 0.67*k;
+      p.pad.visible = k > 0.4;
+    });
+  }
+
+  /* ── 합성 시나리오: 크레인 2대 × 양중 2건, 26초 루프 ──
+     job: {ci, from, to, lift, w, t0, t1} — 페이즈는 job 내 진행도 p 기준
+     travel[0,.45) → 아웃리거 전개[.45,.57) → 선회+텔레스코핑[.57,.75) → 양중[.75,1] */
+  const LOOP = 26;
+  const cranes = [buildCrane(0xf59e0b), buildCrane(0x7dd3fc)];
+  const lifts = [
+    {x:38, y:34, w:15}, {x:44, y:46, w:18}, {x:18, y:60, w:9}, {x:66, y:20, w:19},
+    {x:58, y:66, w:12}, {x:26, y:12, w:13},
+  ];
+  const jobs = [
+    {ci:0, from:{x:16,y:18}, to:{x:30,y:26}, li:0, t0:0.5,  t1:8.5},
+    {ci:1, from:{x:64,y:62}, to:{x:52,y:50}, li:1, t0:4.0,  t1:12.5},
+    {ci:0, from:{x:30,y:26}, to:{x:26,y:52}, li:2, t0:10.0, t1:18.0},
+    {ci:1, from:{x:52,y:50}, to:{x:58,y:28}, li:3, t0:14.5, t1:23.0},
+  ];
+  jobs.forEach(j => {
+    const L = lifts[j.li];
+    j.az = Math.atan2(L.y - j.to.y, L.x - j.to.x);
+    j.r = Math.max(2, Math.hypot(L.x - j.to.x, L.y - j.to.y));
+    j.heading = Math.atan2(j.to.y - j.from.y, j.to.x - j.from.x);
+  });
+  const liftObjs = lifts.map(L => {
+    const s = 1.4 + Math.min(2.4, L.w/10);
+    const m = new T.Mesh(new T.BoxGeometry(s, s, s*0.8), new T.MeshLambertMaterial({color:0xf59e0b}));
+    m.position.set(L.x, L.y, s*0.4); site.add(m);
+    const sh = new T.Mesh(new T.CircleGeometry(s*0.75,16), new T.MeshBasicMaterial({color:0x020617, transparent:true, opacity:0.35, depthWrite:false}));
+    sh.position.set(L.x, L.y, 0.04); site.add(sh);
+    return {mesh: m, size: s, baseZ: s*0.4, bx: L.x, by: L.y};
+  });
+
+  /* 렌더러 + 카메라 */
+  const renderer = new T.WebGLRenderer({antialias:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  stage.appendChild(renderer.domElement);
+  const camera = new T.PerspectiveCamera(45, 16/9, 0.5, 500);
+  camera.up.set(0,0,1);
+  function fit(){
+    const w = stage.clientWidth, h = stage.clientHeight;
+    if(!w || !h) return;
+    renderer.setSize(w, h, false);
+    camera.aspect = w/h; camera.updateProjectionMatrix();
+  }
+  fit();
+  new ResizeObserver(fit).observe(stage);
+
+  const tEls = {
+    clock: document.getElementById('tClock'),
+    rows: [document.getElementById('tC1'), document.getElementById('tC2')],
+  };
+  const LMI_HEX = [0x22c55e, 0xf59e0b, 0xef4444];
+  const LMI_CSS = ['lmi-g', 'lmi-a', 'lmi-r'];
+
+  function pose(tt){
+    /* 루프 시점 tt(초)에서 모든 오브젝트를 결정적으로 배치 */
+    liftObjs.forEach((o, i) => {
+      const doneBy = jobs.find(j => j.li === i && tt >= j.t1);
+      o.mesh.material.color.set(doneBy ? 0x475569 : 0xf59e0b);
+      o.mesh.position.set(o.bx, o.by, o.baseZ);
+      o.mesh.rotation.z = 0;
+    });
+    const tele = [];
+    cranes.forEach((cr, ci) => {
+      const myJobs = jobs.filter(j => j.ci === ci);
+      const active = myJobs.find(j => tt >= j.t0 && tt < j.t1);
+      const lastDone = [...myJobs].reverse().find(j => tt >= j.t1);
+      let x, y, heading, az, radius, outK = 1, hoist = 0, lift = null, util = null;
+      if(active){
+        const p = (tt - active.t0) / (active.t1 - active.t0);
+        lift = lifts[active.li];
+        if(p < 0.45){
+          const e = ease(p/0.45);
+          x = active.from.x + (active.to.x - active.from.x)*e;
+          y = active.from.y + (active.to.y - active.from.y)*e;
+          heading = active.heading; az = heading; radius = 6; outK = 0;
+        } else if(p < 0.57){
+          const k = ease((p - 0.45)/0.12);
+          x = active.to.x; y = active.to.y; heading = active.heading;
+          az = heading; radius = 6; outK = k;
+        } else if(p < 0.75){
+          const k = ease((p - 0.57)/0.18);
+          x = active.to.x; y = active.to.y; heading = active.heading;
+          az = lerpAngle(heading, active.az, k);
+          radius = 6 + (active.r - 6)*k;
+        } else {
+          x = active.to.x; y = active.to.y; heading = active.heading;
+          az = active.az; radius = active.r;
+          hoist = (p - 0.75)/0.25;
+        }
+      } else {
+        const base = lastDone || null;
+        x = base ? base.to.x : jobs.find(j=>j.ci===ci).from.x;
+        y = base ? base.to.y : jobs.find(j=>j.ci===ci).from.y;
+        heading = base ? base.heading : -Math.PI/2;
+        az = base ? base.az : -Math.PI/2;
+        radius = base ? base.r : 7;
+      }
+      cr.root.position.set(x, y, 0);
+      cr.carrier.rotation.z = heading;
+      cr.sup.rotation.z = az - heading;
+      deployOut(cr, outK);
+      cr.beacon.material.emissiveIntensity = active
+        ? (REDUCED ? 0.7 : 0.35 + 0.55*(0.5 + 0.5*Math.sin(performance.now()/1000*9))) : 0;
+      const work = !!active && (tt - active.t0)/(active.t1 - active.t0) >= 0.45;
+      cr.tailRing.visible = work;
+      /* LMI */
+      if(lift){
+        const cap = capAt(radius);
+        util = (cap == null || cap <= 0) ? Infinity : lift.w/cap;
+      }
+      const level = util == null ? 0 : (util > 1 ? 2 : (util >= 0.8 ? 1 : 0));
+      cr.boomMat.color.setHex(work && level > 0 ? LMI_HEX[level] : cr.baseColor);
+      if(work){
+        cr.disc.visible = cr.ring.visible = true;
+        cr.disc.position.set(x, y, 0.06); cr.disc.scale.set(radius, radius, 1);
+        cr.ring.position.set(x, y, 0.08); cr.ring.scale.set(radius, radius, 1);
+        cr.ring.material.color.setHex(LMI_HEX[level]);
+      } else { cr.disc.visible = cr.ring.visible = false; }
+      /* 붐 + 처짐 */
+      const luff = Math.max(0.32, Math.min(1.1, Math.atan2(12, radius)));
+      cr.boomPivot.rotation.y = -luff;
+      let defl = 0;
+      if(lift && hoist > 0){
+        const lf = util == null ? Math.min(1, lift.w/35) : Math.min(1.2, util);
+        defl = (0.035 + 0.075*lf)*Math.min(1, hoist*4);
+      }
+      setBoom(cr, radius/Math.cos(luff), defl);
+      /* 케이블·슬링·화물 */
+      const tipPos = new T.Vector3(); cr.tip.getWorldPosition(tipPos);
+      if(lift && hoist > 0){
+        const lo = liftObjs[jobs.find(j=>j.ci===ci && tt>=j.t0 && tt<j.t1).li];
+        const riseT = Math.max(0, Math.min(1, (hoist - 0.25)/0.6));
+        const rise = Math.sin(riseT*Math.PI)*3.2;
+        const sway = riseT > 0 ? Math.sin(riseT*Math.PI*3)*Math.pow(1-riseT,1.5)*0.85 : 0;
+        const px = Math.cos(az + Math.PI/2), py = Math.sin(az + Math.PI/2);
+        const lx = lo.bx + px*sway, ly = lo.by + py*sway;
+        lo.mesh.position.set(lx, ly, lo.baseZ + rise);
+        lo.mesh.rotation.z = 0.07*Math.sin(riseT*Math.PI*2.4)*(1-riseT);
+        const top = lo.mesh.position.z + lo.size*0.4, apexZ = top + 1.15;
+        cr.hook.visible = cr.cable.visible = cr.slings.visible = true;
+        cr.hook.position.set(lx, ly, apexZ);
+        const pts = cr.cable.geometry.attributes.position.array;
+        const tl = cr.cable.parent.worldToLocal(tipPos.clone());
+        pts[0]=tl.x; pts[1]=tl.y; pts[2]=tl.z; pts[3]=lx; pts[4]=ly; pts[5]=apexZ;
+        cr.cable.geometry.attributes.position.needsUpdate = true;
+        const hw = lo.size*0.42, sp = cr.slings.geometry.attributes.position.array;
+        [[-hw,-hw],[hw,-hw],[-hw,hw],[hw,hw]].forEach(([cx2,cy2], i) => {
+          sp[i*6]=lx; sp[i*6+1]=ly; sp[i*6+2]=apexZ;
+          sp[i*6+3]=lx+cx2; sp[i*6+4]=ly+cy2; sp[i*6+5]=top;
+        });
+        cr.slings.geometry.attributes.position.needsUpdate = true;
+      } else { cr.cable.visible = cr.hook.visible = cr.slings.visible = false; }
+      /* 텔레메트리 */
+      let phaseTxt = '대기';
+      if(active){
+        const p = (tt - active.t0)/(active.t1 - active.t0);
+        phaseTxt = p < 0.45 ? '주행' : p < 0.57 ? '셋업' : p < 0.75 ? '선회' : '양중';
+      }
+      tele.push({ci, active: !!active, phase: phaseTxt, r: radius, util, level});
+    });
+    /* DOM 텔레메트리 칩 */
+    tele.forEach(s => {
+      const row = tEls.rows[s.ci];
+      row.classList.toggle('on', s.active);
+      const utilTxt = (s.active && s.util != null && s.phase === '양중')
+        ? ` · <span class="${LMI_CSS[s.level]}">정격 ${s.util === Infinity ? '초과' : Math.round(s.util*100) + '%'}</span>` : '';
+      row.innerHTML = `<span class="dot"></span><span>C${s.ci+1} <b>${s.phase}</b> · R ${s.r.toFixed(1)}m${utilTxt}</span>`;
+    });
+  }
+
+  /* 루프 — 히어로가 화면에 있을 때만 구동 */
+  let running = true, raf = null, t0 = performance.now();
+  const heroEl = document.querySelector('.hero');
+  new IntersectionObserver(en => {
+    running = en[0].isIntersecting;
+    if(running && !raf) frame();
+  }, {threshold: 0.05}).observe(heroEl);
+
+  const camR = 58;
+  let camTheta = -2.25, camPhiV = 0.56;
+  /* 직접 인터랙션 — 마우스 드래그로 현장을 둘러볼 수 있다 (터치는 페이지
+     스크롤을 막지 않도록 제외). 드래그를 멈추면 자동 선회가 이어진다. */
+  let heroDrag = false, hlx = 0, hly = 0;
+  renderer.domElement.style.cursor = 'grab';
+  renderer.domElement.addEventListener('pointerdown', e => {
+    if(e.pointerType !== 'mouse' || e.button !== 0) return;
+    heroDrag = true; hlx = e.clientX; hly = e.clientY;
+    renderer.domElement.style.cursor = 'grabbing';
+  });
+  window.addEventListener('pointermove', e => {
+    if(!heroDrag) return;
+    camTheta -= (e.clientX - hlx) * 0.005;
+    camPhiV = Math.max(0.25, Math.min(1.15, camPhiV + (e.clientY - hly) * 0.003));
+    hlx = e.clientX; hly = e.clientY;
+  });
+  window.addEventListener('pointerup', () => {
+    heroDrag = false;
+    renderer.domElement.style.cursor = 'grab';
+  });
+  function frame(){
+    raf = null;
+    if(!running) return;
+    const now = performance.now();
+    const tt = REDUCED ? 7.4 : ((now - t0)/1000) % LOOP;
+    if(!REDUCED && !heroDrag) camTheta += 0.00045 * Math.min(50, now - (frame._last || now));
+    frame._last = now;
+    pose(tt);
+    tEls.clock.textContent = tt.toFixed(1).padStart(4, '0') + 's';
+    camera.position.set(camR*Math.cos(camTheta)*Math.cos(camPhiV), camR*Math.sin(camTheta)*Math.cos(camPhiV), camR*Math.sin(camPhiV));
+    camera.lookAt(0, 0, 2);
+    renderer.render(scene, camera);
+    if(!REDUCED) raf = requestAnimationFrame(frame);
+  }
+  frame();
+}
+bootHero();
+</script>
+</body>
+</html>

@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>양중 관제 보드 — IRL→Optuna→MAPPO 파이프라인</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+/* ============================================================
+   양중 관제 보드 (Lift-Ops Pipeline Control Board)
+   Industrial Safety 미학 — CLAUDE.md 디자인 컨텍스트 준수
+   앰버-on-스틸 · 표지판 메타포 · Bloomberg 모노 숫자
+   ============================================================ */
+:root{
+  --surface-0:#15171c;--surface-1:#1c1f24;--surface-2:#2a2f37;--surface-input:#11141a;
+  --text-primary:#f5efe6;--text-secondary:#94a3b8;--text-tertiary:#8b98aa;
+  --text-on-amber:#1c1f24;--text-on-red:#ffffff;--text-on-green:#ffffff;
+  --accent:#f59e0b;--accent-hover:#fbbf24;--accent-dim:#b45309;--accent-faint:rgba(245,158,11,.10);
+  --info:#7dd3fc;--info-deep:#38bdf8;
+  --danger:#dc2626;--danger-text:#fca5a5;--warn:#f59e0b;--warn-soft:#fef3c7;
+  --success:#16a34a;--success-soft:#4ade80;
+  --border:#2a2f37;--border-strong:#3b424d;--border-amber:#b45309;
+  --shadow-1:0 1px 2px rgba(7,12,20,.45),0 1px 1px rgba(7,12,20,.30);
+  --shadow-2:0 4px 12px rgba(7,12,20,.55),0 2px 4px rgba(7,12,20,.35);
+  --shadow-3:0 16px 40px rgba(7,12,20,.65),0 6px 14px rgba(7,12,20,.40);
+  --dur-fast:120ms;--dur-std:280ms;--dur-slow:480ms;
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+  --font-sans:"Pretendard Variable","Pretendard","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+  --font-mono:"JetBrains Mono","Cascadia Code",Consolas,monospace;
+  --text-xs:12px;--text-sm:14px;--text-md:16px;--text-lg:21px;--text-xl:28px;--text-2xl:37px;
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:36px;--s7:54px;
+  --radius-sm:6px;--radius-md:10px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--surface-0);color:var(--text-primary);
+  font-family:var(--font-sans);font-size:var(--text-sm);line-height:1.5;
+  word-break:keep-all;overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  /* 강철판 질감: 미세 노이즈 격자 (글래스모피즘 아님 — 불투명 표면) */
+  background-image:
+    repeating-linear-gradient(0deg,transparent,transparent 47px,rgba(59,66,77,.14) 47px,rgba(59,66,77,.14) 48px),
+    repeating-linear-gradient(90deg,transparent,transparent 47px,rgba(59,66,77,.10) 47px,rgba(59,66,77,.10) 48px);
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+
+/* ── 헤더: 작업표지판 ───────────────────────────── */
+header{
+  border-bottom:3px solid var(--border-amber);
+  background:var(--surface-1);
+  position:sticky;top:0;z-index:10;box-shadow:var(--shadow-2);
+}
+.hazard{ /* 위험 표지 사선 스트라이프 */
+  height:8px;
+  background:repeating-linear-gradient(-45deg,var(--accent) 0,var(--accent) 12px,var(--surface-0) 12px,var(--surface-0) 24px);
+}
+.hd-inner{
+  max-width:1280px;margin:0 auto;padding:var(--s4) var(--s5);
+  display:flex;align-items:center;gap:var(--s4);flex-wrap:wrap;
+}
+.hd-badge{
+  font-family:var(--font-mono);font-size:var(--text-xs);font-weight:700;letter-spacing:.12em;
+  color:var(--text-on-amber);background:var(--accent);
+  padding:3px 10px;border-radius:var(--radius-sm);
+  border:2px solid var(--accent-dim);
+}
+h1{margin:0;font-size:var(--text-lg);font-weight:700;line-height:1.3;letter-spacing:-.01em}
+h1 small{display:block;font-size:var(--text-xs);font-weight:400;color:var(--text-secondary);letter-spacing:.04em;margin-top:2px}
+.hd-right{margin-left:auto;display:flex;align-items:center;gap:var(--s3)}
+.src-lamp{
+  display:inline-flex;align-items:center;gap:var(--s2);
+  font-family:var(--font-mono);font-size:var(--text-xs);font-weight:500;
+  color:var(--text-secondary);
+  border:1px solid var(--border-strong);border-radius:var(--radius-sm);
+  padding:4px 10px;background:var(--surface-2);
+}
+.src-lamp .dot{width:8px;height:8px;border-radius:50%;background:var(--text-tertiary);flex:none}
+.src-lamp.live .dot{background:var(--success-soft)}
+.src-lamp.demo .dot{background:var(--accent)}
+#clock{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-size:var(--text-xs);color:var(--text-tertiary)}
+button.refresh{
+  cursor:pointer;font-family:var(--font-sans);font-size:var(--text-xs);font-weight:700;
+  color:var(--text-primary);background:var(--surface-2);
+  border:1px solid var(--border-strong);border-radius:var(--radius-sm);
+  padding:6px 12px;transition:background var(--dur-fast),border-color var(--dur-fast);
+}
+button.refresh:hover{background:var(--border-strong);border-color:var(--text-tertiary)}
+button.refresh:active{transform:scale(.98)}
+button.refresh:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+main{max-width:1280px;margin:0 auto;padding:var(--s5);display:grid;gap:var(--s5)}
+
+/* ── 파이프라인 레일: 4 스테이션 + 컨베이어 ───────── */
+.rail{
+  display:grid;grid-template-columns:1fr 56px 1fr 56px 1fr 56px 1fr;
+  align-items:stretch;gap:0;
+}
+.station{
+  position:relative;cursor:pointer;text-align:left;width:100%;
+  background:var(--surface-1);color:var(--text-primary);font-family:var(--font-sans);
+  border:2px solid var(--border-strong);border-radius:var(--radius-md);
+  padding:var(--s4);box-shadow:var(--shadow-1);
+  transition:border-color var(--dur-fast),box-shadow var(--dur-fast),transform var(--dur-fast);
+  display:flex;flex-direction:column;gap:var(--s2);
+}
+.station:hover{border-color:var(--text-tertiary);box-shadow:var(--shadow-2)}
+.station:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.station[aria-selected="true"]{
+  border-color:var(--accent);box-shadow:var(--shadow-2),0 0 0 1px var(--accent);
+}
+.station[aria-selected="true"]::after{ /* 선택 스테이션 하단 앰버 화살촉 */
+  content:"";position:absolute;left:50%;bottom:-11px;transform:translateX(-50%);
+  border:9px solid transparent;border-top-color:var(--accent);border-bottom:0;
+}
+.st-top{display:flex;align-items:center;gap:var(--s2)}
+.st-num{
+  font-family:var(--font-mono);font-weight:700;font-size:var(--text-lg);
+  color:var(--text-on-amber);background:var(--accent);
+  width:34px;height:34px;border-radius:var(--radius-sm);
+  display:inline-flex;align-items:center;justify-content:center;flex:none;
+  border:2px solid var(--accent-dim);
+}
+.st-name{font-weight:700;font-size:var(--text-md);line-height:1.3}
+.st-name small{display:block;font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;color:var(--text-tertiary);font-weight:500;text-transform:uppercase}
+.st-lamp{
+  margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:6px;
+  font-size:var(--text-xs);font-weight:500;color:var(--text-secondary);
+}
+.st-lamp .bulb{width:10px;height:10px;border-radius:50%;background:var(--text-tertiary);border:1px solid var(--border-strong)}
+.st-lamp.ok .bulb{background:var(--success-soft);border-color:var(--success)}
+.st-lamp.ok{color:var(--success-soft)}
+.st-lamp.run .bulb{background:var(--accent);border-color:var(--accent-dim)}
+.st-lamp.run{color:var(--accent)}
+.st-lamp.off{color:var(--text-tertiary)}
+/* 펄스는 한 번에 하나만 — JS 상태 머신이 .pulse-owner를 단일 부여 */
+.pulse-owner .bulb{animation:lampPulse 1.6s var(--ease-out) infinite}
+@keyframes lampPulse{
+  0%{box-shadow:0 0 0 0 rgba(245,158,11,.55)}
+  70%{box-shadow:0 0 0 9px rgba(245,158,11,0)}
+  100%{box-shadow:0 0 0 0 rgba(245,158,11,0)}
+}
+.st-metrics{display:grid;gap:2px;margin-top:auto}
+.st-metric{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s2);font-size:var(--text-xs);color:var(--text-secondary)}
+.st-metric b{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-weight:700;font-size:var(--text-sm);color:var(--text-primary)}
+.st-metric b.amber{color:var(--accent)}
+.st-metric b.dim{color:var(--text-tertiary);font-weight:500}
+
+/* 컨베이어 세그먼트 */
+.belt{position:relative;display:flex;align-items:center;justify-content:center}
+.belt::before{
+  content:"";position:absolute;left:4px;right:4px;top:50%;height:4px;transform:translateY(-50%);
+  background:var(--surface-2);border-radius:2px;border:1px solid var(--border-strong);
+}
+.belt .chev{
+  position:relative;font-family:var(--font-mono);font-weight:700;color:var(--text-tertiary);
+  font-size:var(--text-md);letter-spacing:-2px;user-select:none;
+  transition:color var(--dur-std);
+}
+.belt.flow .chev{color:var(--accent);animation:beltFlow 1.2s linear infinite}
+@keyframes beltFlow{
+  0%{transform:translateX(-5px);opacity:.4}
+  50%{opacity:1}
+  100%{transform:translateX(5px);opacity:.4}
+}
+
+/* ── 계수 흐름 보드 (히어로) ─────────────────────── */
+.board{
+  background:var(--surface-1);border:2px solid var(--border-strong);
+  border-radius:var(--radius-md);box-shadow:var(--shadow-2);overflow:hidden;
+}
+.board-head{
+  display:flex;align-items:center;gap:var(--s3);flex-wrap:wrap;
+  padding:var(--s3) var(--s4);
+  background:var(--surface-2);border-bottom:2px solid var(--border-strong);
+}
+.board-head h2{margin:0;font-size:var(--text-md);font-weight:700}
+.board-head .sub{font-size:var(--text-xs);color:var(--text-secondary)}
+.legend{margin-left:auto;display:flex;gap:var(--s4);flex-wrap:wrap;font-size:var(--text-xs);color:var(--text-secondary)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.key{display:inline-block;flex:none}
+.key.default{width:10px;height:10px;border:2px solid var(--text-tertiary);transform:rotate(45deg);background:transparent}
+.key.irl{width:12px;height:12px;border-radius:50%;background:var(--info);border:2px solid var(--info-deep)}
+.key.band{width:18px;height:8px;background:rgba(125,211,252,.25);border:1px dashed var(--info-deep);border-radius:2px}
+.key.best{width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:11px solid var(--accent)}
+.tracks{padding:var(--s3) var(--s4) var(--s4);display:grid;gap:0}
+.track{
+  display:grid;grid-template-columns:130px 1fr 200px;gap:var(--s3);align-items:center;
+  padding:var(--s2) 0;border-bottom:1px solid var(--border);
+}
+.track:last-child{border-bottom:0}
+.track-label{display:flex;flex-direction:column;gap:1px}
+.track-label code{font-family:var(--font-mono);font-size:var(--text-xs);font-weight:700;color:var(--text-primary)}
+.track-label small{font-size:var(--text-xs);color:var(--text-tertiary);letter-spacing:0}
+.track-bar{position:relative;height:30px;background:var(--surface-input);border:1px solid var(--border);border-radius:var(--radius-sm)}
+.track-bar .zero{position:absolute;top:3px;bottom:3px;width:1px;background:var(--border-strong)}
+.track-bar .band{
+  position:absolute;top:7px;bottom:7px;border-radius:3px;
+  background:rgba(125,211,252,.18);border:1px dashed rgba(56,189,248,.55);
+  transition:left var(--dur-std) var(--ease-out),width var(--dur-std) var(--ease-out);
+}
+.track-bar .mark{position:absolute;top:50%;transition:left var(--dur-std) var(--ease-out)}
+.track-bar .mark.default{
+  width:9px;height:9px;border:2px solid var(--text-tertiary);background:var(--surface-1);
+  transform:translate(-50%,-50%) rotate(45deg);
+}
+.track-bar .mark.irl{
+  width:11px;height:11px;border-radius:50%;background:var(--info);border:2px solid var(--info-deep);
+  transform:translate(-50%,-50%);
+}
+.track-bar .mark.best{
+  width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;
+  border-bottom:12px solid var(--accent);transform:translate(-50%,-50%);
+  filter:drop-shadow(0 1px 2px rgba(7,12,20,.6));
+}
+.track-vals{
+  font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-size:var(--text-xs);
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--s2);text-align:right;
+}
+.track-vals .v{color:var(--text-secondary)}
+.track-vals .v b{display:block;font-weight:700;color:var(--text-primary);font-size:var(--text-xs)}
+.track-vals .v.irl b{color:var(--info)}
+.track-vals .v.best b{color:var(--accent)}
+.track-vals .v small{font-size:10px;color:var(--text-tertiary)}
+
+/* ── 상세 패널 ──────────────────────────────────── */
+.detail{
+  background:var(--surface-1);border:2px solid var(--border-strong);
+  border-radius:var(--radius-md);box-shadow:var(--shadow-1);
+  padding:var(--s4) var(--s5);min-height:200px;
+}
+.detail h2{margin:0 0 4px;font-size:var(--text-md);font-weight:700;display:flex;align-items:center;gap:var(--s2)}
+.detail h2 .tag{
+  font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:.14em;
+  color:var(--text-on-amber);background:var(--accent);border-radius:4px;padding:2px 7px;
+}
+.detail .desc{margin:0 0 var(--s4);font-size:var(--text-xs);color:var(--text-secondary);max-width:70ch}
+.detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--s3)}
+.stat{
+  background:var(--surface-2);border:1px solid var(--border-strong);border-radius:var(--radius-sm);
+  padding:var(--s3);display:flex;flex-direction:column;gap:2px;
+}
+.stat .k{font-size:var(--text-xs);color:var(--text-secondary)}
+.stat .v{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-weight:700;font-size:var(--text-lg);color:var(--text-primary);line-height:1.3}
+.stat .v.amber{color:var(--accent)}
+.stat .v.info{color:var(--info)}
+.stat .v.path{font-size:var(--text-xs);font-weight:500;color:var(--text-secondary);word-break:break-all}
+.stat .hint{font-size:var(--text-xs);color:var(--text-tertiary)}
+table.list{
+  width:100%;border-collapse:collapse;margin-top:var(--s3);
+  font-size:var(--text-xs);
+}
+table.list th{
+  text-align:left;font-weight:500;color:var(--text-tertiary);
+  border-bottom:2px solid var(--border-strong);padding:6px 10px;
+  font-size:var(--text-xs);letter-spacing:.06em;
+}
+table.list td{
+  border-bottom:1px solid var(--border);padding:6px 10px;color:var(--text-secondary);
+  font-family:var(--font-mono);font-variant-numeric:tabular-nums;
+}
+table.list td.sans{font-family:var(--font-sans)}
+table.list td b{color:var(--text-primary)}
+table.list tr:last-child td{border-bottom:0}
+.empty-note{
+  margin-top:var(--s3);padding:var(--s3) var(--s4);
+  border:1px dashed var(--border-strong);border-radius:var(--radius-sm);
+  color:var(--text-tertiary);font-size:var(--text-xs);
+}
+.next-action{
+  margin-top:var(--s4);display:flex;align-items:center;gap:var(--s3);flex-wrap:wrap;
+}
+a.goto{
+  display:inline-flex;align-items:center;gap:6px;text-decoration:none;
+  font-size:var(--text-xs);font-weight:700;color:var(--text-on-amber);
+  background:var(--accent);border:2px solid var(--accent-dim);border-radius:var(--radius-sm);
+  padding:7px 14px;transition:background var(--dur-fast);
+}
+a.goto:hover{background:var(--accent-hover)}
+a.goto:focus-visible{outline:2px solid var(--text-primary);outline-offset:2px}
+a.goto.secondary{color:var(--text-primary);background:var(--surface-2);border-color:var(--border-strong)}
+a.goto.secondary:hover{background:var(--border-strong)}
+.next-action .why{font-size:var(--text-xs);color:var(--text-tertiary)}
+
+/* 키보드 힌트 */
+.kbd-hint{font-size:var(--text-xs);color:var(--text-tertiary);text-align:center}
+.kbd-hint kbd{
+  font-family:var(--font-mono);font-size:var(--text-xs);border:1px solid var(--border-strong);
+  border-bottom-width:2px;border-radius:4px;padding:1px 6px;background:var(--surface-2);color:var(--text-secondary);
+}
+
+footer{
+  max-width:1280px;margin:0 auto;padding:0 var(--s5) var(--s6);
+  display:flex;justify-content:space-between;gap:var(--s3);flex-wrap:wrap;
+  font-size:var(--text-xs);color:var(--text-tertiary);
+}
+footer .mono{font-size:var(--text-xs)}
+
+/* ── 반응형: 모바일은 세로 레일로 적응(축소 아님) ── */
+@media (max-width:920px){
+  .rail{grid-template-columns:1fr;gap:0}
+  .belt{height:40px}
+  .belt::before{left:50%;right:auto;top:4px;bottom:4px;width:4px;height:auto;transform:translateX(-50%)}
+  .belt .chev{transform:rotate(90deg)}
+  .belt.flow .chev{animation-name:beltFlowV}
+  @keyframes beltFlowV{
+    0%{transform:rotate(90deg) translateX(-5px);opacity:.4}
+    50%{opacity:1}
+    100%{transform:rotate(90deg) translateX(5px);opacity:.4}
+  }
+  .station[aria-selected="true"]::after{display:none}
+  .track{grid-template-columns:96px 1fr;grid-template-rows:auto auto}
+  .track-vals{grid-column:1/-1;text-align:left}
+  .hd-inner{padding:var(--s3) var(--s4)}
+  main{padding:var(--s4)}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hazard" aria-hidden="true"></div>
+  <div class="hd-inner">
+    <span class="hd-badge">LIFT-OPS</span>
+    <h1>양중 관제 보드
+      <small>사람 플레이 → IRL 계수 복원 → Optuna 탐색 → MAPPO 모델 — 전 공정 현황</small>
+    </h1>
+    <div class="hd-right">
+      <span id="srcLamp" class="src-lamp" role="status"><span class="dot"></span><span id="srcLabel">연결 확인 중…</span></span>
+      <span id="clock" aria-hidden="true">--:--:--</span>
+      <button class="refresh" id="btnRefresh" type="button">새로고침</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ① 파이프라인 레일 -->
+  <nav class="rail" role="tablist" aria-label="파이프라인 단계">
+    <button class="station" role="tab" id="st-collect" aria-selected="true" aria-controls="detail" data-stage="collect">
+      <div class="st-top">
+        <span class="st-num" aria-hidden="true">1</span>
+        <span class="st-name">데이터 수집<small>HUMAN PLAYS</small></span>
+        <span class="st-lamp off" id="lamp-collect"><span class="bulb"></span><span class="lamp-txt">대기</span></span>
+      </div>
+      <div class="st-metrics">
+        <div class="st-metric"><span>누적 플레이</span><b id="m-plays" class="amber">—</b></div>
+        <div class="st-metric"><span>오늘 수집</span><b id="m-plays-today">—</b></div>
+        <div class="st-metric"><span>시나리오 수</span><b id="m-scenarios" class="dim">—</b></div>
+      </div>
+    </button>
+
+    <div class="belt" id="belt-1" aria-hidden="true"><span class="chev">&gt;&gt;</span></div>
+
+    <button class="station" role="tab" id="st-irl" aria-selected="false" aria-controls="detail" data-stage="irl">
+      <div class="st-top">
+        <span class="st-num" aria-hidden="true">2</span>
+        <span class="st-name">IRL 계수 복원<small>MAXENT IRL</small></span>
+        <span class="st-lamp off" id="lamp-irl"><span class="bulb"></span><span class="lamp-txt">대기</span></span>
+      </div>
+      <div class="st-metrics">
+        <div class="st-metric"><span>최신 prior</span><b id="m-irl-date">—</b></div>
+        <div class="st-metric"><span>사용 플레이</span><b id="m-irl-nplays">—</b></div>
+        <div class="st-metric"><span>계수 차원</span><b class="dim">7</b></div>
+      </div>
+    </button>
+
+    <div class="belt" id="belt-2" aria-hidden="true"><span class="chev">&gt;&gt;</span></div>
+
+    <button class="station" role="tab" id="st-optuna" aria-selected="false" aria-controls="detail" data-stage="optuna">
+      <div class="st-top">
+        <span class="st-num" aria-hidden="true">3</span>
+        <span class="st-name">Optuna 계수 탐색<small>AUTO REWARD</small></span>
+        <span class="st-lamp off" id="lamp-optuna"><span class="bulb"></span><span class="lamp-txt">대기</span></span>
+      </div>
+      <div class="st-metrics">
+        <div class="st-metric"><span>탐색 런</span><b id="m-runs">—</b></div>
+        <div class="st-metric"><span>트라이얼</span><b id="m-trials">—</b></div>
+        <div class="st-metric"><span>최고 점수</span><b id="m-best-score" class="amber">—</b></div>
+      </div>
+    </button>
+
+    <div class="belt" id="belt-3" aria-hidden="true"><span class="chev">&gt;&gt;</span></div>
+
+    <button class="station" role="tab" id="st-model" aria-selected="false" aria-controls="detail" data-stage="model">
+      <div class="st-top">
+        <span class="st-num" aria-hidden="true">4</span>
+        <span class="st-name">MAPPO 모델<small>FINAL POLICY</small></span>
+        <span class="st-lamp off" id="lamp-model"><span class="bulb"></span><span class="lamp-txt">대기</span></span>
+      </div>
+      <div class="st-metrics">
+        <div class="st-metric"><span>등록 모델</span><b id="m-models">—</b></div>
+        <div class="st-metric"><span>베스트 모델</span><b id="m-best-model" class="dim">—</b></div>
+        <div class="st-metric"><span>학습 상태</span><b id="m-train-state">—</b></div>
+      </div>
+    </button>
+  </nav>
+
+  <!-- ② 계수 흐름 보드 (히어로) -->
+  <section class="board" aria-label="보상 계수 흐름">
+    <div class="board-head">
+      <h2>보상 계수 흐름 보드</h2>
+      <span class="sub">기본값 → IRL 추정(95% CI) → Optuna 최적 — 7차원</span>
+      <div class="legend" aria-hidden="true">
+        <span><span class="key default"></span>기본값</span>
+        <span><span class="key irl"></span>IRL 추정</span>
+        <span><span class="key band"></span>95% CI (Optuna 탐색 범위)</span>
+        <span><span class="key best"></span>Optuna 최적</span>
+      </div>
+    </div>
+    <div class="tracks" id="tracks"><!-- JS 렌더 --></div>
+  </section>
+
+  <!-- ③ 단계 상세 -->
+  <section class="detail" id="detail" role="tabpanel" aria-live="polite"><!-- JS 렌더 --></section>
+
+  <p class="kbd-hint"><kbd>1</kbd>–<kbd>4</kbd> 또는 <kbd>←</kbd><kbd>→</kbd> 로 단계 이동 · <kbd>R</kbd> 새로고침</p>
+
+</main>
+
+<footer>
+  <span>이 보드는 읽기 전용입니다 — 학습 실행·데이터 편집은 각 워크스페이스에서 수행하세요.</span>
+  <span class="mono" id="lastFetch">마지막 갱신: —</span>
+</footer>
+
+<script>
+'use strict';
+/* ============================================================
+   데이터 계층 — 서버 API 우선, 실패 시 데모 데이터 폴백.
+   기존 기능은 일절 호출하지 않음(읽기 전용 GET만 사용).
+   ============================================================ */
+const FEATURES = [
+  { key:'r_single',     ko:'단일 양중 완료', def: 10.0 },
+  { key:'r_all',        ko:'전체 완료 보너스', def: 100.0 },
+  { key:'r_same',       ko:'동일 구역 연속', def: 3.0 },
+  { key:'p_idle',       ko:'크레인 유휴',   def: -0.5 },
+  { key:'p_inter_soft', ko:'간섭(소프트)',  def: -3.0 },
+  { key:'p_time',       ko:'경과 시간',     def: -0.1 },
+  { key:'p_move',       ko:'이동 거리',     def: -0.02 },
+];
+
+/* 데모 데이터 — 서버 미연결(파일로 직접 열람 / 비관리자) 시 화면 구성 확인용.
+   실제 수치가 아님을 src-lamp 와 각 패널에 명시한다. */
+const DEMO = {
+  plays: { count: 128, today: 9, scenarios: 6, recent: [
+    { ts:'2026-06-11 14:02', scenario:'S-04', tier:'표준', score: 87.4 },
+    { ts:'2026-06-11 13:48', scenario:'S-02', tier:'튜토리얼', score: 64.0 },
+    { ts:'2026-06-11 13:31', scenario:'S-04', tier:'전문가', score: 92.1 },
+    { ts:'2026-06-11 12:55', scenario:'S-01', tier:'표준', score: 71.8 },
+    { ts:'2026-06-11 12:40', scenario:'S-03', tier:'표준', score: 78.3 },
+  ]},
+  irl: {
+    fitted_at:'2026-06-10 21:14', n_plays: 117, path:'irl_priors/prior_20260610_2114.json',
+    coef:    { r_single:11.8, r_all:91.5, r_same:4.1,  p_idle:-0.72, p_inter_soft:-2.45, p_time:-0.13,  p_move:-0.017 },
+    ci_low:  { r_single: 9.2, r_all:78.0, r_same:2.9,  p_idle:-0.95, p_inter_soft:-3.10, p_time:-0.17,  p_move:-0.024 },
+    ci_high: { r_single:14.3, r_all:105.0,r_same:5.6,  p_idle:-0.49, p_inter_soft:-1.85, p_time:-0.09,  p_move:-0.011 },
+  },
+  optuna: {
+    runs: [
+      { name:'auto_reward_20260611_0930', n_trials: 40 },
+      { name:'auto_reward_20260609_1820', n_trials: 60 },
+    ],
+    running: true, currentTrial: 27, totalTrials: 40, bestScore: 0.913, bestTrial: 19,
+    best: { r_single:12.4, r_all:96.0, r_same:4.8, p_idle:-0.61, p_inter_soft:-2.20, p_time:-0.11, p_move:-0.015 },
+  },
+  model: {
+    count: 5, bestName:'mappo_best_t19.pt', trainRunning: false,
+    evalScore: 0.913, baselineScore: 0.844,
+  },
+};
+
+const state = {
+  live: false,           // true = 서버 데이터, false = 데모
+  stage: 'collect',
+  data: null,            // 화면 모델 (DEMO 와 동일 구조)
+  fetchedAt: null,
+};
+
+async function getJSON(url){
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), 4000);
+  try{
+    const r = await fetch(url, { signal: ctrl.signal, credentials:'same-origin' });
+    clearTimeout(t);
+    if(!r.ok) return null;
+    const j = await r.json();
+    return (j && j.ok !== false) ? j : null;
+  }catch(_){ clearTimeout(t); return null; }
+}
+
+/* 서버 응답 → 화면 모델 매핑. 어느 하나라도 성공하면 live 모드. */
+async function loadLive(){
+  const [plays, irl, runs, models, trainStatus, arStatus, scenarios] = await Promise.all([
+    getJSON('/api/game/plays'),
+    getJSON('/api/game/irl/latest'),
+    getJSON('/api/game/auto-reward/runs'),
+    getJSON('/api/models/list'),
+    getJSON('/api/train/status'),
+    getJSON('/api/auto-reward/status'),
+    getJSON('/api/game/scenarios'),
+  ]);
+  if(!plays && !irl && !runs && !models) return null;
+
+  const d = JSON.parse(JSON.stringify(DEMO)); // 골격 재사용
+  d._partial = [];
+
+  if(plays && Array.isArray(plays.plays)){
+    const list = plays.plays;
+    const today = new Date().toISOString().slice(0,10);
+    d.plays.count = plays.count ?? list.length;
+    d.plays.today = list.filter(p => String(p.created_at||p.ts||'').slice(0,10) === today).length;
+    d.plays.recent = list.slice(-5).reverse().map(p => ({
+      ts: String(p.created_at||p.ts||'').replace('T',' ').slice(0,16) || '—',
+      scenario: p.scenario_id || p.scenario || '—',
+      tier: p.tier || '—',
+      score: (p.score != null) ? Number(p.score) : null,
+    }));
+  } else d._partial.push('plays');
+
+  if(scenarios && Array.isArray(scenarios.scenarios)) d.plays.scenarios = scenarios.scenarios.length;
+
+  if(irl && irl.prior){
+    const doc = irl.prior;
+    d.irl.path = irl.path || '—';
+    d.irl.fitted_at = String(doc.fitted_at || doc.created_at || '—').replace('T',' ').slice(0,16);
+    d.irl.n_plays = doc.n_plays ?? doc.num_plays ?? '—';
+    if(doc.reward_coef) d.irl.coef = doc.reward_coef;
+    if(doc.reward_ci_low) d.irl.ci_low = doc.reward_ci_low;
+    if(doc.reward_ci_high) d.irl.ci_high = doc.reward_ci_high;
+  } else if(irl && irl.prior === null){ d.irl = null; }
+  else d._partial.push('irl');
+
+  if(runs && Array.isArray(runs.runs)){
+    d.optuna.runs = runs.runs.map(r => ({ name:r.name, n_trials:r.n_trials }));
+  } else d._partial.push('optuna');
+
+  if(arStatus && arStatus.job){
+    const j = arStatus.job;
+    d.optuna.running = !!j.running;
+    d.optuna.currentTrial = j.currentTrial ?? j.completedTrials ?? 0;
+    d.optuna.totalTrials = j.totalTrials ?? j.nTrials ?? 0;
+    d.optuna.bestScore = j.bestScore ?? null;
+    d.optuna.bestTrial = j.bestTrial ?? null;
+    if(j.bestReward) d.optuna.best = j.bestReward;
+    if(j.bestModelPath) d.model.bestName = String(j.bestModelPath).split(/[\\/]/).pop();
+  } else { d.optuna.running = false; d.optuna.bestScore = null; d.optuna.best = null; }
+
+  if(models && Array.isArray(models.models)){
+    d.model.count = models.models.length;
+    const best = models.models.find(m => /best/i.test(m.name||m.path||'')) || models.models[0];
+    if(best) d.model.bestName = best.name || String(best.path||'').split(/[\\/]/).pop();
+  } else d._partial.push('model');
+
+  if(trainStatus && trainStatus.job){ d.model.trainRunning = !!trainStatus.job.running; }
+  else d.model.trainRunning = false;
+
+  d.model.evalScore = d.optuna.bestScore;
+  d.model.baselineScore = null;
+  return d;
+}
+
+/* ============================================================
+   렌더 계층
+   ============================================================ */
+const $ = id => document.getElementById(id);
+const fmt = (v, digits) => (v == null || v === '—' || Number.isNaN(Number(v)))
+  ? '—'
+  : Number(v).toLocaleString('ko-KR', { minimumFractionDigits: digits ?? 0, maximumFractionDigits: digits ?? 3 });
+
+function setLamp(id, mode, text){
+  const el = $(id);
+  el.className = 'st-lamp ' + mode;
+  el.querySelector('.lamp-txt').textContent = text;
+}
+
+/* 펄스 상태 머신: 한 번에 하나의 램프만 펄스를 소유한다. */
+function assignPulse(d){
+  document.querySelectorAll('.pulse-owner').forEach(el => el.classList.remove('pulse-owner'));
+  document.querySelectorAll('.belt').forEach(el => el.classList.remove('flow'));
+  let owner = null, belt = null;
+  if(d.model.trainRunning){ owner = 'lamp-model'; belt = 'belt-3'; }
+  else if(d.optuna && d.optuna.running){ owner = 'lamp-optuna'; belt = 'belt-2'; }
+  else if(d.plays && d.plays.today > 0){ owner = 'lamp-collect'; belt = 'belt-1'; }
+  if(owner) $(owner).classList.add('pulse-owner');
+  if(belt) $(belt).classList.add('flow');
+}
+
+function renderStations(d){
+  // ① 수집
+  $('m-plays').textContent = fmt(d.plays.count);
+  $('m-plays-today').textContent = '+' + fmt(d.plays.today);
+  $('m-scenarios').textContent = fmt(d.plays.scenarios);
+  setLamp('lamp-collect', d.plays.count > 0 ? 'ok' : 'off', d.plays.count > 0 ? '수집 중' : '대기');
+
+  // ② IRL
+  if(d.irl){
+    $('m-irl-date').textContent = (d.irl.fitted_at||'—').slice(5,16) || '—';
+    $('m-irl-nplays').textContent = fmt(d.irl.n_plays);
+    setLamp('lamp-irl', 'ok', '복원 완료');
+  }else{
+    $('m-irl-date').textContent = '—';
+    $('m-irl-nplays').textContent = '—';
+    setLamp('lamp-irl', 'off', '미실행');
+  }
+
+  // ③ Optuna
+  const totalTrials = (d.optuna.runs||[]).reduce((a,r)=>a+(r.n_trials||0),0);
+  $('m-runs').textContent = fmt((d.optuna.runs||[]).length);
+  $('m-trials').textContent = fmt(totalTrials);
+  $('m-best-score').textContent = d.optuna.bestScore != null ? fmt(d.optuna.bestScore, 3) : '—';
+  if(d.optuna.running) setLamp('lamp-optuna', 'run', `탐색 중 ${d.optuna.currentTrial}/${d.optuna.totalTrials}`);
+  else setLamp('lamp-optuna', totalTrials > 0 ? 'ok' : 'off', totalTrials > 0 ? '탐색 완료' : '미실행');
+
+  // ④ 모델
+  $('m-models').textContent = fmt(d.model.count);
+  $('m-best-model').textContent = d.model.bestName || '—';
+  $('m-train-state').textContent = d.model.trainRunning ? '학습 중' : '대기';
+  if(d.model.trainRunning) setLamp('lamp-model', 'run', '학습 중');
+  else setLamp('lamp-model', d.model.count > 0 ? 'ok' : 'off', d.model.count > 0 ? '배치 완료' : '없음');
+
+  assignPulse(d);
+}
+
+/* 계수 흐름 보드: 트랙별 정규화 — [min,max] 는 (기본값, CI, best) 전체를 포함 + 10% 패딩 */
+function renderTracks(d){
+  const host = $('tracks');
+  host.innerHTML = '';
+  for(const f of FEATURES){
+    const irl  = d.irl ? Number(d.irl.coef?.[f.key]) : null;
+    const lo   = d.irl ? Number(d.irl.ci_low?.[f.key]) : null;
+    const hi   = d.irl ? Number(d.irl.ci_high?.[f.key]) : null;
+    const best = (d.optuna && d.optuna.best) ? Number(d.optuna.best[f.key]) : null;
+
+    const candidates = [f.def, irl, lo, hi, best, 0].filter(v => v != null && !Number.isNaN(v));
+    let min = Math.min(...candidates), max = Math.max(...candidates);
+    const pad = (max - min) * 0.10 || Math.abs(max) * 0.2 || 1;
+    min -= pad; max += pad;
+    const X = v => ((v - min) / (max - min) * 100).toFixed(2) + '%';
+
+    const row = document.createElement('div');
+    row.className = 'track';
+    const digits = Math.abs(f.def) < 1 ? 3 : 1;
+    row.innerHTML = `
+      <div class="track-label">
+        <code>${f.key}</code>
+        <small>${f.ko}</small>
+      </div>
+      <div class="track-bar" role="img" aria-label="${f.ko}: 기본값 ${f.def}${irl!=null?`, IRL 추정 ${fmt(irl,digits)} (CI ${fmt(lo,digits)}~${fmt(hi,digits)})`:''}${best!=null?`, Optuna 최적 ${fmt(best,digits)}`:''}">
+        ${(min < 0 && max > 0) ? `<span class="zero" style="left:${X(0)}"></span>` : ''}
+        ${(lo!=null && hi!=null) ? `<span class="band" style="left:${X(lo)};width:calc(${X(hi)} - ${X(lo)})"></span>` : ''}
+        <span class="mark default" style="left:${X(f.def)}" title="기본값 ${f.def}"></span>
+        ${irl!=null ? `<span class="mark irl" style="left:${X(irl)}" title="IRL 추정 ${fmt(irl,digits)}"></span>` : ''}
+        ${best!=null ? `<span class="mark best" style="left:${X(best)}" title="Optuna 최적 ${fmt(best,digits)}"></span>` : ''}
+      </div>
+      <div class="track-vals">
+        <span class="v"><small>기본</small><b>${fmt(f.def, digits)}</b></span>
+        <span class="v irl"><small>IRL</small><b>${irl!=null?fmt(irl,digits):'—'}</b></span>
+        <span class="v best"><small>최적</small><b>${best!=null?fmt(best,digits):'—'}</b></span>
+      </div>`;
+    host.appendChild(row);
+  }
+}
+
+/* 단계 상세 패널 */
+const STAGE_META = {
+  collect: {
+    tag:'STN-1', name:'데이터 수집 — 사람 플레이',
+    desc:'사람이 양중 퍼즐을 풀 때의 선택 순서·타이밍이 IRL의 관측 데이터가 됩니다. 플레이 수가 많고 시나리오·티어가 다양할수록 계수 복원의 신뢰구간이 좁아집니다.',
+    next:{ href:'/game', label:'게임 워크스페이스 열기', why:'플레이 데이터를 더 모으려면' },
+  },
+  irl: {
+    tag:'STN-2', name:'IRL 계수 복원 — MaxEnt',
+    desc:'수집된 플레이로부터 7차원 보상 계수를 역추정합니다. 부트스트랩 95% 신뢰구간(CI)이 다음 단계 Optuna의 탐색 범위로 쓰입니다.',
+    next:{ href:'/hub', label:'데이터 · 연구 탭 열기', why:'IRL 실행과 prior 관리는' },
+  },
+  optuna: {
+    tag:'STN-3', name:'Optuna 계수 탐색 — Auto Reward',
+    desc:'IRL이 복원한 계수 범위를 사전 분포 삼아 보상 계수 조합을 탐색합니다. 각 트라이얼은 해당 계수로 짧은 학습을 돌려 평가 점수를 매깁니다.',
+    next:{ href:'/trainer', label:'보상 계수 자동 탐색 탭 열기', why:'탐색 실행·중단·로그는' },
+  },
+  model: {
+    tag:'STN-4', name:'MAPPO 최종 모델',
+    desc:'최고 점수 계수로 본 학습을 수행해 최종 정책을 만듭니다. 베스트 모델은 AI 양중계획 생성에 투입됩니다.',
+    next:{ href:'/trainer', label:'강화학습 관리 탭 열기', why:'본 학습 실행과 모델 관리는' },
+  },
+};
+
+function statBox(k, v, cls, hint){
+  return `<div class="stat"><span class="k">${k}</span><span class="v ${cls||''}">${v}</span>${hint?`<span class="hint">${hint}</span>`:''}</div>`;
+}
+
+function renderDetail(d){
+  const meta = STAGE_META[state.stage];
+  let body = '';
+
+  if(state.stage === 'collect'){
+    body = `<div class="detail-grid">
+      ${statBox('누적 플레이', fmt(d.plays.count), 'amber')}
+      ${statBox('오늘 수집', '+' + fmt(d.plays.today))}
+      ${statBox('시나리오', fmt(d.plays.scenarios))}
+    </div>`;
+    if(d.plays.recent && d.plays.recent.length){
+      body += `<table class="list"><thead><tr><th>시각</th><th>시나리오</th><th>티어</th><th>점수</th></tr></thead><tbody>` +
+        d.plays.recent.map(p=>`<tr><td>${p.ts}</td><td><b>${p.scenario}</b></td><td class="sans">${p.tier}</td><td><b>${p.score!=null?fmt(p.score,1):'—'}</b></td></tr>`).join('') +
+        `</tbody></table>`;
+    } else body += `<div class="empty-note">아직 수집된 플레이가 없습니다 — 게임 워크스페이스에서 첫 플레이를 시작하세요.</div>`;
+  }
+
+  if(state.stage === 'irl'){
+    if(d.irl){
+      body = `<div class="detail-grid">
+        ${statBox('최신 prior 생성', d.irl.fitted_at || '—', 'info')}
+        ${statBox('사용된 플레이', fmt(d.irl.n_plays))}
+        ${statBox('아티팩트 경로', d.irl.path || '—', 'path')}
+      </div>
+      <table class="list"><thead><tr><th>계수</th><th>의미</th><th>IRL 추정</th><th>95% CI 하한</th><th>95% CI 상한</th></tr></thead><tbody>` +
+      FEATURES.map(f=>{
+        const dg = Math.abs(f.def) < 1 ? 3 : 1;
+        return `<tr><td><b>${f.key}</b></td><td class="sans">${f.ko}</td>`+
+          `<td><b>${fmt(d.irl.coef?.[f.key],dg)}</b></td><td>${fmt(d.irl.ci_low?.[f.key],dg)}</td><td>${fmt(d.irl.ci_high?.[f.key],dg)}</td></tr>`;
+      }).join('') + `</tbody></table>`;
+    } else {
+      body = `<div class="empty-note">IRL prior가 아직 없습니다 — 플레이가 충분히 모이면 데이터 · 연구 탭에서 IRL을 실행하세요.</div>`;
+    }
+  }
+
+  if(state.stage === 'optuna'){
+    const o = d.optuna;
+    body = `<div class="detail-grid">
+      ${statBox('상태', o.running ? `탐색 중 — ${fmt(o.currentTrial)}/${fmt(o.totalTrials)}` : '대기', o.running?'amber':'')}
+      ${statBox('최고 점수', o.bestScore!=null?fmt(o.bestScore,3):'—', 'amber', o.bestTrial!=null?`trial #${o.bestTrial}`:'')}
+      ${statBox('탐색 런 수', fmt((o.runs||[]).length))}
+    </div>`;
+    if(o.runs && o.runs.length){
+      body += `<table class="list"><thead><tr><th>런</th><th>트라이얼 수</th></tr></thead><tbody>` +
+        o.runs.map(r=>`<tr><td><b>${r.name}</b></td><td>${fmt(r.n_trials)}</td></tr>`).join('') +
+        `</tbody></table>`;
+    } else body += `<div class="empty-note">아직 탐색 런이 없습니다 — IRL prior가 준비되면 보상 계수 자동 탐색을 시작하세요.</div>`;
+  }
+
+  if(state.stage === 'model'){
+    body = `<div class="detail-grid">
+      ${statBox('등록 모델', fmt(d.model.count))}
+      ${statBox('베스트 모델', d.model.bestName || '—', 'path')}
+      ${statBox('평가 점수', d.model.evalScore!=null?fmt(d.model.evalScore,3):'—', 'amber',
+        d.model.baselineScore!=null?`baseline ${fmt(d.model.baselineScore,3)} 대비`:'' )}
+      ${statBox('학습 상태', d.model.trainRunning?'학습 중':'대기', d.model.trainRunning?'amber':'')}
+    </div>`;
+  }
+
+  $('detail').innerHTML = `
+    <h2><span class="tag">${meta.tag}</span>${meta.name}</h2>
+    <p class="desc">${meta.desc}</p>
+    ${body}
+    <div class="next-action">
+      <a class="goto" href="${meta.next.href}">${meta.next.label}</a>
+      <span class="why">${meta.next.why} 기존 워크스페이스를 사용합니다 — 이 보드는 현황 확인 전용.</span>
+    </div>`;
+}
+
+function selectStage(stage, focus){
+  state.stage = stage;
+  document.querySelectorAll('.station').forEach(b=>{
+    const sel = b.dataset.stage === stage;
+    b.setAttribute('aria-selected', sel ? 'true' : 'false');
+    if(sel && focus) b.focus();
+  });
+  if(state.data) renderDetail(state.data);
+}
+
+function renderAll(){
+  const d = state.data;
+  renderStations(d);
+  renderTracks(d);
+  renderDetail(d);
+  const lamp = $('srcLamp');
+  lamp.classList.remove('live','demo');
+  lamp.classList.add(state.live ? 'live' : 'demo');
+  $('srcLabel').textContent = state.live
+    ? (d._partial && d._partial.length ? `LIVE (일부 미연결: ${d._partial.join(', ')})` : 'LIVE — 서버 데이터')
+    : 'DEMO — 예시 데이터 (서버 미연결)';
+  $('lastFetch').textContent = '마지막 갱신: ' + (state.fetchedAt
+    ? state.fetchedAt.toTimeString().slice(0,8) : '—');
+}
+
+async function refresh(){
+  $('btnRefresh').disabled = true;
+  const live = await loadLive();
+  state.live = !!live;
+  state.data = live || DEMO;
+  state.fetchedAt = new Date();
+  renderAll();
+  $('btnRefresh').disabled = false;
+}
+
+/* ── 인터랙션 배선 ── */
+const ORDER = ['collect','irl','optuna','model'];
+document.querySelectorAll('.station').forEach(b=>{
+  b.addEventListener('click', ()=>selectStage(b.dataset.stage, false));
+});
+document.addEventListener('keydown', e=>{
+  if(e.target instanceof Element && e.target.matches('input,textarea,select')) return;
+  if(e.key >= '1' && e.key <= '4'){ selectStage(ORDER[+e.key-1], true); }
+  else if(e.key === 'ArrowRight'){ selectStage(ORDER[Math.min(3, ORDER.indexOf(state.stage)+1)], true); }
+  else if(e.key === 'ArrowLeft'){ selectStage(ORDER[Math.max(0, ORDER.indexOf(state.stage)-1)], true); }
+  else if(e.key === 'r' || e.key === 'R'){ refresh(); }
+});
+$('btnRefresh').addEventListener('click', refresh);
+
+setInterval(()=>{ $('clock').textContent = new Date().toTimeString().slice(0,8); }, 1000);
+setInterval(refresh, 30000); // 30초 주기 갱신 (탐색/학습 진행 반영)
+refresh();
+</script>
+</body>
+</html>

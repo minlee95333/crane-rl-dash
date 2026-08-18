@@ -1,0 +1,12 @@
+# PyTorch MAPPO restricted-zone detour training config.
+# Inherits everything from config.yaml; only the restricted-zone-specific keys live here.
+_base: config.yaml
+
+restricted_clearance: 1.0
+restricted_zones:
+  - id: RZ1
+    type: rect
+    x1: 40.0
+    y1: 40.0
+    x2: 60.0
+    y2: 60.0

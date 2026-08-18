@@ -1,0 +1,11 @@
+[L1_2C12L] ep=20/100 makespan=203.8 done=12/12 hardExecuted=0 best=score=253.565 seen=253.565 val=n/a updates=80
+[L1_2C12L] ep=40/100 makespan=221.6 done=12/12 hardExecuted=0 best=score=237.993 seen=237.993 val=n/a updates=160
+[L1_2C12L] ep=60/100 makespan=222.7 done=12/12 hardExecuted=0 best=score=213.471 seen=213.471 val=n/a updates=240
+[L1_2C12L] ep=80/100 makespan=312.7 done=12/12 hardExecuted=0 best=score=212.093 seen=212.093 val=n/a updates=320
+[L1_2C12L] ep=100/100 makespan=222.4 done=12/12 hardExecuted=0 best=score=212.093 seen=212.093 val=n/a updates=400
+[L2_3C24L] ep=200/1000 makespan=436.3 done=24/24 hardExecuted=0 best=score=326.668 seen=334.182 val=323.4483 updates=1120
+[L2_3C24L] ep=400/1000 makespan=380.0 done=24/24 hardExecuted=0 best=score=326.668 seen=334.182 val=323.4483 updates=1920
+[L2_3C24L] ep=600/1000 makespan=256.4 done=24/24 hardExecuted=0 best=score=326.668 seen=334.182 val=323.4483 updates=2720
+[L2_3C24L] ep=800/1000 makespan=457.8 done=24/24 hardExecuted=0 best=score=322.077 seen=333.133 val=317.3391 updates=3520
+[L2_3C24L] ep=1000/1000 makespan=275.9 done=24/24 hardExecuted=0 best=score=322.077 seen=333.133 val=317.3391 updates=4320
+[L3_4C36L] ep=60/300 makespan=366.1 done=36/36 hardExecuted=0 best=score=369.213 seen=369.213 val=n/a updates=3760

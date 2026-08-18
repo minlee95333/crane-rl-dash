@@ -1,0 +1,4208 @@
+{
+  "seedStart": 206,
+  "seedCount": 5,
+  "out": {
+    "mappo": {
+      "n": 5,
+      "completeRate": 100.0,
+      "makespan": 297.217,
+      "makespanSd": 37.41173303122966,
+      "reward": 288.53352394104,
+      "soft": 4.0,
+      "hardExecuted": 0.0,
+      "hardMask": 9.0,
+      "travel": 17.221572391822548,
+      "setup": 110.0,
+      "move": 172.21572391822548,
+      "restrictedMask": 0.0,
+      "restrictedExecuted": 0.0,
+      "restrictedDetourDistance": 1.53635401468674,
+      "actualLiftRadius": 14.675447947115112,
+      "actualDangerRadius": 18.0
+    },
+    "nearest": {
+      "n": 5,
+      "completeRate": 100.0,
+      "makespan": 329.5048,
+      "makespanSd": 15.838728868188882,
+      "reward": 292.4575107574463,
+      "soft": 1.0,
+      "hardExecuted": 0.0,
+      "hardMask": 11.8,
+      "travel": 15.808283479175405,
+      "setup": 122.0,
+      "move": 158.08283479175407,
+      "restrictedMask": 0.0,
+      "restrictedExecuted": 0.0,
+      "restrictedDetourDistance": 3.5349068935349797,
+      "actualLiftRadius": 14.594577334173218,
+      "actualDangerRadius": 18.0
+    },
+    "radiusPriority": {
+      "n": 5,
+      "completeRate": 100.0,
+      "makespan": 329.5048,
+      "makespanSd": 15.838728868188882,
+      "reward": 292.4575107574463,
+      "soft": 1.0,
+      "hardExecuted": 0.0,
+      "hardMask": 11.8,
+      "travel": 15.808283479175405,
+      "setup": 122.0,
+      "move": 158.08283479175407,
+      "restrictedMask": 0.0,
+      "restrictedExecuted": 0.0,
+      "restrictedDetourDistance": 3.5349068935349797,
+      "actualLiftRadius": 14.594577334173218,
+      "actualDangerRadius": 18.0
+    },
+    "random": {
+      "n": 5,
+      "completeRate": 100.0,
+      "makespan": 337.16639999999995,
+      "makespanSd": 26.492650894918004,
+      "reward": 276.42317237854,
+      "soft": 3.2,
+      "hardExecuted": 0.0,
+      "hardMask": 20.6,
+      "travel": 20.58941395829381,
+      "setup": 138.0,
+      "move": 205.89413958293812,
+      "restrictedMask": 0.0,
+      "restrictedExecuted": 0.0,
+      "restrictedDetourDistance": 3.864770652027476,
+      "actualLiftRadius": 15.413133926638025,
+      "actualDangerRadius": 18.0
+    }
+  },
+  "representative": {
+    "mappo": {
+      "done": 24,
+      "total": 24,
+      "makespan": 249.331,
+      "reward": 312.40843772888184,
+      "softInter": 4,
+      "hardExecuted": 0,
+      "hardMask": 1,
+      "hardInter": 1,
+      "restrictedMask": 0,
+      "restrictedExecuted": 0,
+      "restrictedZones": [
+        {
+          "id": "RZ1",
+          "type": "rect",
+          "x1": 35.0,
+          "y1": 35.0,
+          "x2": 50.0,
+          "y2": 50.0
+        },
+        {
+          "id": "RZ2",
+          "type": "rect",
+          "x1": 55.0,
+          "y1": 50.0,
+          "x2": 70.0,
+          "y2": 70.0
+        }
+      ],
+      "travelTotal": 11.97187132438901,
+      "setupTotal": 60.0,
+      "moveTotal": 119.71871324389011,
+      "restrictedDetourDistance": 0.0,
+      "actualLiftRadiusAvg": 12.645260828265554,
+      "softInterferenceRadiusAvg": 18.0,
+      "actualDangerRadiusAvg": 18.0,
+      "events": [
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L19",
+          "liftIndex": 18,
+          "start": 0.0,
+          "finish": 25.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 34.535916917957366,
+          "fromY": 88.93757270276546,
+          "toX": 34.535916917957366,
+          "toY": 88.93757270276546,
+          "radiusCenterX": 34.535916917957366,
+          "radiusCenterY": 88.93757270276546,
+          "liftX": 49.34775419998914,
+          "liftY": 90.38944664224982,
+          "actualLiftRadius": 14.882824382674825,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            },
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L7",
+          "liftIndex": 6,
+          "start": 0.0,
+          "finish": 25.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 81.03278040420264,
+          "toY": 32.63201511837542,
+          "radiusCenterX": 81.03278040420264,
+          "radiusCenterY": 32.63201511837542,
+          "liftX": 82.65700116474181,
+          "liftY": 48.69345158711076,
+          "actualLiftRadius": 16.143352641820965,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L1",
+          "liftIndex": 0,
+          "start": 0.0,
+          "finish": 25.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 33.46002921555191,
+          "liftY": 42.95972626656294,
+          "actualLiftRadius": 14.509422602450643,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L2",
+          "liftIndex": 1,
+          "start": 25.0,
+          "finish": 50.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 34.535916917957366,
+          "fromY": 88.93757270276546,
+          "toX": 34.535916917957366,
+          "toY": 88.93757270276546,
+          "radiusCenterX": 34.535916917957366,
+          "radiusCenterY": 88.93757270276546,
+          "liftX": 30.193560394458473,
+          "liftY": 75.94529570825398,
+          "actualLiftRadius": 13.698734309390987,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            },
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L18",
+          "liftIndex": 17,
+          "start": 25.0,
+          "finish": 50.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 81.03278040420264,
+          "toY": 32.63201511837542,
+          "radiusCenterX": 81.03278040420264,
+          "radiusCenterY": 32.63201511837542,
+          "liftX": 81.06327003519982,
+          "liftY": 47.385050700977445,
+          "actualLiftRadius": 14.753067088545343,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L5",
+          "liftIndex": 4,
+          "start": 25.0,
+          "finish": 50.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 29.630051442421973,
+          "liftY": 45.20690715312958,
+          "actualLiftRadius": 11.91476245470006,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L12",
+          "liftIndex": 11,
+          "start": 50.0,
+          "finish": 75.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 34.535916917957366,
+          "fromY": 88.93757270276546,
+          "toX": 34.535916917957366,
+          "toY": 88.93757270276546,
+          "radiusCenterX": 34.535916917957366,
+          "radiusCenterY": 88.93757270276546,
+          "liftX": 40.71569142397493,
+          "liftY": 90.09720159135759,
+          "actualLiftRadius": 6.287634857757093,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            },
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L22",
+          "liftIndex": 21,
+          "start": 50.0,
+          "finish": 75.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 81.03278040420264,
+          "toY": 32.63201511837542,
+          "radiusCenterX": 81.03278040420264,
+          "radiusCenterY": 32.63201511837542,
+          "liftX": 71.52833149861544,
+          "liftY": 31.817442590370774,
+          "actualLiftRadius": 9.53929124213626,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L11",
+          "liftIndex": 10,
+          "start": 50.0,
+          "finish": 75.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 31.756834750063717,
+          "liftY": 33.19205952808261,
+          "actualLiftRadius": 13.475453058942383,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L23",
+          "liftIndex": 22,
+          "start": 75.0,
+          "finish": 112.38044755543237,
+          "travel": 2.3804475554323714,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 34.535916917957366,
+          "fromY": 88.93757270276546,
+          "toX": 33.352385861605505,
+          "toY": 65.1625372526332,
+          "radiusCenterX": 33.352385861605505,
+          "radiusCenterY": 65.1625372526332,
+          "liftX": 32.45744663197547,
+          "liftY": 47.18479869142175,
+          "actualLiftRadius": 18.0,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 23.804475554323712,
+          "directMove": 23.804475554323712,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            },
+            {
+              "x": 33.352385861605505,
+              "y": 65.1625372526332
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L6",
+          "liftIndex": 5,
+          "start": 75.0,
+          "finish": 100.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 81.03278040420264,
+          "toY": 32.63201511837542,
+          "radiusCenterX": 81.03278040420264,
+          "radiusCenterY": 32.63201511837542,
+          "liftX": 82.95877272915095,
+          "liftY": 35.00669970549643,
+          "actualLiftRadius": 3.057543674924347,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L9",
+          "liftIndex": 8,
+          "start": 75.0,
+          "finish": 100.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 24.49322633538395,
+          "liftY": 31.395614691078663,
+          "actualLiftRadius": 8.971080406872234,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 1,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L13",
+          "liftIndex": 12,
+          "start": 100.0,
+          "finish": 125.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 81.03278040420264,
+          "toY": 32.63201511837542,
+          "radiusCenterX": 81.03278040420264,
+          "radiusCenterY": 32.63201511837542,
+          "liftX": 76.30856420937926,
+          "liftY": 32.670326724648476,
+          "actualLiftRadius": 4.724371538586562,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L17",
+          "liftIndex": 16,
+          "start": 100.0,
+          "finish": 125.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 18.12340545747429,
+          "liftY": 37.2988121137023,
+          "actualLiftRadius": 2.116881503996416,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 1,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L10",
+          "liftIndex": 9,
+          "start": 112.38044755543237,
+          "finish": 137.38044755543237,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 33.352385861605505,
+          "fromY": 65.1625372526332,
+          "toX": 33.352385861605505,
+          "toY": 65.1625372526332,
+          "radiusCenterX": 33.352385861605505,
+          "radiusCenterY": 65.1625372526332,
+          "liftX": 45.37337743025273,
+          "liftY": 60.896801145747304,
+          "actualLiftRadius": 12.755420135263195,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 1,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 33.352385861605505,
+              "y": 65.1625372526332
+            },
+            {
+              "x": 33.352385861605505,
+              "y": 65.1625372526332
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L20",
+          "liftIndex": 19,
+          "start": 125.0,
+          "finish": 150.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 81.03278040420264,
+          "toY": 32.63201511837542,
+          "radiusCenterX": 81.03278040420264,
+          "radiusCenterY": 32.63201511837542,
+          "liftX": 81.50190060492605,
+          "liftY": 30.934124251827598,
+          "actualLiftRadius": 1.761507069935653,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L4",
+          "liftIndex": 3,
+          "start": 125.0,
+          "finish": 150.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 11.531797192059457,
+          "liftY": 52.55082248710096,
+          "actualLiftRadius": 15.847890540743613,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 1,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L14",
+          "liftIndex": 13,
+          "start": 137.38044755543237,
+          "finish": 175.4738292271123,
+          "travel": 3.093381671679928,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 33.352385861605505,
+          "fromY": 65.1625372526332,
+          "toX": 62.791223637658305,
+          "toY": 74.66284498784775,
+          "radiusCenterX": 62.791223637658305,
+          "radiusCenterY": 74.66284498784775,
+          "liftX": 79.42105522286147,
+          "liftY": 67.77454320527613,
+          "actualLiftRadius": 18.000000000000004,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 30.93381671679928,
+          "directMove": 30.93381671679928,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 33.352385861605505,
+              "y": 65.1625372526332
+            },
+            {
+              "x": 62.791223637658305,
+              "y": 74.66284498784775
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L21",
+          "liftIndex": 20,
+          "start": 150.0,
+          "finish": 185.48204728249968,
+          "travel": 0.482047282499665,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 77.22363016147666,
+          "toY": 35.586221049733595,
+          "radiusCenterX": 77.22363016147666,
+          "radiusCenterY": 35.586221049733595,
+          "liftX": 62.999983050860465,
+          "liftY": 46.61744323372841,
+          "actualLiftRadius": 17.999999999999996,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 4.82047282499665,
+          "directMove": 4.82047282499665,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 77.22363016147666,
+              "y": 35.586221049733595
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L24",
+          "liftIndex": 23,
+          "start": 150.0,
+          "finish": 175.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 36.87154850270599,
+          "liftY": 34.10117640905082,
+          "actualLiftRadius": 17.978812636624017,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L3",
+          "liftIndex": 2,
+          "start": 175.4738292271123,
+          "finish": 210.82443808714433,
+          "travel": 0.35060886003201447,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 62.791223637658305,
+          "fromY": 74.66284498784775,
+          "toX": 65.46117223139483,
+          "toY": 76.93529559899406,
+          "radiusCenterX": 65.46117223139483,
+          "radiusCenterY": 76.93529559899406,
+          "liftX": 79.16849117446691,
+          "liftY": 88.60188924893737,
+          "actualLiftRadius": 18.000000000000007,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 3.506088600320145,
+          "directMove": 3.506088600320145,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 62.791223637658305,
+              "y": 74.66284498784775
+            },
+            {
+              "x": 65.46117223139483,
+              "y": 76.93529559899406
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L15",
+          "liftIndex": 14,
+          "start": 175.0,
+          "finish": 200.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 13.358471971936524,
+          "liftY": 50.388797361403704,
+          "actualLiftRadius": 13.068209733008716,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L8",
+          "liftIndex": 7,
+          "start": 185.48204728249968,
+          "finish": 222.64133825799792,
+          "travel": 2.159290975498231,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 77.22363016147666,
+          "fromY": 35.586221049733595,
+          "toX": 60.921944220302876,
+          "toY": 21.426108509144555,
+          "radiusCenterX": 60.921944220302876,
+          "radiusCenterY": 21.426108509144555,
+          "liftX": 47.33274525310844,
+          "liftY": 9.622140048071742,
+          "actualLiftRadius": 18.0,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 21.59290975498231,
+          "directMove": 21.59290975498231,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 77.22363016147666,
+              "y": 35.586221049733595
+            },
+            {
+              "x": 60.921944220302876,
+              "y": 21.426108509144555
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L16",
+          "liftIndex": 15,
+          "start": 210.82443808714433,
+          "finish": 249.33053306639113,
+          "travel": 3.5060949792468,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 65.46117223139483,
+          "fromY": 76.93529559899406,
+          "toX": 30.636432128759864,
+          "toY": 72.87233151671497,
+          "radiusCenterX": 30.636432128759864,
+          "radiusCenterY": 72.87233151671497,
+          "liftX": 12.757700218819082,
+          "liftY": 70.78643955104053,
+          "actualLiftRadius": 17.999999999999996,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 35.060949792468,
+          "directMove": 35.060949792468,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 65.46117223139483,
+              "y": 76.93529559899406
+            },
+            {
+              "x": 30.636432128759864,
+              "y": 72.87233151671497
+            }
+          ]
+        }
+      ],
+      "cranes": [
+        {
+          "id": "C1",
+          "x": 34.535916917957366,
+          "y": 88.93757270276546,
+          "setup_x": 30.636432128759864,
+          "setup_y": 72.87233151671497,
+          "available": 249.33053306639113,
+          "jobs": 8
+        },
+        {
+          "id": "C2",
+          "x": 81.03278040420264,
+          "y": 32.63201511837542,
+          "setup_x": 60.921944220302876,
+          "setup_y": 21.426108509144555,
+          "available": 222.64133825799792,
+          "jobs": 8
+        },
+        {
+          "id": "C3",
+          "x": 19.53778467979282,
+          "y": 38.87384186498821,
+          "setup_x": 19.53778467979282,
+          "setup_y": 38.87384186498821,
+          "available": 200.0,
+          "jobs": 8
+        }
+      ]
+    },
+    "nearest": {
+      "done": 24,
+      "total": 24,
+      "makespan": 330.327,
+      "reward": 313.21777057647705,
+      "softInter": 0,
+      "hardExecuted": 0,
+      "hardMask": 10,
+      "hardInter": 10,
+      "restrictedMask": 0,
+      "restrictedExecuted": 0,
+      "restrictedZones": [
+        {
+          "id": "RZ1",
+          "type": "rect",
+          "x1": 35.0,
+          "y1": 35.0,
+          "x2": 50.0,
+          "y2": 50.0
+        },
+        {
+          "id": "RZ2",
+          "type": "rect",
+          "x1": 55.0,
+          "y1": 50.0,
+          "x2": 70.0,
+          "y2": 70.0
+        }
+      ],
+      "travelTotal": 12.60742839497462,
+      "setupTotal": 80.0,
+      "moveTotal": 126.07428394974619,
+      "restrictedDetourDistance": 1.1376237156818192,
+      "actualLiftRadiusAvg": 12.86466779610359,
+      "softInterferenceRadiusAvg": 18.0,
+      "actualDangerRadiusAvg": 18.0,
+      "events": [
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L2",
+          "liftIndex": 1,
+          "start": 0.0,
+          "finish": 25.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 34.535916917957366,
+          "fromY": 88.93757270276546,
+          "toX": 34.535916917957366,
+          "toY": 88.93757270276546,
+          "radiusCenterX": 34.535916917957366,
+          "radiusCenterY": 88.93757270276546,
+          "liftX": 30.193560394458473,
+          "liftY": 75.94529570825398,
+          "actualLiftRadius": 13.698734309390987,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            },
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L6",
+          "liftIndex": 5,
+          "start": 0.0,
+          "finish": 25.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 81.03278040420264,
+          "toY": 32.63201511837542,
+          "radiusCenterX": 81.03278040420264,
+          "radiusCenterY": 32.63201511837542,
+          "liftX": 82.95877272915095,
+          "liftY": 35.00669970549643,
+          "actualLiftRadius": 3.057543674924347,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L1",
+          "liftIndex": 0,
+          "start": 0.0,
+          "finish": 25.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 33.46002921555191,
+          "liftY": 42.95972626656294,
+          "actualLiftRadius": 14.509422602450643,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L12",
+          "liftIndex": 11,
+          "start": 25.0,
+          "finish": 50.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 34.535916917957366,
+          "fromY": 88.93757270276546,
+          "toX": 34.535916917957366,
+          "toY": 88.93757270276546,
+          "radiusCenterX": 34.535916917957366,
+          "radiusCenterY": 88.93757270276546,
+          "liftX": 40.71569142397493,
+          "liftY": 90.09720159135759,
+          "actualLiftRadius": 6.287634857757093,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            },
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L7",
+          "liftIndex": 6,
+          "start": 25.0,
+          "finish": 50.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 81.03278040420264,
+          "toY": 32.63201511837542,
+          "radiusCenterX": 81.03278040420264,
+          "radiusCenterY": 32.63201511837542,
+          "liftX": 82.65700116474181,
+          "liftY": 48.69345158711076,
+          "actualLiftRadius": 16.143352641820965,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L4",
+          "liftIndex": 3,
+          "start": 25.0,
+          "finish": 50.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 11.531797192059457,
+          "liftY": 52.55082248710096,
+          "actualLiftRadius": 15.847890540743613,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L19",
+          "liftIndex": 18,
+          "start": 50.0,
+          "finish": 75.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 34.535916917957366,
+          "fromY": 88.93757270276546,
+          "toX": 34.535916917957366,
+          "toY": 88.93757270276546,
+          "radiusCenterX": 34.535916917957366,
+          "radiusCenterY": 88.93757270276546,
+          "liftX": 49.34775419998914,
+          "liftY": 90.38944664224982,
+          "actualLiftRadius": 14.882824382674825,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            },
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L13",
+          "liftIndex": 12,
+          "start": 50.0,
+          "finish": 75.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 81.03278040420264,
+          "toY": 32.63201511837542,
+          "radiusCenterX": 81.03278040420264,
+          "radiusCenterY": 32.63201511837542,
+          "liftX": 76.30856420937926,
+          "liftY": 32.670326724648476,
+          "actualLiftRadius": 4.724371538586562,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L5",
+          "liftIndex": 4,
+          "start": 50.0,
+          "finish": 75.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 29.630051442421973,
+          "liftY": 45.20690715312958,
+          "actualLiftRadius": 11.91476245470006,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L16",
+          "liftIndex": 15,
+          "start": 75.0,
+          "finish": 111.03505618513333,
+          "travel": 1.0350561851333273,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 34.535916917957366,
+          "fromY": 88.93757270276546,
+          "toX": 26.584865360735087,
+          "toY": 82.31074014318854,
+          "radiusCenterX": 26.584865360735087,
+          "radiusCenterY": 82.31074014318854,
+          "liftX": 12.757700218819082,
+          "liftY": 70.78643955104053,
+          "actualLiftRadius": 18.0,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 10.350561851333273,
+          "directMove": 10.350561851333273,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            },
+            {
+              "x": 26.584865360735087,
+              "y": 82.31074014318854
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L18",
+          "liftIndex": 17,
+          "start": 75.0,
+          "finish": 100.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 81.03278040420264,
+          "toY": 32.63201511837542,
+          "radiusCenterX": 81.03278040420264,
+          "radiusCenterY": 32.63201511837542,
+          "liftX": 81.06327003519982,
+          "liftY": 47.385050700977445,
+          "actualLiftRadius": 14.753067088545343,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L9",
+          "liftIndex": 8,
+          "start": 75.0,
+          "finish": 100.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 24.49322633538395,
+          "liftY": 31.395614691078663,
+          "actualLiftRadius": 8.971080406872234,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L20",
+          "liftIndex": 19,
+          "start": 100.0,
+          "finish": 125.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 81.03278040420264,
+          "toY": 32.63201511837542,
+          "radiusCenterX": 81.03278040420264,
+          "radiusCenterY": 32.63201511837542,
+          "liftX": 81.50190060492605,
+          "liftY": 30.934124251827598,
+          "actualLiftRadius": 1.761507069935653,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L11",
+          "liftIndex": 10,
+          "start": 100.0,
+          "finish": 125.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 31.756834750063717,
+          "liftY": 33.19205952808261,
+          "actualLiftRadius": 13.475453058942383,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L10",
+          "liftIndex": 9,
+          "start": 111.03505618513333,
+          "finish": 147.08385412316358,
+          "travel": 1.0487979380302574,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 26.584865360735087,
+          "fromY": 82.31074014318854,
+          "toX": 33.50194166653709,
+          "toY": 74.4271009542502,
+          "radiusCenterX": 33.50194166653709,
+          "radiusCenterY": 74.4271009542502,
+          "liftX": 45.37337743025273,
+          "liftY": 60.896801145747304,
+          "actualLiftRadius": 18.0,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 10.487979380302574,
+          "directMove": 10.487979380302574,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 26.584865360735087,
+              "y": 82.31074014318854
+            },
+            {
+              "x": 33.50194166653709,
+              "y": 74.4271009542502
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L22",
+          "liftIndex": 21,
+          "start": 125.0,
+          "finish": 150.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 81.03278040420264,
+          "toY": 32.63201511837542,
+          "radiusCenterX": 81.03278040420264,
+          "radiusCenterY": 32.63201511837542,
+          "liftX": 71.52833149861544,
+          "liftY": 31.817442590370774,
+          "actualLiftRadius": 9.53929124213626,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L15",
+          "liftIndex": 14,
+          "start": 125.0,
+          "finish": 150.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 13.358471971936524,
+          "liftY": 50.388797361403704,
+          "actualLiftRadius": 13.068209733008716,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L21",
+          "liftIndex": 20,
+          "start": 147.08385412316358,
+          "finish": 184.33787867667067,
+          "travel": 2.254024553507084,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 33.50194166653709,
+          "fromY": 74.4271009542502,
+          "toX": 49.90275737030828,
+          "toY": 58.96502111251437,
+          "radiusCenterX": 49.90275737030828,
+          "radiusCenterY": 58.96502111251437,
+          "liftX": 62.999983050860465,
+          "liftY": 46.61744323372841,
+          "actualLiftRadius": 18.000000000000004,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 22.540245535070838,
+          "directMove": 22.540245535070838,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 33.50194166653709,
+              "y": 74.4271009542502
+            },
+            {
+              "x": 49.90275737030828,
+              "y": 58.96502111251437
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L8",
+          "liftIndex": 7,
+          "start": 150.0,
+          "finish": 187.28062093306394,
+          "travel": 2.2806209330639464,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 62.19814546229248,
+          "toY": 19.772010816746146,
+          "radiusCenterX": 62.19814546229248,
+          "radiusCenterY": 19.772010816746146,
+          "liftX": 47.33274525310844,
+          "liftY": 9.622140048071742,
+          "actualLiftRadius": 18.0,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 22.806209330639465,
+          "directMove": 22.806209330639465,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 62.19814546229248,
+              "y": 19.772010816746146
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L17",
+          "liftIndex": 16,
+          "start": 150.0,
+          "finish": 175.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 18.12340545747429,
+          "liftY": 37.2988121137023,
+          "actualLiftRadius": 2.116881503996416,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L23",
+          "liftIndex": 22,
+          "start": 184.33787867667067,
+          "finish": 219.64290244624527,
+          "travel": 0.3050237695745939,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 49.90275737030828,
+          "fromY": 58.96502111251437,
+          "toX": 47.37488356683014,
+          "toY": 57.25803428355567,
+          "radiusCenterX": 47.37488356683014,
+          "radiusCenterY": 57.25803428355567,
+          "liftX": 32.45744663197547,
+          "liftY": 47.18479869142175,
+          "actualLiftRadius": 18.0,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 3.0502376957459387,
+          "directMove": 3.0502376957459387,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 49.90275737030828,
+              "y": 58.96502111251437
+            },
+            {
+              "x": 47.37488356683014,
+              "y": 57.25803428355567
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L24",
+          "liftIndex": 23,
+          "start": 219.64290244624527,
+          "finish": 255.38565708263724,
+          "travel": 0.7427546363919532,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 47.37488356683014,
+          "fromY": 57.25803428355567,
+          "toX": 44.30679327419924,
+          "toY": 50.493770321790265,
+          "radiusCenterX": 44.30679327419924,
+          "radiusCenterY": 50.493770321790265,
+          "liftX": 36.87154850270599,
+          "liftY": 34.10117640905082,
+          "actualLiftRadius": 17.999999999999996,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 7.427546363919531,
+          "directMove": 7.427546363919531,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 47.37488356683014,
+              "y": 57.25803428355567
+            },
+            {
+              "x": 44.30679327419924,
+              "y": 50.493770321790265
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L14",
+          "liftIndex": 13,
+          "start": 255.38565708263724,
+          "finish": 293.3227659647697,
+          "travel": 2.937108882132451,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 44.30679327419924,
+          "fromY": 50.493770321790265,
+          "toX": 72.53275344028984,
+          "toY": 51.144711620072975,
+          "radiusCenterX": 72.53275344028984,
+          "radiusCenterY": 51.144711620072975,
+          "liftX": 79.42105522286147,
+          "liftY": 67.77454320527613,
+          "actualLiftRadius": 18.0,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 29.37108882132451,
+          "directMove": 28.23346510564269,
+          "restrictedDetourDistance": 1.1376237156818192,
+          "movePath": [
+            {
+              "x": 44.30679327419924,
+              "y": 50.493770321790265
+            },
+            {
+              "x": 71.0,
+              "y": 49.0
+            },
+            {
+              "x": 72.53275344028984,
+              "y": 51.144711620072975
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L3",
+          "liftIndex": 2,
+          "start": 293.3227659647697,
+          "finish": 330.32680746191073,
+          "travel": 2.004041497141008,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 72.53275344028984,
+          "fromY": 51.144711620072975,
+          "toX": 76.02858643617851,
+          "toY": 70.87786605344154,
+          "radiusCenterX": 76.02858643617851,
+          "radiusCenterY": 70.87786605344154,
+          "liftX": 79.16849117446691,
+          "liftY": 88.60188924893737,
+          "actualLiftRadius": 18.000000000000004,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 20.04041497141008,
+          "directMove": 20.04041497141008,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 72.53275344028984,
+              "y": 51.144711620072975
+            },
+            {
+              "x": 76.02858643617851,
+              "y": 70.87786605344154
+            }
+          ]
+        }
+      ],
+      "cranes": [
+        {
+          "id": "C1",
+          "x": 34.535916917957366,
+          "y": 88.93757270276546,
+          "setup_x": 76.02858643617851,
+          "setup_y": 70.87786605344154,
+          "available": 330.32680746191073,
+          "jobs": 10
+        },
+        {
+          "id": "C2",
+          "x": 81.03278040420264,
+          "y": 32.63201511837542,
+          "setup_x": 62.19814546229248,
+          "setup_y": 19.772010816746146,
+          "available": 187.28062093306394,
+          "jobs": 7
+        },
+        {
+          "id": "C3",
+          "x": 19.53778467979282,
+          "y": 38.87384186498821,
+          "setup_x": 19.53778467979282,
+          "setup_y": 38.87384186498821,
+          "available": 175.0,
+          "jobs": 7
+        }
+      ]
+    },
+    "radiusPriority": {
+      "done": 24,
+      "total": 24,
+      "makespan": 330.327,
+      "reward": 313.21777057647705,
+      "softInter": 0,
+      "hardExecuted": 0,
+      "hardMask": 10,
+      "hardInter": 10,
+      "restrictedMask": 0,
+      "restrictedExecuted": 0,
+      "restrictedZones": [
+        {
+          "id": "RZ1",
+          "type": "rect",
+          "x1": 35.0,
+          "y1": 35.0,
+          "x2": 50.0,
+          "y2": 50.0
+        },
+        {
+          "id": "RZ2",
+          "type": "rect",
+          "x1": 55.0,
+          "y1": 50.0,
+          "x2": 70.0,
+          "y2": 70.0
+        }
+      ],
+      "travelTotal": 12.60742839497462,
+      "setupTotal": 80.0,
+      "moveTotal": 126.07428394974619,
+      "restrictedDetourDistance": 1.1376237156818192,
+      "actualLiftRadiusAvg": 12.86466779610359,
+      "softInterferenceRadiusAvg": 18.0,
+      "actualDangerRadiusAvg": 18.0,
+      "events": [
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L2",
+          "liftIndex": 1,
+          "start": 0.0,
+          "finish": 25.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 34.535916917957366,
+          "fromY": 88.93757270276546,
+          "toX": 34.535916917957366,
+          "toY": 88.93757270276546,
+          "radiusCenterX": 34.535916917957366,
+          "radiusCenterY": 88.93757270276546,
+          "liftX": 30.193560394458473,
+          "liftY": 75.94529570825398,
+          "actualLiftRadius": 13.698734309390987,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            },
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L6",
+          "liftIndex": 5,
+          "start": 0.0,
+          "finish": 25.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 81.03278040420264,
+          "toY": 32.63201511837542,
+          "radiusCenterX": 81.03278040420264,
+          "radiusCenterY": 32.63201511837542,
+          "liftX": 82.95877272915095,
+          "liftY": 35.00669970549643,
+          "actualLiftRadius": 3.057543674924347,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L1",
+          "liftIndex": 0,
+          "start": 0.0,
+          "finish": 25.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 33.46002921555191,
+          "liftY": 42.95972626656294,
+          "actualLiftRadius": 14.509422602450643,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L12",
+          "liftIndex": 11,
+          "start": 25.0,
+          "finish": 50.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 34.535916917957366,
+          "fromY": 88.93757270276546,
+          "toX": 34.535916917957366,
+          "toY": 88.93757270276546,
+          "radiusCenterX": 34.535916917957366,
+          "radiusCenterY": 88.93757270276546,
+          "liftX": 40.71569142397493,
+          "liftY": 90.09720159135759,
+          "actualLiftRadius": 6.287634857757093,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            },
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L7",
+          "liftIndex": 6,
+          "start": 25.0,
+          "finish": 50.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 81.03278040420264,
+          "toY": 32.63201511837542,
+          "radiusCenterX": 81.03278040420264,
+          "radiusCenterY": 32.63201511837542,
+          "liftX": 82.65700116474181,
+          "liftY": 48.69345158711076,
+          "actualLiftRadius": 16.143352641820965,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L4",
+          "liftIndex": 3,
+          "start": 25.0,
+          "finish": 50.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 11.531797192059457,
+          "liftY": 52.55082248710096,
+          "actualLiftRadius": 15.847890540743613,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L19",
+          "liftIndex": 18,
+          "start": 50.0,
+          "finish": 75.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 34.535916917957366,
+          "fromY": 88.93757270276546,
+          "toX": 34.535916917957366,
+          "toY": 88.93757270276546,
+          "radiusCenterX": 34.535916917957366,
+          "radiusCenterY": 88.93757270276546,
+          "liftX": 49.34775419998914,
+          "liftY": 90.38944664224982,
+          "actualLiftRadius": 14.882824382674825,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            },
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L13",
+          "liftIndex": 12,
+          "start": 50.0,
+          "finish": 75.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 81.03278040420264,
+          "toY": 32.63201511837542,
+          "radiusCenterX": 81.03278040420264,
+          "radiusCenterY": 32.63201511837542,
+          "liftX": 76.30856420937926,
+          "liftY": 32.670326724648476,
+          "actualLiftRadius": 4.724371538586562,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L5",
+          "liftIndex": 4,
+          "start": 50.0,
+          "finish": 75.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 29.630051442421973,
+          "liftY": 45.20690715312958,
+          "actualLiftRadius": 11.91476245470006,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L16",
+          "liftIndex": 15,
+          "start": 75.0,
+          "finish": 111.03505618513333,
+          "travel": 1.0350561851333273,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 34.535916917957366,
+          "fromY": 88.93757270276546,
+          "toX": 26.584865360735087,
+          "toY": 82.31074014318854,
+          "radiusCenterX": 26.584865360735087,
+          "radiusCenterY": 82.31074014318854,
+          "liftX": 12.757700218819082,
+          "liftY": 70.78643955104053,
+          "actualLiftRadius": 18.0,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 10.350561851333273,
+          "directMove": 10.350561851333273,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            },
+            {
+              "x": 26.584865360735087,
+              "y": 82.31074014318854
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L18",
+          "liftIndex": 17,
+          "start": 75.0,
+          "finish": 100.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 81.03278040420264,
+          "toY": 32.63201511837542,
+          "radiusCenterX": 81.03278040420264,
+          "radiusCenterY": 32.63201511837542,
+          "liftX": 81.06327003519982,
+          "liftY": 47.385050700977445,
+          "actualLiftRadius": 14.753067088545343,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L9",
+          "liftIndex": 8,
+          "start": 75.0,
+          "finish": 100.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 24.49322633538395,
+          "liftY": 31.395614691078663,
+          "actualLiftRadius": 8.971080406872234,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L20",
+          "liftIndex": 19,
+          "start": 100.0,
+          "finish": 125.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 81.03278040420264,
+          "toY": 32.63201511837542,
+          "radiusCenterX": 81.03278040420264,
+          "radiusCenterY": 32.63201511837542,
+          "liftX": 81.50190060492605,
+          "liftY": 30.934124251827598,
+          "actualLiftRadius": 1.761507069935653,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L11",
+          "liftIndex": 10,
+          "start": 100.0,
+          "finish": 125.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 31.756834750063717,
+          "liftY": 33.19205952808261,
+          "actualLiftRadius": 13.475453058942383,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L10",
+          "liftIndex": 9,
+          "start": 111.03505618513333,
+          "finish": 147.08385412316358,
+          "travel": 1.0487979380302574,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 26.584865360735087,
+          "fromY": 82.31074014318854,
+          "toX": 33.50194166653709,
+          "toY": 74.4271009542502,
+          "radiusCenterX": 33.50194166653709,
+          "radiusCenterY": 74.4271009542502,
+          "liftX": 45.37337743025273,
+          "liftY": 60.896801145747304,
+          "actualLiftRadius": 18.0,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 10.487979380302574,
+          "directMove": 10.487979380302574,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 26.584865360735087,
+              "y": 82.31074014318854
+            },
+            {
+              "x": 33.50194166653709,
+              "y": 74.4271009542502
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L22",
+          "liftIndex": 21,
+          "start": 125.0,
+          "finish": 150.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 81.03278040420264,
+          "toY": 32.63201511837542,
+          "radiusCenterX": 81.03278040420264,
+          "radiusCenterY": 32.63201511837542,
+          "liftX": 71.52833149861544,
+          "liftY": 31.817442590370774,
+          "actualLiftRadius": 9.53929124213626,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L15",
+          "liftIndex": 14,
+          "start": 125.0,
+          "finish": 150.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 13.358471971936524,
+          "liftY": 50.388797361403704,
+          "actualLiftRadius": 13.068209733008716,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L21",
+          "liftIndex": 20,
+          "start": 147.08385412316358,
+          "finish": 184.33787867667067,
+          "travel": 2.254024553507084,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 33.50194166653709,
+          "fromY": 74.4271009542502,
+          "toX": 49.90275737030828,
+          "toY": 58.96502111251437,
+          "radiusCenterX": 49.90275737030828,
+          "radiusCenterY": 58.96502111251437,
+          "liftX": 62.999983050860465,
+          "liftY": 46.61744323372841,
+          "actualLiftRadius": 18.000000000000004,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 22.540245535070838,
+          "directMove": 22.540245535070838,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 33.50194166653709,
+              "y": 74.4271009542502
+            },
+            {
+              "x": 49.90275737030828,
+              "y": 58.96502111251437
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L8",
+          "liftIndex": 7,
+          "start": 150.0,
+          "finish": 187.28062093306394,
+          "travel": 2.2806209330639464,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 62.19814546229248,
+          "toY": 19.772010816746146,
+          "radiusCenterX": 62.19814546229248,
+          "radiusCenterY": 19.772010816746146,
+          "liftX": 47.33274525310844,
+          "liftY": 9.622140048071742,
+          "actualLiftRadius": 18.0,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 22.806209330639465,
+          "directMove": 22.806209330639465,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 62.19814546229248,
+              "y": 19.772010816746146
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L17",
+          "liftIndex": 16,
+          "start": 150.0,
+          "finish": 175.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 18.12340545747429,
+          "liftY": 37.2988121137023,
+          "actualLiftRadius": 2.116881503996416,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L23",
+          "liftIndex": 22,
+          "start": 184.33787867667067,
+          "finish": 219.64290244624527,
+          "travel": 0.3050237695745939,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 49.90275737030828,
+          "fromY": 58.96502111251437,
+          "toX": 47.37488356683014,
+          "toY": 57.25803428355567,
+          "radiusCenterX": 47.37488356683014,
+          "radiusCenterY": 57.25803428355567,
+          "liftX": 32.45744663197547,
+          "liftY": 47.18479869142175,
+          "actualLiftRadius": 18.0,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 3.0502376957459387,
+          "directMove": 3.0502376957459387,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 49.90275737030828,
+              "y": 58.96502111251437
+            },
+            {
+              "x": 47.37488356683014,
+              "y": 57.25803428355567
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L24",
+          "liftIndex": 23,
+          "start": 219.64290244624527,
+          "finish": 255.38565708263724,
+          "travel": 0.7427546363919532,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 47.37488356683014,
+          "fromY": 57.25803428355567,
+          "toX": 44.30679327419924,
+          "toY": 50.493770321790265,
+          "radiusCenterX": 44.30679327419924,
+          "radiusCenterY": 50.493770321790265,
+          "liftX": 36.87154850270599,
+          "liftY": 34.10117640905082,
+          "actualLiftRadius": 17.999999999999996,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 7.427546363919531,
+          "directMove": 7.427546363919531,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 47.37488356683014,
+              "y": 57.25803428355567
+            },
+            {
+              "x": 44.30679327419924,
+              "y": 50.493770321790265
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L14",
+          "liftIndex": 13,
+          "start": 255.38565708263724,
+          "finish": 293.3227659647697,
+          "travel": 2.937108882132451,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 44.30679327419924,
+          "fromY": 50.493770321790265,
+          "toX": 72.53275344028984,
+          "toY": 51.144711620072975,
+          "radiusCenterX": 72.53275344028984,
+          "radiusCenterY": 51.144711620072975,
+          "liftX": 79.42105522286147,
+          "liftY": 67.77454320527613,
+          "actualLiftRadius": 18.0,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 29.37108882132451,
+          "directMove": 28.23346510564269,
+          "restrictedDetourDistance": 1.1376237156818192,
+          "movePath": [
+            {
+              "x": 44.30679327419924,
+              "y": 50.493770321790265
+            },
+            {
+              "x": 71.0,
+              "y": 49.0
+            },
+            {
+              "x": 72.53275344028984,
+              "y": 51.144711620072975
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L3",
+          "liftIndex": 2,
+          "start": 293.3227659647697,
+          "finish": 330.32680746191073,
+          "travel": 2.004041497141008,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 72.53275344028984,
+          "fromY": 51.144711620072975,
+          "toX": 76.02858643617851,
+          "toY": 70.87786605344154,
+          "radiusCenterX": 76.02858643617851,
+          "radiusCenterY": 70.87786605344154,
+          "liftX": 79.16849117446691,
+          "liftY": 88.60188924893737,
+          "actualLiftRadius": 18.000000000000004,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 20.04041497141008,
+          "directMove": 20.04041497141008,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 72.53275344028984,
+              "y": 51.144711620072975
+            },
+            {
+              "x": 76.02858643617851,
+              "y": 70.87786605344154
+            }
+          ]
+        }
+      ],
+      "cranes": [
+        {
+          "id": "C1",
+          "x": 34.535916917957366,
+          "y": 88.93757270276546,
+          "setup_x": 76.02858643617851,
+          "setup_y": 70.87786605344154,
+          "available": 330.32680746191073,
+          "jobs": 10
+        },
+        {
+          "id": "C2",
+          "x": 81.03278040420264,
+          "y": 32.63201511837542,
+          "setup_x": 62.19814546229248,
+          "setup_y": 19.772010816746146,
+          "available": 187.28062093306394,
+          "jobs": 7
+        },
+        {
+          "id": "C3",
+          "x": 19.53778467979282,
+          "y": 38.87384186498821,
+          "setup_x": 19.53778467979282,
+          "setup_y": 38.87384186498821,
+          "available": 175.0,
+          "jobs": 7
+        }
+      ]
+    },
+    "random": {
+      "done": 24,
+      "total": 24,
+      "makespan": 323.195,
+      "reward": 286.2025623321533,
+      "softInter": 3,
+      "hardExecuted": 0,
+      "hardMask": 10,
+      "hardInter": 10,
+      "restrictedMask": 0,
+      "restrictedExecuted": 0,
+      "restrictedZones": [
+        {
+          "id": "RZ1",
+          "type": "rect",
+          "x1": 35.0,
+          "y1": 35.0,
+          "x2": 50.0,
+          "y2": 50.0
+        },
+        {
+          "id": "RZ2",
+          "type": "rect",
+          "x1": 55.0,
+          "y1": 50.0,
+          "x2": 70.0,
+          "y2": 70.0
+        }
+      ],
+      "travelTotal": 19.324759370207598,
+      "setupTotal": 120.0,
+      "moveTotal": 193.24759370207602,
+      "restrictedDetourDistance": 3.6809963893051503,
+      "actualLiftRadiusAvg": 14.42972793028583,
+      "softInterferenceRadiusAvg": 18.0,
+      "actualDangerRadiusAvg": 18.0,
+      "events": [
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L2",
+          "liftIndex": 1,
+          "start": 0.0,
+          "finish": 25.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 34.535916917957366,
+          "fromY": 88.93757270276546,
+          "toX": 34.535916917957366,
+          "toY": 88.93757270276546,
+          "radiusCenterX": 34.535916917957366,
+          "radiusCenterY": 88.93757270276546,
+          "liftX": 30.193560394458473,
+          "liftY": 75.94529570825398,
+          "actualLiftRadius": 13.698734309390987,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            },
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L6",
+          "liftIndex": 5,
+          "start": 0.0,
+          "finish": 25.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 81.03278040420264,
+          "toY": 32.63201511837542,
+          "radiusCenterX": 81.03278040420264,
+          "radiusCenterY": 32.63201511837542,
+          "liftX": 82.95877272915095,
+          "liftY": 35.00669970549643,
+          "actualLiftRadius": 3.057543674924347,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L5",
+          "liftIndex": 4,
+          "start": 0.0,
+          "finish": 25.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 29.630051442421973,
+          "liftY": 45.20690715312958,
+          "actualLiftRadius": 11.91476245470006,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L19",
+          "liftIndex": 18,
+          "start": 25.0,
+          "finish": 50.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 34.535916917957366,
+          "fromY": 88.93757270276546,
+          "toX": 34.535916917957366,
+          "toY": 88.93757270276546,
+          "radiusCenterX": 34.535916917957366,
+          "radiusCenterY": 88.93757270276546,
+          "liftX": 49.34775419998914,
+          "liftY": 90.38944664224982,
+          "actualLiftRadius": 14.882824382674825,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            },
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L13",
+          "liftIndex": 12,
+          "start": 25.0,
+          "finish": 50.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 81.03278040420264,
+          "toY": 32.63201511837542,
+          "radiusCenterX": 81.03278040420264,
+          "radiusCenterY": 32.63201511837542,
+          "liftX": 76.30856420937926,
+          "liftY": 32.670326724648476,
+          "actualLiftRadius": 4.724371538586562,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L4",
+          "liftIndex": 3,
+          "start": 25.0,
+          "finish": 50.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 11.531797192059457,
+          "liftY": 52.55082248710096,
+          "actualLiftRadius": 15.847890540743613,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L16",
+          "liftIndex": 15,
+          "start": 50.0,
+          "finish": 86.03505618513333,
+          "travel": 1.0350561851333273,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 34.535916917957366,
+          "fromY": 88.93757270276546,
+          "toX": 26.584865360735087,
+          "toY": 82.31074014318854,
+          "radiusCenterX": 26.584865360735087,
+          "radiusCenterY": 82.31074014318854,
+          "liftX": 12.757700218819082,
+          "liftY": 70.78643955104053,
+          "actualLiftRadius": 18.0,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 10.350561851333273,
+          "directMove": 10.350561851333273,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 34.535916917957366,
+              "y": 88.93757270276546
+            },
+            {
+              "x": 26.584865360735087,
+              "y": 82.31074014318854
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L18",
+          "liftIndex": 17,
+          "start": 50.0,
+          "finish": 75.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 81.03278040420264,
+          "toY": 32.63201511837542,
+          "radiusCenterX": 81.03278040420264,
+          "radiusCenterY": 32.63201511837542,
+          "liftX": 81.06327003519982,
+          "liftY": 47.385050700977445,
+          "actualLiftRadius": 14.753067088545343,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L11",
+          "liftIndex": 10,
+          "start": 50.0,
+          "finish": 75.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 31.756834750063717,
+          "liftY": 33.19205952808261,
+          "actualLiftRadius": 13.475453058942383,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L14",
+          "liftIndex": 13,
+          "start": 75.0,
+          "finish": 111.71794675684379,
+          "travel": 1.7179467568437907,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 81.03278040420264,
+          "fromY": 32.63201511837542,
+          "toX": 80.24571390218068,
+          "toY": 49.79344373770676,
+          "radiusCenterX": 80.24571390218068,
+          "radiusCenterY": 49.79344373770676,
+          "liftX": 79.42105522286147,
+          "liftY": 67.77454320527613,
+          "actualLiftRadius": 18.000000000000004,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 17.179467568437907,
+          "directMove": 17.179467568437907,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 81.03278040420264,
+              "y": 32.63201511837542
+            },
+            {
+              "x": 80.24571390218068,
+              "y": 49.79344373770676
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L9",
+          "liftIndex": 8,
+          "start": 75.0,
+          "finish": 100.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 24.49322633538395,
+          "liftY": 31.395614691078663,
+          "actualLiftRadius": 8.971080406872234,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L15",
+          "liftIndex": 14,
+          "start": 86.03505618513333,
+          "finish": 122.69041132323245,
+          "travel": 1.655355138099121,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 26.584865360735087,
+          "fromY": 82.31074014318854,
+          "toX": 20.248504153385326,
+          "toY": 67.01791208644543,
+          "radiusCenterX": 20.248504153385326,
+          "radiusCenterY": 67.01791208644543,
+          "liftX": 13.358471971936524,
+          "liftY": 50.388797361403704,
+          "actualLiftRadius": 17.999999999999996,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 1,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 16.55355138099121,
+          "directMove": 16.55355138099121,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 26.584865360735087,
+              "y": 82.31074014318854
+            },
+            {
+              "x": 20.248504153385326,
+              "y": 67.01791208644543
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L17",
+          "liftIndex": 16,
+          "start": 100.0,
+          "finish": 125.0,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 19.53778467979282,
+          "toY": 38.87384186498821,
+          "radiusCenterX": 19.53778467979282,
+          "radiusCenterY": 38.87384186498821,
+          "liftX": 18.12340545747429,
+          "liftY": 37.2988121137023,
+          "actualLiftRadius": 2.116881503996416,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 1,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L21",
+          "liftIndex": 20,
+          "start": 111.71794675684379,
+          "finish": 136.7179467568438,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 80.24571390218068,
+          "fromY": 49.79344373770676,
+          "toX": 80.24571390218068,
+          "toY": 49.79344373770676,
+          "radiusCenterX": 80.24571390218068,
+          "radiusCenterY": 49.79344373770676,
+          "liftX": 62.999983050860465,
+          "liftY": 46.61744323372841,
+          "actualLiftRadius": 17.53574098227528,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 80.24571390218068,
+              "y": 49.79344373770676
+            },
+            {
+              "x": 80.24571390218068,
+              "y": 49.79344373770676
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L23",
+          "liftIndex": 22,
+          "start": 122.69041132323245,
+          "finish": 158.21938247673648,
+          "travel": 0.5289711535040336,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 20.248504153385326,
+          "fromY": 67.01791208644543,
+          "toX": 23.021478982312523,
+          "toY": 62.51328571769131,
+          "radiusCenterX": 23.021478982312523,
+          "radiusCenterY": 62.51328571769131,
+          "liftX": 32.45744663197547,
+          "liftY": 47.18479869142175,
+          "actualLiftRadius": 18.0,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 1,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 5.289711535040335,
+          "directMove": 5.289711535040335,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 20.248504153385326,
+              "y": 67.01791208644543
+            },
+            {
+              "x": 23.021478982312523,
+              "y": 62.51328571769131
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L8",
+          "liftIndex": 7,
+          "start": 125.0,
+          "finish": 162.23512316101747,
+          "travel": 2.235123161017472,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 19.53778467979282,
+          "fromY": 38.87384186498821,
+          "toX": 34.9338847882515,
+          "toY": 22.670828073042202,
+          "radiusCenterX": 34.9338847882515,
+          "radiusCenterY": 22.670828073042202,
+          "liftX": 47.33274525310844,
+          "liftY": 9.622140048071742,
+          "actualLiftRadius": 18.0,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 22.35123161017472,
+          "directMove": 22.35123161017472,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 19.53778467979282,
+              "y": 38.87384186498821
+            },
+            {
+              "x": 34.9338847882515,
+              "y": 22.670828073042202
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L22",
+          "liftIndex": 21,
+          "start": 136.7179467568438,
+          "finish": 171.9157690042397,
+          "travel": 0.1978222473959328,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 80.24571390218068,
+          "fromY": 49.79344373770676,
+          "toX": 79.38252791016822,
+          "toY": 48.01347910331898,
+          "radiusCenterX": 79.38252791016822,
+          "radiusCenterY": 48.01347910331898,
+          "liftX": 71.52833149861544,
+          "liftY": 31.817442590370774,
+          "actualLiftRadius": 18.0,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 1.978222473959328,
+          "directMove": 1.978222473959328,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 80.24571390218068,
+              "y": 49.79344373770676
+            },
+            {
+              "x": 79.38252791016822,
+              "y": 48.01347910331898
+            }
+          ]
+        },
+        {
+          "craneId": "C1",
+          "craneIndex": 0,
+          "liftId": "L10",
+          "liftIndex": 9,
+          "start": 158.21938247673648,
+          "finish": 193.66040988977355,
+          "travel": 0.44102741303707604,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 23.021478982312523,
+          "fromY": 62.51328571769131,
+          "toX": 27.420264955038782,
+          "toY": 62.19516644577546,
+          "radiusCenterX": 27.420264955038782,
+          "radiusCenterY": 62.19516644577546,
+          "liftX": 45.37337743025273,
+          "liftY": 60.896801145747304,
+          "actualLiftRadius": 18.0,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 4.410274130370761,
+          "directMove": 4.410274130370761,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 23.021478982312523,
+              "y": 62.51328571769131
+            },
+            {
+              "x": 27.420264955038782,
+              "y": 62.19516644577546
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L1",
+          "liftIndex": 0,
+          "start": 162.23512316101747,
+          "finish": 197.46935923423078,
+          "travel": 0.23423607321330006,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 34.9338847882515,
+          "fromY": 22.670828073042202,
+          "toX": 34.764174818804655,
+          "toY": 25.007032757077614,
+          "radiusCenterX": 34.764174818804655,
+          "radiusCenterY": 25.007032757077614,
+          "liftX": 33.46002921555191,
+          "liftY": 42.95972626656294,
+          "actualLiftRadius": 18.0,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 2.3423607321330007,
+          "directMove": 2.3423607321330007,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 34.9338847882515,
+              "y": 22.670828073042202
+            },
+            {
+              "x": 34.764174818804655,
+              "y": 25.007032757077614
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L12",
+          "liftIndex": 11,
+          "start": 171.9157690042397,
+          "finish": 211.19416652277644,
+          "travel": 4.27839751853673,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 79.38252791016822,
+          "fromY": 48.01347910331898,
+          "toX": 57.34552300917809,
+          "toY": 83.20889980878596,
+          "radiusCenterX": 57.34552300917809,
+          "radiusCenterY": 83.20889980878596,
+          "liftX": 40.71569142397493,
+          "liftY": 90.09720159135759,
+          "actualLiftRadius": 18.0,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 42.7839751853673,
+          "directMove": 41.52526006710948,
+          "restrictedDetourDistance": 1.2587151182578182,
+          "movePath": [
+            {
+              "x": 79.38252791016822,
+              "y": 48.01347910331898
+            },
+            {
+              "x": 71.0,
+              "y": 71.0
+            },
+            {
+              "x": 57.34552300917809,
+              "y": 83.20889980878596
+            }
+          ]
+        },
+        {
+          "craneId": "C3",
+          "craneIndex": 2,
+          "liftId": "L24",
+          "liftIndex": 23,
+          "start": 197.46935923423078,
+          "finish": 222.46935923423078,
+          "travel": 0.0,
+          "setup": 0.0,
+          "duration": 25.0,
+          "fromX": 34.764174818804655,
+          "fromY": 25.007032757077614,
+          "toX": 34.764174818804655,
+          "toY": 25.007032757077614,
+          "radiusCenterX": 34.764174818804655,
+          "radiusCenterY": 25.007032757077614,
+          "liftX": 36.87154850270599,
+          "liftY": 34.10117640905082,
+          "actualLiftRadius": 9.335120385207922,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": true,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 0.0,
+          "directMove": 0.0,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 34.764174818804655,
+              "y": 25.007032757077614
+            },
+            {
+              "x": 34.764174818804655,
+              "y": 25.007032757077614
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L20",
+          "liftIndex": 19,
+          "start": 211.19416652277644,
+          "finish": 250.39713760170116,
+          "travel": 4.202971078924723,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 57.34552300917809,
+          "fromY": 83.20889980878596,
+          "toX": 74.61359882235443,
+          "toY": 47.56395583703076,
+          "radiusCenterX": 74.61359882235443,
+          "radiusCenterY": 47.56395583703076,
+          "liftX": 81.50190060492605,
+          "liftY": 30.934124251827598,
+          "actualLiftRadius": 18.000000000000004,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 42.02971078924723,
+          "directMove": 39.6074295181999,
+          "restrictedDetourDistance": 2.422281271047332,
+          "movePath": [
+            {
+              "x": 57.34552300917809,
+              "y": 83.20889980878596
+            },
+            {
+              "x": 71.0,
+              "y": 71.0
+            },
+            {
+              "x": 74.61359882235443,
+              "y": 47.56395583703076
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L3",
+          "liftIndex": 2,
+          "start": 250.39713760170116,
+          "finish": 287.7261314537908,
+          "travel": 2.32899385208965,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 74.61359882235443,
+          "fromY": 47.56395583703076,
+          "toX": 77.1828243201428,
+          "toY": 70.71174874798996,
+          "radiusCenterX": 77.1828243201428,
+          "radiusCenterY": 70.71174874798996,
+          "liftX": 79.16849117446691,
+          "liftY": 88.60188924893737,
+          "actualLiftRadius": 18.000000000000007,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 23.289938520896502,
+          "directMove": 23.289938520896502,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 74.61359882235443,
+              "y": 47.56395583703076
+            },
+            {
+              "x": 77.1828243201428,
+              "y": 70.71174874798996
+            }
+          ]
+        },
+        {
+          "craneId": "C2",
+          "craneIndex": 1,
+          "liftId": "L7",
+          "liftIndex": 6,
+          "start": 287.7261314537908,
+          "finish": 323.19499024620325,
+          "travel": 0.4688587924124438,
+          "setup": 10.0,
+          "duration": 25.0,
+          "fromX": 77.1828243201428,
+          "fromY": 70.71174874798996,
+          "toX": 78.31406084900664,
+          "toY": 66.16167615098564,
+          "radiusCenterX": 78.31406084900664,
+          "radiusCenterY": 66.16167615098564,
+          "liftX": 82.65700116474181,
+          "liftY": 48.69345158711076,
+          "actualLiftRadius": 17.999999999999996,
+          "craneRadius": 18.0,
+          "dangerRadius": 18.0,
+          "sameRadius": false,
+          "softConflict": 0,
+          "hardMask": 0,
+          "restrictedMask": 0,
+          "restrictedViolation": false,
+          "move": 4.688587924124438,
+          "directMove": 4.688587924124438,
+          "restrictedDetourDistance": 0.0,
+          "movePath": [
+            {
+              "x": 77.1828243201428,
+              "y": 70.71174874798996
+            },
+            {
+              "x": 78.31406084900664,
+              "y": 66.16167615098564
+            }
+          ]
+        }
+      ],
+      "cranes": [
+        {
+          "id": "C1",
+          "x": 34.535916917957366,
+          "y": 88.93757270276546,
+          "setup_x": 27.420264955038782,
+          "setup_y": 62.19516644577546,
+          "available": 193.66040988977355,
+          "jobs": 6
+        },
+        {
+          "id": "C2",
+          "x": 81.03278040420264,
+          "y": 32.63201511837542,
+          "setup_x": 78.31406084900664,
+          "setup_y": 66.16167615098564,
+          "available": 323.19499024620325,
+          "jobs": 10
+        },
+        {
+          "id": "C3",
+          "x": 19.53778467979282,
+          "y": 38.87384186498821,
+          "setup_x": 34.764174818804655,
+          "setup_y": 25.007032757077614,
+          "available": 222.46935923423078,
+          "jobs": 8
+        }
+      ]
+    }
+  }
+}

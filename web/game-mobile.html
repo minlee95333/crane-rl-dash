@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no" />
+<meta name="theme-color" content="#12141a" />
+<title>LIFT-OPS 모바일 — 크레인 양중 퍼즐</title>
+<meta name="description" content="크레인을 끌어 배치하면 작업반경 안의 양중물이 한 번에 양중됩니다. 동선과 반경을 읽고 최적 계획을 짜세요." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&display=swap">
+<style>
+/* ============================================================
+   LIFT-OPS 모바일 — 정제된 다크 모바일 게임 (스윕 모드).
+   데스크톱 index.html과 별개, 같은 게임 API 재사용.
+   크레인을 끌어 배치 → 작업반경/양중반경 안의 양중물이 한 번에 양중.
+   ============================================================ */
+:root{
+  --bg:#12141a; --panel:#1b1f27; --panel2:#232834; --line:#2b313c; --line2:#3a4150;
+  --txt:#e7ebf2; --txt2:#9aa4b4; --txt3:#6b7280;
+  --amber:#f5a623; --amber-d:#b87d12; --amber-h:#ffba42; --amber-ink:#1a1300;
+  --blue:#4aa3ff; --teal:#2dd4bf; --green:#45c47a; --green-d:#2f8d56; --red:#ef5a5a; --red-d:#bf3f3f;
+  --r-sm:8px; --r-md:14px; --r-lg:20px; --r-xl:26px;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:36px;
+  --num:'JetBrains Mono',monospace;
+  --body:'Pretendard Variable',Pretendard,system-ui,sans-serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;height:100%;overscroll-behavior:none}
+body{font-family:var(--body);color:var(--txt);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;
+  background:radial-gradient(120% 80% at 50% 0%,#1a1e27,#0f1116);display:flex;flex-direction:column;min-height:100dvh}
+.num{font-family:var(--num);font-variant-numeric:tabular-nums}
+button{font-family:inherit}
+
+.screen{display:none;flex:1 1 auto;flex-direction:column;min-height:0}
+.screen.active{display:flex}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);width:100%;min-height:54px;
+  padding:0 var(--s5);border:none;cursor:pointer;font-weight:700;font-size:17px;color:var(--amber-ink);
+  border-radius:var(--r-md);background:var(--amber);box-shadow:0 4px 0 var(--amber-d);
+  transition:transform .06s,box-shadow .06s,background .15s;-webkit-user-select:none;user-select:none}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--amber-d)}
+.btn:disabled{opacity:.4;pointer-events:none}
+.btn.green{background:var(--green);box-shadow:0 4px 0 var(--green-d);color:#06210f}
+.btn.green:active{box-shadow:0 1px 0 var(--green-d)}
+.btn.ghost{background:var(--panel2);color:var(--txt);box-shadow:0 4px 0 #161a21}
+.btn.ghost:active{box-shadow:0 1px 0 #161a21}
+.btn.sm{width:auto;min-height:52px;min-width:52px;font-size:18px;padding:0 var(--s4)}
+
+.topbar{display:flex;align-items:center;gap:var(--s3);padding:var(--s3) var(--s4);
+  padding-top:max(var(--s3),env(safe-area-inset-top));flex:0 0 auto}
+.logo{font-weight:800;font-size:17px;letter-spacing:.02em;flex:1}
+.logo .a{color:var(--amber)}
+.tb-btn{background:var(--panel2);border:1px solid var(--line2);color:var(--txt2);border-radius:var(--r-sm);
+  min-height:38px;padding:0 12px;font-size:13px;font-weight:700}
+.tb-btn:active{transform:translateY(1px)}
+
+.scroll{flex:1 1 auto;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:var(--s4)}
+.center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--s4);color:var(--txt2)}
+.spin{width:40px;height:40px;border:4px solid var(--line2);border-top-color:var(--amber);border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+.lede{text-align:center;color:var(--txt2);font-size:15px;margin:0 auto var(--s5);max-width:300px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--s5);max-width:420px;margin:0 auto}
+.field{display:block;margin:var(--s3) 0}
+.field span{display:block;font-size:12px;color:var(--txt2);font-weight:700;margin:0 0 5px 2px}
+.field input{width:100%;min-height:52px;padding:0 var(--s4);background:var(--bg);border:1px solid var(--line2);
+  border-radius:var(--r-sm);color:var(--txt);font-size:16px;font-family:inherit}
+.field input:focus{outline:none;border-color:var(--amber)}
+.err{color:#fca5a5;font-size:14px;font-weight:600;min-height:18px;margin:6px 0 0 2px}
+.formnote{text-align:center;color:var(--txt2);font-size:13px;margin-top:var(--s4)}
+.formnote a{color:var(--amber);font-weight:700}
+.linkbtn{background:none;border:none;color:var(--amber);font-weight:700;font-size:13px;padding:0;cursor:pointer;text-decoration:underline}
+.field select{width:100%;min-height:52px;padding:0 var(--s4);background:var(--bg);border:1px solid var(--line2);
+  border-radius:var(--r-sm);color:var(--txt);font-size:16px;font-family:inherit;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%239aa4b4' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right var(--s4) center}
+.field select:focus{outline:none;border-color:var(--amber)}
+.consent{display:flex;gap:var(--s3);align-items:flex-start;margin:var(--s4) 0 0;font-size:13px;line-height:1.5;color:var(--txt2);cursor:pointer}
+/* 자필 서명란. touch-action:none 이 없으면 서명하는 동안 시트가 스크롤돼
+   획이 끊긴다 — 모바일에서는 이 한 줄이 기능의 전제다. */
+.sig-block{margin:var(--s4) 0 0;padding:var(--s3);border:1px solid var(--line);border-radius:var(--r-sm);background:var(--panel2)}
+.sig-head{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);font-size:13px}
+.sig-clear{width:auto;flex:0 0 auto;padding:6px 12px;font-size:12px;margin:0}
+.sig-note{font-size:12px;color:var(--txt2);margin-top:var(--s1)}
+/* 서명란만 흰 종이 — 잉크가 검정이라 다크 배경에서는 보이지 않고, 화면과
+   저장본이 어긋나면 서명한 사람이 자기가 제출한 것을 확인할 수 없다. */
+.sig-pad{display:block;width:100%;height:180px;margin-top:var(--s2);border:2px dashed var(--line2);
+         border-radius:var(--r-sm);background:#ffffff;touch-action:none}
+.sig-pad.is-signed{border-style:solid;border-color:var(--amber)}
+.consent input{width:22px;height:22px;flex:0 0 auto;margin-top:1px;accent-color:var(--amber)}
+.consent b{color:var(--txt)}
+.req{color:#fca5a5}
+/* .field span 이 display:block 이라 라벨 안 별표가 줄바꿈됨 — inline 으로 되돌려 항목명 옆에 둠 */
+.field .req{display:inline;margin-left:2px}
+
+.lv-head{font-weight:800;font-size:20px;margin:0 0 var(--s3)}
+.lv-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3)}
+.lv-card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:var(--s4);box-shadow:0 4px 0 #14171d;text-align:left;min-height:120px;display:flex;flex-direction:column;gap:6px;overflow:hidden}
+.lv-card:active{transform:translateY(2px)}
+.lv-card .lv-no{font-family:var(--num);font-weight:700;font-size:13px;color:var(--amber-ink);background:var(--amber);
+  width:30px;height:30px;border-radius:8px;display:grid;place-items:center}
+.lv-card.cleared .lv-no{background:var(--green);color:#06210f}
+.lv-name{font-weight:700;font-size:15px;line-height:1.25;color:var(--txt)}
+.lv-meta{font-size:12px;color:var(--txt2);margin-top:auto}
+.lv-meta b{font-family:var(--num);color:var(--txt)}
+.lv-result{font-size:11px;font-weight:800;line-height:1;padding:6px 8px;border-radius:99px;
+  color:var(--txt2);background:var(--bg);border:1px solid var(--line)}
+.lv-result.graded{font-family:var(--num);font-size:15px;color:var(--amber-ink);background:var(--amber);border-color:var(--amber)}
+.lv-card.locked{opacity:.5;box-shadow:none}
+.lv-card.locked .lv-no{background:var(--line2);color:var(--txt2)}
+.research-panel{background:rgba(74,163,255,.08);border:1px solid rgba(74,163,255,.45);border-radius:var(--r-lg);
+  padding:var(--s4);margin:0 0 var(--s4)}
+.research-head{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s3)}
+.research-title{font-weight:800;font-size:15px}.research-copy{font-size:12px;color:var(--txt2);margin-top:3px}
+.research-actions{display:flex;gap:var(--s2);margin-top:var(--s3)}
+.research-actions .tb-btn{flex:1}
+.research-mode{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);padding-top:var(--s3);margin-top:var(--s3);border-top:1px solid var(--line)}
+/* 단계 미터 — 색만으로 상태를 전달하지 않도록 위의 "n/N단계" 문구와 함께 쓴다. */
+/* 항상 한 줄. 단계 수(현재 27)가 늘어도 접히지 않도록 칸이 폭을 나눠 갖고 줄어든다
+   — 접히는 위치가 폭에 따라 달라지면 단계 수를 눈으로 셀 수 없다. */
+.research-steps{display:flex;gap:3px;margin-top:6px;width:100%}
+.research-step{flex:1 1 0;min-width:3px;max-width:12px;height:10px;border-radius:3px;
+  border:1px solid var(--line);background:transparent}
+.research-step.done{background:var(--green);border-color:var(--green)}
+.research-step.current{border-color:var(--amber);border-width:2px}
+.research-complete{color:var(--green);font-weight:800}
+.research-toggle{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:800}
+.research-toggle input{width:24px;height:24px;accent-color:var(--green)}
+.research-consent-text{text-align:left;background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);
+  padding:var(--s3);font-size:12px;color:var(--txt2);line-height:1.55;margin:0 0 var(--s3)}
+.research-consent-text ul{padding-left:18px;margin:6px 0}
+#ovResearch .sheet{max-height:calc(100dvh - 24px);overflow-y:auto;text-align:left;padding-top:var(--s5)}
+#ovResearch .sheet h2{text-align:center}
+#ovSignature .sheet{max-height:calc(100dvh - 24px);overflow-y:auto;text-align:left;padding-top:var(--s5)}
+#ovSignature .sheet h2{text-align:center}
+
+/* 리더보드 */
+.lb-note{font-size:12px;color:var(--txt2);margin:0 0 var(--s3);line-height:1.5}
+.lb-row{display:flex;align-items:center;gap:var(--s3);padding:11px var(--s3);border:1px solid var(--line);
+  border-radius:var(--r-md);background:var(--panel);margin-bottom:7px}
+.lb-row.mine{border-color:var(--amber);box-shadow:0 0 0 1px var(--amber) inset}
+.lb-row .rk{font-family:var(--num);font-weight:800;font-size:16px;color:var(--txt2);width:30px;text-align:center;flex:0 0 auto}
+.lb-row.top1 .rk{color:#ffd23f} .lb-row.top3 .rk{color:var(--amber)}
+.lb-row .nm{flex:1;min-width:0;font-weight:700;font-size:14px;color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lb-row .nm .sub{display:block;font-size:11px;color:var(--txt2);font-weight:500}
+.lb-row .sc{font-family:var(--num);font-weight:800;font-size:17px;color:var(--amber);flex:0 0 auto}
+.lb-row .sc small{font-size:11px;color:var(--txt2);font-weight:600}
+.lb-myrank{font-family:var(--num);font-size:11px;font-weight:800;color:var(--amber-ink);background:var(--amber);
+  border-radius:99px;padding:3px 9px;margin-left:auto;white-space:nowrap}
+.lb-myrank.none{color:var(--txt2);background:var(--bg);border:1px solid var(--line)}
+.lb-scenhead{display:flex;align-items:center;gap:var(--s2);margin-bottom:var(--s2)}
+.lb-gap{text-align:center;color:var(--txt3);font-size:12px;margin:2px 0 5px}
+
+#scrPlay{position:relative;overflow:hidden}
+.goalbar{display:flex;align-items:center;gap:var(--s2);padding:var(--s2) var(--s4);flex:0 0 auto}
+.pill{background:var(--panel);border:1px solid var(--line);border-radius:99px;padding:5px 12px;
+  display:flex;align-items:baseline;gap:6px;font-size:12px;color:var(--txt2);font-weight:700}
+.pill .num{font-size:16px;color:var(--amber)}
+.pill.b .num{color:var(--blue)}
+.pill.warn .num{color:#ffba42}
+.pill.warn.on{background:rgba(245,166,35,.18);border-color:var(--amber-d)}
+.play-clock{margin-left:auto;font-family:var(--num);color:var(--txt2);font-size:14px}
+
+.stage{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center;padding:var(--s3)}
+#siteSvg{width:100%;height:100%;max-height:100%;touch-action:none;
+  background:linear-gradient(180deg,#171b22,#13161c);border:1px solid var(--line);border-radius:var(--r-md)}
+.lift-hit,.crane-g{cursor:pointer}
+.crane-g.active{cursor:grab}
+@keyframes candpulse{0%,100%{opacity:1}50%{opacity:.55}}
+.reach-ring{animation:candpulse 1.3s ease-in-out infinite}
+
+.banner{position:absolute;top:52px;left:var(--s4);right:var(--s4);z-index:6;background:var(--red);color:#fff;
+  padding:9px 14px;border-radius:var(--r-sm);font-size:14px;font-weight:700;display:none;text-align:center;
+  box-shadow:0 8px 20px rgba(0,0,0,.4)}
+.banner.show{display:block}
+.banner .bn-t{display:block}
+.banner .bn-s{display:block;font-weight:600;font-size:12px;opacity:.92;margin-top:2px}
+
+.cranebar{display:flex;gap:var(--s2);padding:var(--s2) var(--s4);overflow-x:auto;flex:0 0 auto}
+.crane-chip{flex:0 0 auto;min-width:88px;min-height:56px;padding:7px 11px;border:1px solid var(--line2);border-radius:var(--r-sm);
+  background:var(--panel);text-align:left;display:flex;flex-direction:column;gap:2px}
+.crane-chip:active{transform:translateY(1px)}
+.crane-chip .cc-id{display:flex;align-items:center;gap:6px;font-weight:800;font-size:14px;color:var(--txt)}
+.crane-chip .cc-dot{width:12px;height:12px;border-radius:4px}
+.crane-chip .cc-sub{font-size:11px;color:var(--txt2);font-family:var(--num)}
+.crane-chip .cc-reach{font-size:12px;color:var(--green);font-weight:700;font-family:var(--num)}
+.crane-chip.active{border-color:var(--amber);box-shadow:0 0 0 1px var(--amber) inset}
+.crane-chip.ready{border-color:var(--green);box-shadow:0 0 0 1px var(--green) inset}
+.crane-chip.idle{opacity:.5}
+
+.actionbar{display:flex;gap:var(--s2);padding:var(--s3) var(--s4);
+  padding-bottom:max(var(--s3),env(safe-area-inset-bottom));flex:0 0 auto}
+.actionbar .btn{flex:1 1 auto}
+.hint{text-align:center;color:var(--txt2);font-size:13px;padding:0 var(--s4) 2px}
+
+.overlay{position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;
+  padding:var(--s5);background:rgba(8,9,12,.62)}
+.overlay.show{display:flex;animation:fade .18s ease-out}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.sheet{background:var(--panel);border:1px solid var(--line2);border-radius:var(--r-xl);padding:var(--s6) var(--s5) var(--s5);
+  width:100%;max-width:380px;box-shadow:0 20px 50px rgba(0,0,0,.55);text-align:center;animation:rise .26s cubic-bezier(.2,.9,.3,1.1)}
+@keyframes rise{from{transform:translateY(18px);opacity:0}to{transform:none;opacity:1}}
+.sheet h2{font-weight:800;font-size:23px;margin:0 0 var(--s2)}
+.sheet p{color:var(--txt2);font-size:14px;margin:0 0 var(--s4)}
+.goal-row{display:flex;gap:var(--s3);justify-content:center;margin:var(--s4) 0 var(--s5)}
+.goal-box{background:var(--bg);border:1px solid var(--line2);border-radius:var(--r-md);padding:var(--s3) var(--s4);min-width:84px}
+.goal-box .gv{font-family:var(--num);font-weight:700;font-size:26px;color:var(--amber);line-height:1}
+.goal-box .gl{font-size:11px;color:var(--txt2);font-weight:700;margin-top:4px;letter-spacing:.02em}
+.goal-box.b .gv{color:var(--blue)}
+
+.grade-badge{font-family:var(--num);font-weight:700;font-size:18px;color:var(--amber-ink);background:var(--amber);
+  display:inline-block;padding:3px 14px;border-radius:99px}
+#ovWin .sheet{max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contain}
+.score-hero{display:flex;align-items:center;justify-content:center;gap:var(--s3);margin:var(--s3) 0 var(--s4)}
+.score-total{font-family:var(--num);font-weight:800;font-size:42px;line-height:1;color:var(--amber)}
+.score-total small{font-size:15px;color:var(--txt2);font-weight:600}
+.score-cats{display:grid;gap:7px;margin:0 0 var(--s4);text-align:left}
+.score-cat{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 10px}
+.score-cat-head{display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:700;color:var(--txt)}
+.score-cat-calc{font-family:var(--num);font-size:11px;color:var(--txt2);white-space:nowrap}
+.score-cat-track{height:5px;margin-top:6px;border-radius:99px;background:var(--line);overflow:hidden}
+.score-cat-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--blue),var(--amber));transform-origin:left}
+.win-rank{display:flex;gap:var(--s2);margin:0 0 var(--s4)}
+.win-rank .wr{flex:1;background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);padding:10px 8px;text-align:center}
+.win-rank .wr .v{font-family:var(--num);font-weight:800;font-size:22px;color:var(--amber);line-height:1}
+.win-rank .wr .v small{font-size:12px;color:var(--txt2);font-weight:600}
+.win-rank .wr .k{font-size:11px;color:var(--txt2);font-weight:700;margin-top:4px}
+.win-rank .wr.best{border-color:var(--green)}
+.win-rank .wr.best .v{color:var(--green)}
+.win-actions{display:grid;gap:var(--s2);margin-top:var(--s3)}
+.tut-step{display:flex;align-items:center;gap:var(--s3);background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);
+  padding:var(--s3);text-align:left;margin-bottom:var(--s2)}
+.tut-step .tn{font-family:var(--num);font-weight:700;color:var(--amber-ink);background:var(--amber);
+  width:28px;height:28px;border-radius:7px;display:grid;place-items:center;flex:0 0 auto}
+.tut-step .tt{font-size:13.5px;color:var(--txt)}
+.legend{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);justify-content:center;margin:var(--s2) 0 var(--s4);font-size:12px;color:var(--txt2)}
+.legend i{display:inline-block;width:13px;height:13px;border-radius:3px;margin-right:5px;vertical-align:-2px}
+
+.toast{position:fixed;left:50%;bottom:94px;transform:translateX(-50%);z-index:60;background:#000c;border:1px solid var(--line2);
+  color:#fff;padding:10px 16px;border-radius:99px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;
+  transition:opacity .2s;max-width:90vw;text-align:center}
+.toast.show{opacity:1}
+/* 3D 다시 보기 */
+#ovReplay{padding:0;background:#020617}
+.replay-sheet{width:100%;height:100dvh;display:flex;flex-direction:column;background:#020617}
+.replay-top{display:flex;align-items:center;gap:var(--s3);padding:var(--s3) var(--s4);padding-top:max(var(--s3),env(safe-area-inset-top))}
+.replay-title{font-weight:800;font-size:var(--text-md);color:#fff}
+.replay-hint{flex:1;font-size:11px;color:var(--txt2)}
+.replay-top .tb-btn{white-space:nowrap}
+.replay-stage{flex:1;min-height:0;position:relative;background:#020617}
+.replay-stage canvas{display:block;width:100%;height:100%;touch-action:none}
+.replay-panel{padding:var(--s2) var(--s4);padding-bottom:max(var(--s3),env(safe-area-inset-bottom));
+  background:#0b0f17;border-top:1px solid var(--line)}
+.replay-ctrls,.replay-zoom{display:flex;align-items:center;gap:var(--s3)}
+.replay-ctrls{padding-bottom:var(--s1)}
+.replay-zoom{height:34px;color:var(--txt2);font-size:12px}
+.replay-ctrls .btn.sm{min-width:48px;width:auto}
+.replay-panel input[type=range]{flex:1;accent-color:var(--amber);height:30px;min-width:0}
+.replay-time{color:var(--txt2);font-size:13px;min-width:52px;text-align:right}
+.replay-zoom .btn.sm{min-width:auto;width:auto;padding:6px 10px;font-size:12px}
+@media (max-width:390px){.replay-hint{display:none}.replay-top{gap:var(--s2);padding-left:var(--s3);padding-right:var(--s3)}}
+#confetti{position:fixed;inset:0;z-index:25;pointer-events:none;overflow:hidden}
+.cft{position:absolute;width:9px;height:13px;border-radius:1px;will-change:transform,opacity}
+@keyframes confall{to{transform:translateY(110vh) rotate(680deg);opacity:.15}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}.reach-ring{animation:none}}
+</style>
+</head>
+<body>
+
+<section class="screen active" id="scrLoading"><div class="center"><div class="spin"></div><span>불러오는 중…</span></div></section>
+
+<!-- 로그인 -->
+<section class="screen" id="scrLogin">
+  <div class="topbar"><span class="logo"><span class="a">LIFT</span>·OPS</span></div>
+  <div class="scroll">
+    <div class="panel">
+      <p class="lede" style="margin:0 auto var(--s4);max-width:none">크레인을 끌어 세우면 작업반경 안의 양중물이 한 번에 양중됩니다. 한 판 1분, 당신의 선택이 AI 보상함수가 됩니다.</p>
+      <form id="loginForm" autocomplete="on">
+        <label class="field"><span>이메일<span class="req">*</span></span>
+          <input id="loginEmail" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required></label>
+        <label class="field"><span>비밀번호<span class="req">*</span></span>
+          <input id="loginPw" type="password" autocomplete="current-password" minlength="6" placeholder="6자 이상" required></label>
+        <div class="err" id="loginErr"></div>
+        <button class="btn" type="submit" id="loginBtn">로그인</button>
+      </form>
+      <p class="formnote">계정이 없나요? <button type="button" class="linkbtn" id="goSignupBtn">회원가입</button></p>
+    </div>
+  </div>
+</section>
+
+<!-- 회원가입 -->
+<section class="screen" id="scrSignup">
+  <div class="topbar">
+    <button class="tb-btn" id="signupBackBtn" type="button">← 로그인</button>
+    <span class="logo" style="font-size:15px">회원가입</span>
+  </div>
+  <div class="scroll">
+    <div class="panel">
+      <p class="lede" style="margin:0 auto var(--s4);max-width:none">계정을 만들면 플레이 데이터가 사용자별로 저장되고 리더보드에 표시 ID가 노출됩니다.</p>
+      <form id="signupForm" autocomplete="on">
+        <label class="field"><span>이름<span class="req">*</span></span>
+          <input id="suFullName" maxlength="40" autocomplete="name" placeholder="실명" required></label>
+        <label class="field"><span>전화번호<span class="req">*</span></span>
+          <input id="suPhone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="13" placeholder="01012345678" required></label>
+        <label class="field"><span>이메일<span class="req">*</span></span>
+          <input id="suEmail" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required></label>
+        <label class="field"><span>ID<span class="req">*</span></span>
+          <input id="suDisplayName" maxlength="24" autocomplete="nickname" placeholder="리더보드 표시 ID" required></label>
+        <label class="field"><span>비밀번호<span class="req">*</span></span>
+          <input id="suPw" type="password" autocomplete="new-password" minlength="6" placeholder="6자 이상" required></label>
+        <label class="field"><span>비밀번호 확인<span class="req">*</span></span>
+          <input id="suPwConfirm" type="password" autocomplete="new-password" minlength="6" placeholder="비밀번호 다시 입력" required></label>
+        <label class="field"><span>참여자 유형<span class="req">*</span></span>
+          <select id="suRoleKind">
+            <option value="">선택하세요</option>
+            <option value="student">관련 전공(건설·토목) 대학생</option>
+            <option value="expert">건설·토목 분야 전문가</option>
+            <option value="general">해당 사항 없음</option>
+          </select></label>
+        <label class="field" id="suRoleStudentRow" style="display:none"><span>학년<span class="req">*</span></span>
+          <select id="suRoleGrade">
+            <option value="">선택하세요</option>
+            <option value="1학년">학부 1학년</option><option value="2학년">학부 2학년</option>
+            <option value="3학년">학부 3학년</option><option value="4학년">학부 4학년</option>
+            <option value="5학년">학부 5학년</option><option value="석사">대학원 석사</option>
+            <option value="박사">대학원 박사</option>
+          </select></label>
+        <label class="field" id="suRoleExpertRow" style="display:none"><span>경력<span class="req">*</span></span>
+          <input id="suRoleYears" type="text" inputmode="numeric" maxlength="2" placeholder="숫자만 (예: 10)"></label>
+        <label class="field" id="suExpertFieldRow" style="display:none"><span>주요 업무/직무<span class="req">*</span></span>
+          <input id="suExpertField" maxlength="60" placeholder="예: 양중 계획, 타워크레인 운전, 안전 관리"></label>
+        <label class="field"><span>양중 계획 사전 경험<span class="req">*</span></span>
+          <select id="suConstructionExp">
+            <option value="">선택하세요</option>
+            <option value="none">없음</option>
+            <option value="education">교육·학습 수준</option>
+            <option value="field">현장 실무 경험</option>
+          </select></label>
+        <label class="field"><span>연령대<span class="req">*</span></span>
+          <select id="suAgeBand">
+            <option value="">선택하세요</option>
+            <option value="under20">19세 이하</option><option value="20-24">20–24세</option>
+            <option value="25-29">25–29세</option><option value="30-34">30–34세</option>
+            <option value="35-39">35–39세</option><option value="40-44">40–44세</option>
+            <option value="45-49">45–49세</option><option value="50-54">50–54세</option>
+            <option value="55-59">55–59세</option><option value="60plus">60세 이상</option>
+          </select></label>
+        <label class="field"><span>성별<span class="req">*</span></span>
+          <select id="suGender">
+            <option value="">선택하세요</option>
+            <option value="male">남성</option><option value="female">여성</option>
+            <option value="other">기타</option><option value="na">응답 안 함</option>
+          </select></label>
+        <label class="field"><span>최종 학력<span class="req">*</span></span>
+          <select id="suEducation">
+            <option value="">선택하세요</option>
+            <option value="highschool">고등학교 졸업 이하</option>
+            <option value="college">전문대 재학·졸업</option>
+            <option value="bachelor">학사 재학·졸업</option>
+            <option value="master">석사 졸업</option><option value="doctorate">박사 졸업</option>
+          </select></label>
+        <label class="field"><span>게임·시뮬레이션 친숙도<span class="req">*</span></span>
+          <select id="suSimFamiliarity">
+            <option value="">선택하세요</option>
+            <option value="1">1 — 전혀 익숙하지 않음</option><option value="2">2 — 익숙하지 않음</option>
+            <option value="3">3 — 보통</option><option value="4">4 — 익숙함</option>
+            <option value="5">5 — 매우 익숙함</option>
+          </select></label>
+        <label class="consent">
+          <input id="suPrivacyConsent" type="checkbox">
+          <span><b>서비스 개인정보 처리 동의<span class="req">*</span></b><br>계정 생성과 일반 게임 서비스 제공을 위해 회원 정보를 처리하는 데 동의합니다. 연구 참여와 연구 데이터 공개 여부는 가입 후 별도로 선택합니다.</span>
+        </label>
+        <div class="err" id="suErr"></div>
+        <button class="btn" type="submit" id="suBtn">가입하기</button>
+        <button class="btn ghost" type="button" id="suResendBtn" style="display:none;margin-top:var(--s2)">확인 메일 다시 보내기</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- 리더보드 -->
+<section class="screen" id="scrBoard">
+  <div class="topbar">
+    <button class="tb-btn" id="boardBackBtn" type="button">← 목록</button>
+    <span class="logo" style="font-size:15px">🏆 리더보드</span>
+    <button class="tb-btn" id="boardRefreshBtn" type="button">새로고침</button>
+  </div>
+  <div class="scroll">
+    <div id="boardHost"><div class="center"><div class="spin"></div></div></div>
+  </div>
+</section>
+
+<!-- 레벨 선택 -->
+<section class="screen" id="scrLevels">
+  <div class="topbar"><span class="logo"><span class="a">LIFT</span>·OPS</span>
+    <button class="tb-btn" id="boardBtn" type="button">🏆 리더보드</button>
+    <button class="tb-btn" id="logoutBtn" type="button">로그아웃</button></div>
+  <div class="scroll">
+    <div class="research-panel" id="mobileResearchPanel">
+      <div class="research-head">
+        <div><div class="research-title">실험 데이터 제공 <span style="font-weight:400;color:var(--txt2);font-size:12px">· 만 19세 이상</span></div><div class="research-copy" id="mobileResearchStatus">참여 상태를 확인하는 중…</div></div>
+      </div>
+      <div class="research-actions">
+        <button class="tb-btn" id="mobileResearchJoin" type="button">실험 참여 동의하기</button>
+        <button class="tb-btn" id="mobileResearchWithdraw" type="button" style="display:none">참여 철회</button>
+      </div>
+      <div class="research-mode" id="mobileResearchModeRow" style="display:none">
+        <div><div class="research-title">실험 참여</div><div class="research-copy" id="mobileResearchProgress"></div>
+          <div class="research-steps" id="mobileResearchSteps" aria-hidden="true"></div></div>
+        <label class="research-toggle"><input id="mobileResearchToggle" type="checkbox"><span id="mobileResearchModeLabel">OFF</span></label>
+      </div>
+      <!-- 상시 제출 경로. 완료 안내 시트는 한 번만 뜨므로 그 시트를 놓친
+           참여자에게는 여기가 유일한 제출 경로다. -->
+      <div class="research-mode" id="mobileResearchSubmitRow" style="display:none">
+        <div><div class="research-title">실험 데이터 제출</div>
+          <div class="research-copy" id="mobileResearchSubmitHint"></div></div>
+        <button class="tb-btn" id="mobileResearchSubmitAll" type="button">제출</button>
+      </div>
+    </div>
+    <h2 class="lv-head">레벨 선택</h2>
+    <div class="lv-grid" id="lvGrid"><div class="center"><div class="spin"></div></div></div>
+  </div>
+</section>
+
+<!-- 플레이 -->
+<section class="screen" id="scrPlay">
+  <div class="topbar">
+    <button class="tb-btn" id="backBtn" type="button">← 목록</button>
+    <span class="logo" id="playTitle" style="font-size:15px">레벨</span>
+    <button class="tb-btn" id="howBtn" type="button">도움말</button>
+  </div>
+  <div class="goalbar">
+    <div class="pill"><span class="num" id="goalDone">0/0</span><span>양중</span></div>
+    <div class="pill b"><span class="num" id="goalStep">0</span><span>step</span></div>
+    <div class="pill warn" id="goalSoftPill"><span class="num" id="goalSoft">0</span><span>작업반경 겹침</span></div>
+    <span class="play-clock" id="playClock">00:00</span>
+  </div>
+  <div class="stage"><svg id="siteSvg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"></svg></div>
+  <div class="banner" id="playBanner"></div>
+  <div class="cranebar" id="craneBar"></div>
+  <p class="hint" id="playHint">크레인을 끌어 배치하면, 작업반경 안의 양중물이 양중됩니다.</p>
+  <div class="actionbar">
+    <button class="btn ghost sm" id="undoBtn" type="button" aria-label="실행 취소">↶</button>
+    <button class="btn ghost sm" id="restartBtn" type="button" aria-label="처음부터">⟲</button>
+    <button class="btn" id="sweepBtn" type="button">배치 실행</button>
+    <button class="btn green" id="submitBtn" type="button" style="display:none">제출</button>
+  </div>
+</section>
+
+<!-- 목표 카드 -->
+<div class="overlay" id="ovGoal"><div class="sheet">
+  <h2 id="goalTitle">레벨</h2>
+  <p id="goalDesc">모든 양중물을 완료하세요.</p>
+  <div class="goal-row">
+    <div class="goal-box"><div class="gv num" id="goalLifts">0</div><div class="gl">양중물</div></div>
+    <div class="goal-box b"><div class="gv num" id="goalCranes">0</div><div class="gl">크레인</div></div>
+  </div>
+  <button class="btn" id="goalStartBtn" type="button">시작</button>
+</div></div>
+
+<!-- 실험 참여 등록 -->
+<div class="overlay" id="ovResearch"><div class="sheet">
+  <h2>실험 참여 등록</h2>
+  <div class="research-consent-text" id="mobileResearchConsentText"></div>
+  <button class="btn ghost" id="mrDownloadConsent" type="button" style="margin-bottom:var(--s2)">설명문 사본 저장 (.txt)</button>
+  <p>만 19세 이상 성인이 참여할 수 있습니다. 아래 연구 설명과 동의 항목을 확인해 주세요.</p>
+  <label class="field"><span>이름(실명)<span class="req">*</span></span><input id="mrFullName" maxlength="80" autocomplete="name"></label>
+  <label class="field"><span>대학교<span class="req">*</span></span><input id="mrUniversity" maxlength="120" placeholder="예: 인천대학교"></label>
+  <label class="field"><span>단과대<span class="req">*</span></span><input id="mrCollege" maxlength="120" placeholder="예: 도시과학대학"></label>
+  <label class="field"><span>전공<span class="req">*</span></span><input id="mrDepartment" maxlength="120" placeholder="예: 도시건축학부"></label>
+  <label class="field"><span>학번<span class="req">*</span></span><input id="mrStudentNumber" maxlength="32" placeholder="예: 202012345"></label>
+  <label class="field"><span>학년<span class="req">*</span></span>
+    <select id="mrGrade"><option value="">선택하세요</option><option>1학년</option><option>2학년</option><option>3학년</option><option>4학년</option><option>5학년</option><option>석사</option><option>박사</option></select></label>
+  <label class="field"><span>전화번호<span class="req">*</span></span><input id="mrPhone" type="tel" inputmode="numeric" maxlength="13" placeholder="010-0000-0000" autocomplete="tel" oninput="formatPhoneInput(this)"></label>
+  <label class="field"><span>이메일<span class="req">*</span></span><input id="mrEmail" type="email" inputmode="email" maxlength="254"></label>
+  <label class="consent"><input id="mrAgeConfirmed" type="checkbox"><span><b>만 19세 이상 연령 확인<span class="req">*</span></b><br>나는 만 19세 이상입니다.</span></label>
+  <label class="consent"><input id="mrParticipationConsent" type="checkbox"><span><b>연구 참여 동의<span class="req">*</span></b><br>목적·절차·위험·이익과 기록 열람 내용을 이해하고 자발적으로 참여합니다.</span></label>
+  <label class="consent"><input id="mrPrivacyConsent" type="checkbox"><span><b>개인정보 수집·이용 동의<span class="req">*</span></b><br>설명문에 기재된 수집 항목·목적·보유기간에 동의합니다.</span></label>
+  <label class="consent"><input id="mrOverseasConsent" type="checkbox"><span><b>개인정보 저장 위치 확인<span class="req">*</span></b><br>수집 정보가 이 프로그램이 실행되는 컴퓨터의 로컬 디스크에만 저장되며 외부 서버로 전송되지 않음을 확인합니다.</span></label>
+  <label class="consent"><input id="mrOpenDataConsent" type="checkbox"><span><b>익명 데이터 공개 및 2차 사용 동의 (선택)</b><br>동의하지 않아도 연구 참여에는 제한이 없습니다.</span></label>
+  <div class="sig-block">
+    <div class="sig-head">
+      <b>자필 서명<span class="req">*</span></b>
+      <button class="btn ghost sig-clear" type="button" id="mrSigClear">다시 쓰기</button>
+    </div>
+    <div class="sig-note">아래 칸에 손가락이나 펜으로 직접 서명해 주세요.</div>
+    <canvas id="mrSignaturePad" class="sig-pad" width="600" height="180"
+            role="img" aria-label="자필 서명 입력란"></canvas>
+    <div class="sig-note" id="mrSignatureHint">아직 서명하지 않았습니다.</div>
+  </div>
+  <div class="err" id="mrErr"></div>
+  <button class="btn green" id="mrSubmit" type="button">동의하고 참여하기</button>
+  <button class="btn ghost" id="mrClose" type="button" style="margin-top:var(--s2)">취소</button>
+</div></div>
+
+<!-- 서명 보충 — 서명란이 생기기 전에 동의한 참여자에게 한 번만 받는다 -->
+<div class="overlay" id="ovSignature"><div class="sheet">
+  <h2>자필 서명이 필요합니다</h2>
+  <p>연구대상자 동의서에 자필 서명 항목이 추가되었습니다. 이미 하신 참여 동의는 그대로 유효하며, <b>서명만 한 번</b> 받으면 됩니다. 다시 동의서를 작성하실 필요는 없고, 서명 후 바로 이어서 플레이하실 수 있습니다.</p>
+  <div class="sig-block">
+    <div class="sig-head">
+      <b>자필 서명<span class="req">*</span></b>
+      <button class="btn ghost sig-clear" type="button" id="sigTopupClear">다시 쓰기</button>
+    </div>
+    <div class="sig-note">아래 칸에 손가락이나 펜으로 직접 서명해 주세요.</div>
+    <canvas id="sigTopupPad" class="sig-pad" width="600" height="180"
+            role="img" aria-label="자필 서명 입력란"></canvas>
+    <div class="sig-note" id="sigTopupHint">아직 서명하지 않았습니다.</div>
+  </div>
+  <div class="err" id="sigTopupErr"></div>
+  <button class="btn green" id="sigTopupSave" type="button">서명 저장하고 시작</button>
+  <button class="btn ghost" id="sigTopupCancel" type="button" style="margin-top:var(--s2)">나중에</button>
+</div></div>
+
+<!-- 튜토리얼 -->
+<div class="overlay" id="ovTut"><div class="sheet">
+  <h2>플레이 방법</h2>
+  <p>크레인을 끌어 배치하면, 그 자리의 작업반경 안에 들어온 양중물이 한 번에 양중됩니다.</p>
+  <div class="legend">
+    <span><i style="border:2px dashed #9aa4b4;background:transparent;border-radius:50%"></i>경고 반경</span>
+    <span><i style="border:2px dashed var(--teal);background:transparent;border-radius:50%"></i>양중 가능 반경</span>
+    <span><i style="background:var(--green)"></i>이번에 들어올림</span>
+    <span><i style="background:var(--amber)"></i>작업반경 겹침</span>
+    <span><i style="background:#7c6f93"></i>잠김(양중 순서 대기)</span>
+    <span><i style="background:#7a3a3a"></i>양중 불가(무게 초과)</span>
+  </div>
+  <div class="tut-step"><span class="tn">1</span><span class="tt">지도에서 <b>크레인을 잡아 끌어</b> 옮기기</span></div>
+  <div class="tut-step"><span class="tn">2</span><span class="tt">작업반경 안에 <b>양중물</b>이 들어오게 배치</span></div>
+  <div class="tut-step"><span class="tn">3</span><span class="tt"><b>배치 실행</b> — 반경 안 양중물이 한 번에</span></div>
+  <button class="btn" id="tutOkBtn" type="button">시작하기</button>
+</div></div>
+
+<!-- 승리 -->
+<div class="overlay" id="ovWin"><div class="sheet">
+  <h2>채점 결과</h2>
+  <div class="score-hero">
+    <div class="score-total"><span id="winScore">-</span><small> / 100</small></div>
+    <span class="grade-badge" id="winGrade">A</span>
+  </div>
+  <div class="win-rank" id="winRank" style="display:none"></div>
+  <div class="score-cats" id="winScoreCats"></div>
+  <div class="win-actions">
+    <button class="btn" id="winReplayBtn" type="button">▶ 3D 다시 보기</button>
+    <button class="btn green" id="winNextBtn" type="button">다음 레벨</button>
+    <button class="btn ghost" id="winRetryBtn" type="button">다시 하기</button>
+    <button class="btn ghost" id="winListBtn" type="button">레벨 목록</button>
+  </div>
+</div></div>
+
+<!-- 실험 전 회차 완료 안내 — 마지막 제출 이후 1회만. 회차마다 뜨는 축하가
+     아니라 종료 통지이므로, 남은 데이터 수집이 없는 시점에서만 열린다. -->
+<div class="overlay" id="ovResearchDone"><div class="sheet">
+  <h2>실험 참여가 모두 끝났습니다</h2>
+  <div class="research-copy" id="researchDoneSummary" style="font-size:14px"></div>
+  <div class="research-copy" style="margin-top:10px;font-size:13px">남겨 주신 선택 기록은 크레인 양중 계획 강화학습의 보상함수를 역추정하는 데 쓰입니다. 더 제출하실 단계는 없으며, 지금부터는 일반 모드로 자유롭게 플레이하실 수 있습니다.</div>
+  <div class="research-copy" id="researchDoneContact" style="margin-top:10px;font-size:12px"></div>
+  <div class="research-copy" id="researchSubmitStatus" style="margin-top:10px;font-size:12px"></div>
+  <!-- 버튼은 제출 하나만 둔다 — 참여자가 마지막에 해야 할 일이 하나뿐이라
+       오클릭이 생기지 않는다. 제출이 끝나면 시트는 자동으로 닫힌다. -->
+  <div class="win-actions">
+    <button class="btn green" id="researchSubmitBtn" type="button">실험 데이터 제출</button>
+  </div>
+</div></div>
+
+<!-- 3D 다시 보기 (전체화면) -->
+<div class="overlay" id="ovReplay">
+  <div class="replay-sheet">
+    <div class="replay-top">
+      <span class="replay-title">3D 다시 보기</span>
+      <span class="replay-hint">드래그=회전 · 핀치=줌</span>
+      <button class="tb-btn" id="replayLandscape" type="button" aria-label="가로 전체화면">↔ 가로보기</button>
+      <button class="tb-btn" id="replayClose" type="button">닫기</button>
+    </div>
+    <div class="replay-stage" id="replayStage"></div>
+    <div class="replay-panel">
+      <div class="replay-ctrls">
+        <button class="btn ghost sm" id="replayPlay" type="button" aria-label="재생/일시정지">⏸</button>
+        <input type="range" id="replayScrub" min="0" max="1000" value="0" step="1" aria-label="타임라인" />
+        <button class="btn ghost sm" id="replaySpeed" type="button">×1</button>
+        <span class="replay-time num" id="replayTime">0.0s</span>
+      </div>
+      <div class="replay-zoom">
+        <span>작게</span>
+        <input type="range" id="replayZoom" min="50" max="220" value="100" step="1" aria-label="장면 크기" />
+        <span>크게</span>
+        <button class="btn ghost sm" id="replayFit" type="button">전체 보기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="confetti"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const CRANE_HEX=['#ff7a45','#4aa3ff','#2dd4bf','#b07cff','#ff8fb0'];  // 크레인1은 강조색(앰버)과 구분되는 세이프티 오렌지
+const REDUCED=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');}
+function ov(id){$(id).classList.add('show');} function ovHide(id){$(id).classList.remove('show');}
+let _tT=null;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tT);_tT=setTimeout(()=>t.classList.remove('show'),2400);}
+function vibrate(ms){try{if(navigator.vibrate)navigator.vibrate(ms);}catch(e){}}
+
+async function api(path,body,timeoutMs){
+  const opt={credentials:'same-origin',headers:{'Content-Type':'application/json'}};
+  if(body!==undefined){opt.method='POST';opt.body=JSON.stringify(body);}
+  let to=null;
+  if(timeoutMs){const ac=new AbortController();opt.signal=ac.signal;to=setTimeout(()=>ac.abort(),timeoutMs);}
+  let r;try{r=await fetch(path,opt);}finally{if(to)clearTimeout(to);}
+  let j={};try{j=await r.json();}catch(e){}
+  if(!r.ok||j.ok===false){const e=new Error(j.message||('요청 실패 ('+r.status+')'));e.status=r.status;throw e;}
+  return j;
+}
+
+const PROG_KEY='liftops_mobile_scores_v4',TUT_KEY='liftops_mobile_tut_v3';
+function loadProg(){try{return JSON.parse(localStorage.getItem(PROG_KEY)||'{}');}catch(e){return{};}}
+function saveBestScore(sid,totalScore,grade){
+  const score=+totalScore,g=String(grade||'').trim().toUpperCase().charAt(0);
+  if(!sid||!Number.isFinite(score)||!/^[A-Z]$/.test(g))return;
+  const p=loadProg(),prev=p[sid];
+  if(!prev||!Number.isFinite(+prev.score)||score>+prev.score){
+    p[sid]={score,grade:g};try{localStorage.setItem(PROG_KEY,JSON.stringify(p));}catch(e){}
+  }
+}
+
+const G={user:null,scenarios:[],levels:[],scen:null,scenIdx:-1,state:null,sessionId:null,
+  activeCrane:null,setups:{},home:{},startedAt:0,clockT:null,animating:false,geom:null,drag:null,renderQueued:false,submitting:false,lastReplay:null,
+  research:{study:null,participation:null,progress:null,loaded:false},researchMode:false,playPurpose:'general'};
+
+// ── 부팅/인증 ──
+async function boot(){try{const me=await api('/api/auth/me');if(me.user){G.user=me.user;await gotoLevels();}else show('scrLogin');}catch(e){show('scrLogin');}}
+$('loginForm').addEventListener('submit',async ev=>{ev.preventDefault();
+  const email=$('loginEmail').value.trim(),password=$('loginPw').value;
+  $('loginErr').textContent='';const b=$('loginBtn');b.disabled=true;b.textContent='로그인 중…';
+  try{const r=await api('/api/auth/login',{email,password});G.user=r.user||{display_name:email};await gotoLevels();}
+  catch(e){$('loginErr').textContent=e.message||'로그인 실패';}finally{b.disabled=false;b.textContent='로그인';}});
+$('logoutBtn').addEventListener('click',async()=>{try{await api('/api/auth/logout',{});}catch(e){}G.user=null;G.research={study:null,participation:null,progress:null,loaded:false};G.researchMode=false;G.playPurpose='general';show('scrLogin');});
+
+// ── 회원가입 ──
+$('goSignupBtn').addEventListener('click',()=>{$('suErr').textContent='';
+  const seed=$('loginEmail').value.trim();if(seed&&!$('suEmail').value)$('suEmail').value=seed;show('scrSignup');});
+$('signupBackBtn').addEventListener('click',()=>show('scrLogin'));
+// 전화번호 자동 하이픈 (010-1234-5678 / 02-123-4567)
+$('suPhone').addEventListener('input',function(){
+  const d=(this.value||'').replace(/\D/g,'').slice(0,11);let out=d;
+  if(d.startsWith('02')){
+    if(d.length<3)out=d;else if(d.length<6)out=d.slice(0,2)+'-'+d.slice(2);
+    else if(d.length<10)out=d.slice(0,2)+'-'+d.slice(2,5)+'-'+d.slice(5);
+    else out=d.slice(0,2)+'-'+d.slice(2,6)+'-'+d.slice(6,10);
+  }else{
+    if(d.length<4)out=d;else if(d.length<8)out=d.slice(0,3)+'-'+d.slice(3);
+    else if(d.length<11)out=d.slice(0,3)+'-'+d.slice(3,6)+'-'+d.slice(6);
+    else out=d.slice(0,3)+'-'+d.slice(3,7)+'-'+d.slice(7,11);
+  }this.value=out;});
+$('suRoleYears').addEventListener('input',function(){this.value=this.value.replace(/[^0-9]/g,'').slice(0,2);});
+// 참여자 유형에 따라 학년/경력/직무 필드 토글
+function suRoleToggle(){const k=$('suRoleKind').value;
+  $('suRoleStudentRow').style.display=k==='student'?'':'none';
+  $('suRoleExpertRow').style.display=k==='expert'?'':'none';
+  $('suExpertFieldRow').style.display=k==='expert'?'':'none';
+  if(k!=='student')$('suRoleGrade').value='';
+  if(k!=='expert'){$('suRoleYears').value='';$('suExpertField').value='';}}
+$('suRoleKind').addEventListener('change',suRoleToggle);
+// '해당 사항 없음' | '대학생·3학년' | '전문가·10년차' — '·' 구분자로 후처리 집계 용이.
+function suComposeRole(kind,grade,years){
+  if(kind==='general')return '해당 사항 없음';
+  if(kind==='student')return grade?`대학생·${grade}`:'';
+  if(kind==='expert'){const y=Math.max(0,Math.min(60,parseInt(years,10)||0));return years===''?'':`전문가·${y}년차`;}
+  return '';}
+function suValidate(p){
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(p.email))return['suEmail','이메일을 user@example.com 형식으로 입력하세요.'];
+  if(String(p.password).length<6)return['suPw','비밀번호는 6자 이상 입력하세요.'];
+  if(p.password!==p.password_confirm)return['suPwConfirm','비밀번호 확인이 일치하지 않습니다.'];
+  if(!p.full_name)return['suFullName','이름을 입력하세요.'];
+  const ph=String(p.phone||'').replace(/\D/g,'');if(ph.length<9||ph.length>11)return['suPhone','전화번호를 숫자로 정확히 입력하세요 (예: 01012345678).'];
+  if(!p.display_name)return['suDisplayName','리더보드에 표시될 ID를 입력하세요.'];
+  if(!p.role_kind)return['suRoleKind','참여자 유형을 선택하세요.'];
+  if(p.role_kind==='student'&&!p.role_grade)return['suRoleGrade','학년을 선택하세요.'];
+  if(p.role_kind==='expert'){const y=parseInt(p.role_years,10);
+    if(p.role_years===''||!Number.isFinite(y)||y<0||y>60)return['suRoleYears','경력 연수를 0~60 사이 숫자로 입력하세요.'];
+    if(!p.expert_field)return['suExpertField','주요 업무/직무를 입력하세요.'];}
+  const checks=[['age_band','suAgeBand','연령대를 선택하세요.'],['gender','suGender','성별을 선택하세요.'],
+    ['education','suEducation','최종 학력을 선택하세요.'],['construction_exp','suConstructionExp','양중 계획 사전 경험을 선택하세요.'],
+    ['sim_familiarity','suSimFamiliarity','게임·시뮬레이션 친숙도를 선택하세요.']];
+  for(const [key,id,msg] of checks)if(!p[key])return[id,msg];
+  if(!p.privacy_consent)return['suPrivacyConsent','서비스 개인정보 처리에 동의해야 가입할 수 있습니다.'];
+  return null;}
+$('signupForm').addEventListener('submit',async ev=>{ev.preventDefault();
+  const p={email:($('suEmail').value||'').replace(/\s/g,''),password:$('suPw').value,password_confirm:$('suPwConfirm').value,
+    full_name:$('suFullName').value.trim(),phone:$('suPhone').value.trim(),display_name:$('suDisplayName').value.trim(),
+    role_kind:$('suRoleKind').value,role_grade:$('suRoleGrade').value,role_years:$('suRoleYears').value.trim(),
+    expert_field:$('suExpertField').value.trim(),age_band:$('suAgeBand').value,gender:$('suGender').value,
+    education:$('suEducation').value,construction_exp:$('suConstructionExp').value,sim_familiarity:$('suSimFamiliarity').value,
+    privacy_consent:$('suPrivacyConsent').checked};
+  const err=suValidate(p);$('suErr').textContent='';$('suResendBtn').style.display='none';
+  if(err){$('suErr').textContent=err[1];const el=$(err[0]);if(el){el.focus();}return;}
+  const b=$('suBtn');b.disabled=true;b.textContent='가입 중…';
+  try{
+    const body={email:p.email,password:p.password,full_name:p.full_name,phone:p.phone,display_name:p.display_name,
+      role:suComposeRole(p.role_kind,p.role_grade,p.role_years),role_kind:p.role_kind||null,role_grade:p.role_grade||null,
+      role_years:p.role_kind==='expert'&&p.role_years!==''?Math.max(0,Math.min(60,parseInt(p.role_years,10)||0)):null,
+      expert_field:p.role_kind==='expert'?(p.expert_field||null):null,age_band:p.age_band||null,gender:p.gender||null,
+      education:p.education||null,construction_exp:p.construction_exp||null,
+      sim_familiarity:p.sim_familiarity?parseInt(p.sim_familiarity,10):null,privacy_consent:!!p.privacy_consent};
+    const r=await api('/api/auth/signup',body);
+    if(r.needs_email_confirmation){
+      $('suErr').style.color='#9aa4b4';
+      $('suErr').textContent=`${p.email} 로 확인 메일을 보냈습니다. 메일함(스팸함 포함)에서 링크를 누른 뒤 로그인하세요.`;
+      $('suResendBtn').style.display='';return;}
+    G.user=r.user||{display_name:p.display_name};
+    $('suErr').style.color='';$('suErr').textContent='';await gotoLevels();
+  }catch(e){$('suErr').style.color='';$('suErr').textContent=e.message||'회원가입 실패';
+    if(/이미 가입|확인 메일|email not confirmed/i.test(e.message||''))$('suResendBtn').style.display='';}
+  finally{b.disabled=false;b.textContent='가입하기';}});
+$('suResendBtn').addEventListener('click',async()=>{const email=($('suEmail').value||'').replace(/\s/g,'');
+  if(!email){$('suErr').textContent='이메일을 먼저 입력하세요.';return;}
+  const b=$('suResendBtn');b.disabled=true;
+  try{const r=await api('/api/auth/resend',{email});$('suErr').style.color='#9aa4b4';$('suErr').textContent=r.message||'확인 메일을 다시 보냈습니다.';}
+  catch(e){$('suErr').style.color='';$('suErr').textContent='재발송 실패: '+(e.message||e);}
+  finally{setTimeout(()=>{b.disabled=false;},1500);}});
+
+// ── 실험 참여 ──
+function researchActive(){return !!(G.research.participation&&G.research.participation.active);}
+function researchSeq(){return Array.isArray(G.research.progress&&G.research.progress.scenario_sequence)?G.research.progress.scenario_sequence:[];}
+function researchModeKey(){return G.user&&G.user.id?'craneResearchModeV1:'+G.user.id:'';}
+// 동의한 참여자는 기본적으로 실험 모드다 — 저장값이 없으면(새 기기·캐시 삭제)
+// ON으로 시작하고, 끈 이력이 있으면 그 선택을 따른다.
+function readResearchMode(){
+  const k=researchModeKey();if(!k||!researchActive())return false;
+  try{const saved=localStorage.getItem(k);return saved===null?true:saved==='1';}catch(e){return true;}
+}
+// 동의 직후 OFF로 저장하던 시절(2026-07-30 이전)의 '0'을 한 번만 걷어낸다.
+// 참여자가 끈 것이 아니라 동의 처리가 남긴 값이라, 그대로 두면 기존 참여자만
+// 계속 OFF로 시작한다. 플래그로 1회만 돌아 이후의 직접 끈 선택은 유지된다.
+function researchModeAutoOnOnce(){
+  const k=researchModeKey();if(!k)return;
+  try{
+    const flag=k+':autoOnV1';
+    if(localStorage.getItem(flag)==='1')return;
+    localStorage.setItem(flag,'1');
+    if(localStorage.getItem(k)==='0')localStorage.removeItem(k);
+  }catch(e){}
+}
+function researchAccess(id){
+  if(!G.researchMode||!researchActive())return{order:-1,locked:false,completed:false};
+  const seq=researchSeq(),order=seq.indexOf(id),p=G.research.progress||{};
+  return{order,locked:order<0||order>+(p.unlocked_index||0),completed:(p.completed_scenarios||[]).includes(id)};
+}
+// 서버가 enrollment_open을 안 실어주는 구버전 응답은 기존대로 열어 둔다.
+function researchEnrollOpen(){return (G.research.study||{}).enrollment_open!==false;}
+function renderResearch(){
+  const active=researchActive(),part=G.research.participation,p=G.research.progress||{},seq=researchSeq();
+  // 동의서 승인 전(draft)에는 서버가 등록을 403으로 막는다. 단, loopback
+  // 로컬 검증 모드는 격리된 파일 저장소에서만 폼 흐름을 열 수 있다.
+  const enrollOpen=researchEnrollOpen();
+  $('mobileResearchJoin').style.display=active?'none':'';
+  $('mobileResearchJoin').disabled=!enrollOpen;
+  $('mobileResearchJoin').textContent=!enrollOpen?'참여 모집 준비 중':(part?'다시 동의하기':'실험 참여 동의하기');
+  $('mobileResearchWithdraw').style.display=active?'':'none';
+  $('mobileResearchModeRow').style.display=active?'flex':'none';
+  $('mobileResearchToggle').checked=active&&G.researchMode;
+  $('mobileResearchModeLabel').textContent=active&&G.researchMode?'ON':'OFF';
+  // 동의하면 실험 참여가 자동으로 켜지므로, 이미 켜진 상태에 "켜고 플레이하세요"라고
+  // 안내하면 어긋난다. 껐을 때만 켜라고 알린다.
+  $('mobileResearchStatus').textContent=!G.research.loaded?'참여 상태를 확인하는 중…':
+    active?(G.researchMode?'참여 동의 완료 · 순서대로 플레이하세요.'
+                          :'참여 동의 완료 · 실험 참여를 켜면 실험 데이터로 저장됩니다.'):
+    part?'참여를 철회했습니다. 다시 동의하면 재개할 수 있습니다.':
+    !enrollOpen?((G.research.study||{}).enrollment_blocked_reason||'연구 참여 모집이 아직 열리지 않았습니다.'):
+    '만 19세 이상 성인 대상 연구입니다. 참여하지 않아도 일반 게임은 그대로 이용할 수 있습니다.';
+  const cur=seq[+(p.unlocked_index||0)]||'-';
+  const total=+(p.total_count||seq.length||0),doneN=+(p.completed_count||0);
+  if(researchComplete()){
+    $('mobileResearchProgress').innerHTML=`<span class="research-complete">✓ ${total}/${total}단계 전체 완료</span> · 감사합니다`;
+  }else{
+    $('mobileResearchProgress').textContent=`${doneN}/${total}단계 완료 · 남은 ${Math.max(0,total-doneN)}단계 · 현재 ${cur}`;
+  }
+  const steps=$('mobileResearchSteps');
+  if(steps){
+    const doneList=p.completed_scenarios||[],unlocked=+(p.unlocked_index||0);
+    steps.innerHTML=seq.map((sid,i)=>{
+      const cls=doneList.includes(sid)?'done':(i===unlocked&&!researchComplete()?'current':'');
+      return `<span class="research-step ${cls}"></span>`;
+    }).join('');
+  }
+  syncResearchSubmitRow();
+}
+// 상시 제출 버튼 — 전 시나리오를 완료해야 누를 수 있고 한 번 제출하면 잠긴다.
+// 완료 안내 시트를 놓친 참여자에게는 여기가 유일한 제출 경로다.
+function syncResearchSubmitRow(){
+  const row=$('mobileResearchSubmitRow'); if(!row)return;
+  const show=researchActive()&&researchComplete();
+  row.style.display=show?'flex':'none';
+  if(!show)return;
+  const btn=$('mobileResearchSubmitAll'),hint=$('mobileResearchSubmitHint');
+  const at=(G.research.participation||{}).submitted_at||'';
+  if(at){
+    btn.disabled=true;btn.textContent='제출 완료';
+    hint.style.color='var(--green)';
+    hint.textContent=`제출 완료 · ${new Date(at).toLocaleString('ko-KR')}`;
+  }else{
+    btn.disabled=false;btn.textContent='제출';
+    hint.style.color='';
+    hint.textContent='모든 단계를 마쳤습니다. 제출하면 실험 참여가 완료됩니다. 제출 후에도 계속 플레이할 수 있습니다.';
+  }
+}
+// 제출 호출 한 곳 — 완료 시트와 참여 패널 버튼이 같은 경로를 쓴다.
+async function submitResearchData(btn, statusEl){
+  const target=btn||$('mobileResearchSubmitAll');
+  const status=statusEl||$('mobileResearchSubmitHint');
+  if(target)target.disabled=true;
+  if(status){status.style.color='';status.textContent='제출 중…';}
+  try{
+    // api()는 body가 없으면 GET을 보낸다 — 제출은 POST여야 하므로 빈 객체를 준다.
+    const r=await api('/api/game/research/submit',{});
+    G.research={study:r.study||G.research.study,participation:r.participation||null,
+                progress:r.progress||null,loaded:true};
+    renderResearch();
+    return true;
+  }catch(e){
+    if(status){status.style.color='var(--red)';status.textContent='제출 실패: '+(e.message||e);}
+    if(target)target.disabled=false;
+    return false;
+  }
+}
+$('mobileResearchSubmitAll').addEventListener('click',()=>submitResearchData());
+// 전체 완료 판정과 1회성 종료 안내 --------------------------------------------
+// 실험 회차마다 축하를 다르게 주면 IRL이 역추정하려는 의사결정 자체가 흔들린다.
+// 그래서 마지막 제출(= 더 수집할 데이터가 없는 시점) 이후에만 한 번 알린다.
+function researchComplete(){
+  const p=G.research.progress||{};
+  const total=+(p.total_count||researchSeq().length||0);
+  return total>0&&+(p.completed_count||0)>=total;
+}
+function researchDoneKey(){
+  if(!(G.user&&G.user.id))return '';
+  const p=G.research.progress||{},s=G.research.study||{};
+  return 'craneResearchDoneV1:'+G.user.id+':'+(p.study_version||s.study_version||'');
+}
+function researchDoneSeen(){const k=researchDoneKey();if(!k)return false;try{return localStorage.getItem(k)==='1';}catch(e){return false;}}
+function researchDoneMark(){const k=researchDoneKey();if(!k)return;try{localStorage.setItem(k,'1');}catch(e){}}
+// True when the sheet was actually opened — the caller uses it only for tests.
+function maybeShowResearchDone(){
+  if(!researchActive()||!researchComplete()||researchDoneSeen())return false;
+  researchDoneMark();
+  const p=G.research.progress||{},s=G.research.study||{};
+  const total=+(p.total_count||researchSeq().length||0);
+  const pid=(G.research.participation||{}).participant_id||'';
+  $('researchDoneSummary').innerHTML=`<span class="research-complete">✓ ${total}/${total}단계 완료</span>`
+    +(pid?` · 참여자 번호 ${esc(pid.slice(0,8))}`:'');
+  $('researchDoneContact').innerHTML=`철회: ${esc(s.withdrawal||'계정 화면에서 언제든 철회할 수 있습니다.')}<br>문의: ${esc(s.research_contact||'연구 책임자 연락처는 동의서를 확인해 주세요.')}`;
+  syncResearchSubmitBtn();
+  ov('ovResearchDone');
+  return true;
+}
+// 플레이는 판마다 이미 저장돼 있다. 이 버튼은 데이터가 아니라 "여기까지가 내
+// 최종 제출"이라는 참여자의 의사를 기록한다 (PC index.html과 같은 계약).
+function syncResearchSubmitBtn(){
+  const at=(G.research.participation||{}).submitted_at||'';
+  const btn=$('researchSubmitBtn'),st=$('researchSubmitStatus');
+  if(!btn||!st)return;
+  if(at){
+    btn.disabled=true;btn.textContent='제출 완료';
+    st.style.color='var(--green)';
+    st.textContent=`제출 완료 · ${new Date(at).toLocaleString('ko-KR')}`;
+  }else{
+    btn.disabled=false;btn.textContent='실험 데이터 제출';st.style.color='';st.textContent='';
+  }
+}
+$('researchSubmitBtn').addEventListener('click',async()=>{
+  // 제출 호출은 submitResearchData 한 곳에만 있다 — 참여 패널 버튼과 같은 경로.
+  const ok=await submitResearchData($('researchSubmitBtn'), $('researchSubmitStatus'));
+  if(!ok)return;
+  syncResearchSubmitBtn();
+  // 제출이 끝나면 이 시트에서 더 할 일이 없다 (닫기 버튼을 없앤 자리를 대신).
+  setTimeout(()=>ovHide('ovResearchDone'),1600);
+});
+async function loadResearchStatus(){
+  if(!G.user){G.research={study:null,participation:null,progress:null,loaded:true};G.researchMode=false;renderResearch();return;}
+  try{
+    const r=await api('/api/game/research/status');
+    G.research={study:r.study||null,participation:r.participation||null,progress:r.progress||null,loaded:true};
+    // 참여 상태를 알게 된 뒤에 실행해야 한다 — 활성 참여자에게만 의미가 있다.
+    if(researchActive())researchModeAutoOnOnce();
+    G.researchMode=readResearchMode();
+  }catch(e){G.research={study:null,participation:null,progress:null,loaded:true,error:e.message};G.researchMode=false;}
+  renderResearch();
+}
+function setMobileResearchMode(on){
+  G.researchMode=!!on&&researchActive();const k=researchModeKey();
+  try{if(k)localStorage.setItem(k,G.researchMode?'1':'0');}catch(e){}
+  renderResearch();renderLevels();
+}
+$('mobileResearchToggle').addEventListener('change',e=>setMobileResearchMode(e.target.checked));
+// 전화번호 입력 중 자동 하이픈. index.html의 formatPhoneInput 및 서버의
+// crane_db/storage.py:_format_research_phone과 규칙이 반드시 같아야 한다 —
+// 서울(02)은 2-3-4/2-4-4, 그 외는 3-3-4(10자리)/3-4-4(11자리).
+function formatPhoneInput(el){
+  if(!el) return;
+  const d = (el.value || '').replace(/\D/g, '').slice(0, 11);
+  let out = d;
+  if(d.startsWith('02')){
+    if(d.length < 3)      out = d;
+    else if(d.length < 6) out = d.slice(0,2) + '-' + d.slice(2);
+    else if(d.length < 10)out = d.slice(0,2) + '-' + d.slice(2,5) + '-' + d.slice(5);
+    else                  out = d.slice(0,2) + '-' + d.slice(2,6) + '-' + d.slice(6,10);
+  } else {
+    if(d.length < 4)       out = d;
+    else if(d.length < 8)  out = d.slice(0,3) + '-' + d.slice(3);
+    else if(d.length < 11) out = d.slice(0,3) + '-' + d.slice(3,6) + '-' + d.slice(6);
+    else                   out = d.slice(0,3) + '-' + d.slice(3,7) + '-' + d.slice(7,11);
+  }
+  el.value = out;
+}
+// ── 자필 서명 패드 ─────────────────────────────────────────────────────────
+// Pointer Events 하나로 손가락·펜·마우스를 모두 받는다. 획을 이미지가 아니라
+// 좌표로 들고 있어서 (1) 화면 회전에도 서명이 살아남고 (2) 빈 서명 판정이
+// 정확하며 (3) 저장본을 흰 배경·검은 잉크로 다시 렌더할 수 있다 — 다크 테마
+// 잉크 그대로 저장하면 인쇄했을 때 보이지 않는다.
+// index.html에도 같은 위젯이 있다. 두 클라이언트는 서로를 import 하지 않는
+// 완전 별도 페이지라 의도적으로 중복을 둔다.
+const _sigPads={};
+// 화면과 저장본이 같은 잉크를 쓴다 — 서명은 본 대로 보관되어야 한다.
+const SIGNATURE_INK='#111111';
+const SIGNATURE_PAPER='#ffffff';
+function initSignaturePad(canvasId,onChange){
+  const cv=$(canvasId); if(!cv)return null;
+  let pad=_sigPads[canvasId];
+  if(!pad){
+    pad=_sigPads[canvasId]={canvas:cv,strokes:[],current:null,onChange:onChange||null};
+    const pt=e=>{const r=cv.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};};
+    cv.addEventListener('pointerdown',e=>{
+      e.preventDefault();
+      cv.setPointerCapture(e.pointerId);
+      pad.current=[pt(e)]; pad.strokes.push(pad.current); _sigRedraw(pad);
+    });
+    cv.addEventListener('pointermove',e=>{
+      if(!pad.current)return;
+      e.preventDefault(); pad.current.push(pt(e)); _sigRedraw(pad);
+    });
+    const end=()=>{if(!pad.current)return;pad.current=null;if(pad.onChange)pad.onChange();};
+    cv.addEventListener('pointerup',end);
+    cv.addEventListener('pointercancel',end);
+    cv.addEventListener('pointerleave',end);
+  }
+  if(onChange)pad.onChange=onChange;
+  _sigResize(pad);
+  return pad;
+}
+function _sigDpr(){return Math.min(window.devicePixelRatio||1,3);}
+function _sigResize(pad){
+  const cv=pad.canvas,r=cv.getBoundingClientRect();
+  const w=Math.max(1,Math.round(r.width)),h=Math.max(1,Math.round(r.height));
+  if(!w||!h)return;
+  const dpr=_sigDpr();
+  cv.width=Math.round(w*dpr); cv.height=Math.round(h*dpr);
+  cv.getContext('2d').setTransform(dpr,0,0,dpr,0,0);
+  _sigRedraw(pad);
+}
+function _sigStrokePath(ctx,strokes){
+  ctx.lineWidth=2.2; ctx.lineCap='round'; ctx.lineJoin='round';
+  for(const s of strokes){
+    if(!s.length)continue;
+    ctx.beginPath();
+    if(s.length===1){ctx.arc(s[0].x,s[0].y,1.1,0,Math.PI*2);ctx.fill();continue;}
+    ctx.moveTo(s[0].x,s[0].y);
+    for(let i=1;i<s.length;i++)ctx.lineTo(s[i].x,s[i].y);
+    ctx.stroke();
+  }
+}
+function _sigRedraw(pad){
+  const cv=pad.canvas,ctx=cv.getContext('2d'),dpr=_sigDpr();
+  ctx.save(); ctx.setTransform(1,0,0,1,0,0); ctx.clearRect(0,0,cv.width,cv.height); ctx.restore();
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  // 화면 잉크도 저장본과 같은 검정 (.sig-pad 배경이 흰 종이인 이유도 같다).
+  ctx.strokeStyle=SIGNATURE_INK; ctx.fillStyle=SIGNATURE_INK;
+  _sigStrokePath(ctx,pad.strokes);
+  cv.classList.toggle('is-signed',!signaturePadIsEmpty(cv.id));
+}
+function clearSignaturePad(canvasId){
+  const pad=_sigPads[canvasId]; if(!pad)return;
+  pad.strokes=[]; pad.current=null; _sigRedraw(pad);
+  if(pad.onChange)pad.onChange();
+}
+function signaturePadIsEmpty(canvasId){
+  const pad=_sigPads[canvasId];
+  return !pad||!pad.strokes.some(s=>s.length>0);
+}
+function signaturePadDataUrl(canvasId){
+  const pad=_sigPads[canvasId];
+  if(!pad||signaturePadIsEmpty(canvasId))return '';
+  const r=pad.canvas.getBoundingClientRect();
+  const w=Math.max(1,Math.round(r.width)),h=Math.max(1,Math.round(r.height)),dpr=_sigDpr();
+  const out=document.createElement('canvas');
+  out.width=Math.round(w*dpr); out.height=Math.round(h*dpr);
+  const ctx=out.getContext('2d');
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.fillStyle=SIGNATURE_PAPER; ctx.fillRect(0,0,w,h);
+  ctx.strokeStyle=SIGNATURE_INK; ctx.fillStyle=SIGNATURE_INK;
+  _sigStrokePath(ctx,pad.strokes);
+  return out.toDataURL('image/png');
+}
+// 서명이 없는 기존 참여자에게 다음 시나리오 시작 직전 한 번만 받는다.
+// true면 진행, false면 시작을 멈춘다(취소/저장 실패). 이미 서명이 있으면 즉시 true.
+function ensureResearchSignature(){
+  const p=G.research.participation;
+  if(!p||p.has_signature)return Promise.resolve(true);
+  return new Promise(resolve=>{
+    const hint=$('sigTopupHint'),err=$('sigTopupErr'),save=$('sigTopupSave');
+    const syncHint=()=>{hint.textContent=signaturePadIsEmpty('sigTopupPad')
+      ?'아직 서명하지 않았습니다.':'서명이 입력되었습니다.';};
+    err.textContent='';save.disabled=false;
+    clearSignaturePad('sigTopupPad');
+    ov('ovSignature');
+    setTimeout(()=>{initSignaturePad('sigTopupPad',syncHint);syncHint();},50);
+    const cleanup=()=>{
+      $('sigTopupClear').onclick=null;$('sigTopupCancel').onclick=null;save.onclick=null;
+      ovHide('ovSignature');
+    };
+    $('sigTopupClear').onclick=()=>clearSignaturePad('sigTopupPad');
+    $('sigTopupCancel').onclick=()=>{cleanup();resolve(false);};
+    save.onclick=async()=>{
+      if(signaturePadIsEmpty('sigTopupPad')){err.textContent='서명란에 직접 서명해 주세요.';return;}
+      save.disabled=true;err.textContent='저장 중…';
+      try{
+        const r=await api('/api/game/research/signature',{signature:signaturePadDataUrl('sigTopupPad')});
+        G.research={study:r.study||G.research.study,participation:r.participation||null,
+                    progress:r.progress||null,loaded:true};
+        renderResearch();
+        cleanup();resolve(true);
+      }catch(e){err.textContent='저장 실패: '+(e.message||e);save.disabled=false;}
+    };
+  });
+}
+
+function _syncMobileSignatureHint(){
+  $('mrSignatureHint').textContent=signaturePadIsEmpty('mrSignaturePad')
+    ?'아직 서명하지 않았습니다.':'서명이 입력되었습니다.';
+}
+$('mrSigClear').addEventListener('click',()=>clearSignaturePad('mrSignaturePad'));
+
+function openMobileResearch(){
+  // 버튼이 이미 disabled 이므로 여기까지 오지 않는 것이 정상. 사유는
+  // mobileResearchStatus 문구가 이미 설명하므로 조용히 되돌린다.
+  if(!researchEnrollOpen())return;
+  const s=G.research.study||{},profile=(G.research.participation&&G.research.participation.profile)||{};
+  const values={mrFullName:profile.full_name||'',
+    mrUniversity:profile.university||'',
+    mrCollege:profile.college||'',
+    mrDepartment:profile.department||'',
+    mrStudentNumber:profile.student_number||'',
+    mrGrade:profile.grade||'',
+    mrPhone:profile.phone||'',
+    mrEmail:profile.email||(G.user&&G.user.email)||''};
+  Object.entries(values).forEach(([id,v])=>{$(id).value=v;});
+  for(const id of ['mrAgeConfirmed','mrParticipationConsent','mrPrivacyConsent','mrOverseasConsent','mrOpenDataConsent'])$(id).checked=false;
+  $('mrErr').textContent='';
+  // 승인된 동의서에는 초안 배너를 붙이지 않는다 (index.html과 동일 규칙).
+  const draftBanner=s.consent_status==='approved'
+    ?''
+    :s.local_draft_preview
+      ?`※ 로컬 검증용 동의서 초안 (${esc(s.consent_version||'draft')}) — 운영 모집과 운영 데이터 저장에는 사용되지 않습니다.`
+      :`※ IRB 확정 전 동의서 초안 (${esc(s.consent_version||'draft')}) — 참여 모집은 열려 있지 않습니다.`;
+  $('mobileResearchConsentText').innerHTML=`${draftBanner?`<b style="color:#fbbf24">${draftBanner}</b>`:''}
+    <div style="margin-top:6px"><b style="color:var(--txt)">${esc(s.name||'크레인 양중 스케줄링 의사결정 데이터 수집 연구')}</b></div>
+    <ul><li>참여 대상: ${esc(s.eligibility||'만 19세 이상 성인')}</li>
+    <li>수집 목적: ${esc(s.purpose||'플레이 의사결정 연구')}</li><li>참여 절차: ${esc(s.procedure||'웹 연구용 게임에 참여합니다.')}</li>
+    <li>예상 위험: ${esc(s.risks||'화면 조작으로 가벼운 피로가 있을 수 있습니다.')}</li><li>위해 보상·치료: ${esc(s.harm_compensation||'신체적 개입이 없는 웹 기반 연구입니다.')}</li><li>예상 이익: ${esc(s.benefits||'직접적인 이익은 없을 수 있습니다.')}</li>
+    <li>비용·보상: ${esc(s.costs_and_rewards||'별도 비용과 보상 내용을 확인하세요.')}</li>
+    <li>수집 항목: ${esc((s.required_fields||[]).join(', '))}</li>
+    <li>보유 기간: ${esc(s.retention_period||'연구 종료 후 1년')}</li>
+    <li>보안: ${esc(s.security||'가명 처리하고 접근을 제한합니다.')}</li><li>정보주체 권리: ${esc(s.data_rights||'열람·정정·삭제·처리정지를 요청할 수 있습니다.')}</li>
+    <li>제3자 제공: ${esc(s.third_party_provision||'별도 동의 없이 제3자에게 제공하지 않습니다.')}</li>
+    <li>기록 열람: ${esc(s.records_access||'IRB 등이 비밀 보장 범위에서 열람할 수 있습니다.')}</li>
+    <li>저장 위치(필수): ${esc(s.overseas_transfer||'이 컴퓨터의 로컬 디스크에만 저장됩니다.')}</li>
+    <li>공개·2차 사용(선택): ${esc(s.open_data_secondary_use||'거부해도 연구 참여에 제한이 없습니다.')}</li>
+    <li>재식별 위험: ${esc(s.open_data_risk||'재식별 위험을 완전히 배제할 수 없습니다.')}</li>
+    <li>동의 거부: ${esc(s.refusal_effect||'일반 게임은 이용할 수 있습니다.')}</li>
+    <li>철회: ${esc(s.withdrawal||'계정 화면에서 철회할 수 있습니다.')}</li>
+    <li>철회 전 데이터: ${esc(s.existing_data||'이미 제출된 데이터는 관련 절차에 따라 처리됩니다.')}</li>
+    <li>연구자에 의한 중단: ${esc(s.researcher_termination||'비정상 입력이나 시스템 오류 시 참여가 중단될 수 있습니다.')}</li>
+    <li>새로운 정보: ${esc(s.new_information||'참여 의사에 영향을 줄 정보가 생기면 알립니다.')}</li>
+    <li>연구비·이해상충: ${esc(s.funding_conflicts||'공개할 이해상충이 없습니다.')}</li></ul>
+    <div>연구 책임자·담당 연락처: ${esc(s.research_contact||'추후 확정')}</div>
+    <div style="color:#fbbf24;margin-top:6px">${esc(s.irb_notice||'최종 내용은 IRB 심의 결과에 따릅니다.')}</div>`;
+  // 서명은 이전 값을 프리필하지 않는다 — 재동의는 새로 서명받는 것이 절차다.
+  // 캔버스 크기는 시트가 표시된 뒤에야 확정되므로 ov() 다음에 init 한다.
+  clearSignaturePad('mrSignaturePad');
+  ov('ovResearch');
+  setTimeout(()=>{
+    initSignaturePad('mrSignaturePad',_syncMobileSignatureHint);
+    _syncMobileSignatureHint();
+    $('mrFullName').focus();
+  },50);
+}
+$('mobileResearchJoin').addEventListener('click',openMobileResearch);
+$('mrDownloadConsent').addEventListener('click',()=>{
+  const version=(G.research.study||{}).consent_version||'draft';
+  const content=`연구대상자 설명문 및 동의서\n동의 문안 버전: ${version}\n저장일: ${new Date().toLocaleString('ko-KR')}\n\n${$('mobileResearchConsentText').innerText}`;
+  const url=URL.createObjectURL(new Blob([content],{type:'text/plain;charset=utf-8'}));
+  const a=document.createElement('a');a.href=url;a.download=`연구대상자_설명문_및_동의서_${version}.txt`;a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),0);
+});
+$('mrClose').addEventListener('click',()=>ovHide('ovResearch'));
+$('mrSubmit').addEventListener('click',async()=>{
+  const fields=[['mrFullName','이름(실명)'],['mrUniversity','대학교'],['mrCollege','단과대'],
+    ['mrDepartment','전공'],['mrStudentNumber','학번'],['mrGrade','학년'],
+    ['mrPhone','전화번호'],['mrEmail','이메일']];
+  for(const [id,label] of fields){if(!$(id).value.trim()){$('mrErr').textContent=label+'을(를) 입력하세요.';$(id).focus();return;}}
+  if(!/^\d{2,3}-\d{3,4}-\d{4}$/.test($('mrPhone').value.trim())){
+    $('mrErr').textContent='전화번호를 000-0000-0000 형식으로 입력하세요.';$('mrPhone').focus();return;
+  }
+  const requiredConsents=[['mrAgeConfirmed','만 19세 이상임을 확인해 주세요.'],['mrParticipationConsent','연구 참여에 동의해 주세요.'],['mrPrivacyConsent','개인정보 수집·이용에 동의해 주세요.'],['mrOverseasConsent','개인정보 국외 이전에 동의해 주세요.']];
+  for(const [id,message] of requiredConsents){if(!$(id).checked){$('mrErr').textContent=message;return;}}
+  if(signaturePadIsEmpty('mrSignaturePad')){
+    $('mrErr').textContent='동의서 하단에 자필 서명을 해 주세요.';
+    $('mrSignaturePad').scrollIntoView({block:'center'});
+    return;
+  }
+  const b=$('mrSubmit');b.disabled=true;$('mrErr').textContent='저장 중…';
+  try{
+    const r=await api('/api/game/research/participation',{full_name:$('mrFullName').value.trim(),
+      university:$('mrUniversity').value.trim(),college:$('mrCollege').value.trim(),
+      department:$('mrDepartment').value.trim(),student_number:$('mrStudentNumber').value.trim(),
+      grade:$('mrGrade').value,phone:$('mrPhone').value.trim(),email:$('mrEmail').value.trim(),
+      age_confirmed:$('mrAgeConfirmed').checked,research_consent:$('mrParticipationConsent').checked,
+      privacy_consent:$('mrPrivacyConsent').checked,overseas_transfer_consent:$('mrOverseasConsent').checked,
+      open_data_consent:$('mrOpenDataConsent').checked,
+      signature:signaturePadDataUrl('mrSignaturePad')});
+    G.research={study:r.study||null,participation:r.participation||null,progress:r.progress||null,loaded:true};
+    // 동의한 참여자는 곧바로 실험 모드로 이어진다 (PC와 같은 규칙). 동의 직후
+    // OFF면 토글을 따로 켜야 해서, 모르고 시작한 첫 판이 일반 데이터로 저장된다.
+    // 끄고 싶으면 토글로 언제든 끌 수 있다.
+    setMobileResearchMode(true);ovHide('ovResearch');renderResearch();
+  }catch(e){$('mrErr').textContent='등록 실패: '+(e.message||e);}finally{b.disabled=false;}
+});
+$('mobileResearchWithdraw').addEventListener('click',async()=>{
+  if(!confirm('실험 참여를 철회할까요? 이후 새 플레이는 일반 데이터로 저장되며 이미 제출한 데이터는 유지됩니다.'))return;
+  try{
+    const res=await fetch('/api/game/research/participation',{method:'DELETE',credentials:'same-origin'});
+    const r=await res.json();if(!res.ok||r.ok===false)throw new Error(r.message||'철회 실패');
+    G.research={study:r.study||null,participation:r.participation||null,progress:r.progress||null,loaded:true};
+    setMobileResearchMode(false);
+  }catch(e){toast('철회 실패: '+(e.message||e));}
+});
+
+// ── 리더보드 (시나리오별 순위) ──
+let LB={plays:[],loaded:false};
+function scenName(id){const s=G.scenarios.find(x=>x.id===id);return s&&(s.name||s.id)||id;}
+async function openBoard(){show('scrBoard');
+  if(!G.scenarios.length){try{const r=await api('/api/game/scenarios');G.scenarios=(r.scenarios||[]).slice();}catch(e){}}
+  await loadBoard();}
+async function loadBoard(){$('boardHost').innerHTML='<div class="center"><div class="spin"></div></div>';
+  try{const r=await api('/api/game/plays');LB.plays=r.plays||[];LB.loaded=true;renderBoard();}
+  catch(e){$('boardHost').innerHTML='<div class="center">리더보드를 불러오지 못했습니다.<br>'+esc(e.message)+'</div>';}}
+function playerKey(p){if(p.player_id)return 'p:'+p.player_id;if(p.is_mine)return 'me';const n=p.display_name||p.nickname||'';return n?'n:'+n:'';}
+function playerName(p){return p.display_name||p.nickname||'-';}
+// 시나리오별: 각 (시나리오) 최고 점수 Top 5, 내 기록 강조.
+function renderBoard(){
+  const byScen=new Map();
+  LB.plays.forEach(p=>{const id=p.scenario_id;if(!id)return;if(!byScen.has(id))byScen.set(id,[]);byScen.get(id).push(p);});
+  if(!byScen.size){$('boardHost').innerHTML='<p class="lb-note">아직 제출된 플레이가 없습니다.</p>';return;}
+  const ids=[...byScen.keys()].sort((a,b)=>{const ai=G.scenarios.findIndex(s=>s.id===a),bi=G.scenarios.findIndex(s=>s.id===b);
+    return (ai<0?999:ai)-(bi<0?999:bi);});
+  $('boardHost').innerHTML=ids.map(id=>{
+    // 플레이어별 베스트만 추려 Top 5 — 동일인 중복 제거.
+    const byP=new Map();byScen.get(id).forEach(p=>{const k=playerKey(p);if(!k)return;const s=+p.totalScore;if(!Number.isFinite(s))return;
+      const cur=byP.get(k);if(!cur||s>cur.score)byP.set(k,{name:playerName(p),mine:p.is_mine,score:s,grade:p.grade});});
+    const ranked=[...byP.values()].sort((a,b)=>b.score-a.score);
+    const top=ranked.slice(0,5);const myIdx=ranked.findIndex(r=>r.mine);
+    const myRankBadge=myIdx>=0
+      ? `<span class="lb-myrank" title="이 시나리오에서 본인 베스트 등수">내 등수 ${myIdx+1}/${ranked.length}위</span>`
+      : `<span class="lb-myrank none" title="이 시나리오 제출 기록 없음">미참가</span>`;
+    const rows=top.map((r,i)=>{const rank=i+1,cls=rank===1?'top1':rank<=3?'top3':'';
+      return `<div class="lb-row ${r.mine?'mine':''} ${cls}"><span class="rk">${rank}</span>
+        <span class="nm">${esc(r.name)}</span><span class="sc">${r.score.toFixed(1)}<small> ${esc(r.grade||'')}</small></span></div>`;}).join('');
+    const myExtra=(myIdx>=5)?`<div class="lb-gap">⋯</div><div class="lb-row mine"><span class="rk">${myIdx+1}</span>
+      <span class="nm">${esc(ranked[myIdx].name)}</span><span class="sc">${ranked[myIdx].score.toFixed(1)}<small> ${esc(ranked[myIdx].grade||'')}</small></span></div>`:'';
+    return `<div style="margin-bottom:var(--s5)"><div class="lb-scenhead"><h3 class="lv-head" style="font-size:16px;margin:0">${esc(scenName(id))}
+      <span style="font-size:12px;color:var(--txt2);font-weight:600">· ${ranked.length}명</span></h3>${myRankBadge}</div>${rows}${myExtra}</div>`;
+  }).join('');
+}
+$('boardBtn').addEventListener('click',openBoard);
+$('boardBackBtn').addEventListener('click',()=>gotoLevels());
+$('boardRefreshBtn').addEventListener('click',loadBoard);
+
+// ── 레벨 선택 ──
+async function gotoLevels(){show('scrLevels');
+  await loadResearchStatus();
+  if(!G.scenarios.length){$('lvGrid').innerHTML='<div class="center"><div class="spin"></div></div>';
+    try{const r=await api('/api/game/scenarios');
+      // 전체 원본은 유지한다. 일반 모드에서는 FLEET_1을 숨기고, 실험 모드에서는
+      // PC/모바일 비교 가능성을 위해 서버의 버전 고정 기본 fleet로 포함한다.
+      G.scenarios=(r.scenarios||[]).slice();}
+    catch(e){$('lvGrid').innerHTML='<div class="center">시나리오를 불러오지 못했습니다.<br>'+esc(e.message)+'</div>';return;}}
+  renderLevels();}
+function renderLevels(){
+  const research=G.researchMode&&researchActive(),seq=researchSeq();
+  G.levels=research
+    ? seq.map(id=>G.scenarios.find(s=>s.id===id)).filter(Boolean)
+    : G.scenarios.filter(s=>!s.crane_choice).slice().sort((a,b)=>(a.difficulty||3)-(b.difficulty||3));
+  const prog=loadProg();
+  $('lvGrid').innerHTML=G.levels.map((s,i)=>{
+    const rec=prog[s.id],grade=rec&&String(rec.grade||'').trim().toUpperCase().charAt(0),submitted=/^[A-Z]$/.test(grade);
+    const access=researchAccess(s.id),done=research?access.completed:submitted,locked=research&&access.locked;
+    const result=research?(access.completed?'완료':locked?'잠김':'현재'):(submitted?esc(grade):'미제출');
+    return `<button class="lv-card${done?' cleared':''}${locked?' locked':''}" data-i="${i}" type="button" ${locked?'disabled':''}>
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <span class="lv-no">${i+1}</span><span class="lv-result${!research&&submitted?' graded':''}">${result}</span></div>
+      <span class="lv-name">${esc(s.name||s.id)}</span>
+      <span class="lv-meta">크레인 <b>${s.num_cranes||'-'}</b> · 양중 <b>${s.num_lifts||'-'}</b></span>
+    </button>`;
+  }).join('');
+  $('lvGrid').querySelectorAll('.lv-card').forEach(c=>c.addEventListener('click',()=>openGoal(+c.dataset.i)));}
+
+// ── 목표 → 시작 ──
+function openGoal(idx){const s=G.levels[idx];if(!s||researchAccess(s.id).locked)return;G.scen=s;G.scenIdx=idx;
+  $('goalTitle').textContent=`레벨 ${idx+1}`;$('goalDesc').textContent=s.name||'모든 양중물을 완료하세요.';
+  $('goalLifts').textContent=s.num_lifts||'?';$('goalCranes').textContent=s.num_cranes||'?';ov('ovGoal');}
+$('goalStartBtn').addEventListener('click',()=>{ovHide('ovGoal');startScenario(G.scen);});
+
+async function startScenario(scen){show('scrLoading');
+  // tier = 플레이어 트랙(일반인/전문가) — IRL 데이터 분리용. PC(index.html)와
+  // 동일하게 사용자 직무(role)가 '전문가…'면 expert, 그 외엔 general.
+  // (주의: scen.tier 는 시나리오 난이도 카테고리라 트랙과 무관 — 혼용 금지.)
+  const tier=String((G.user&&G.user.role)||'').startsWith('전문가')?'expert':'general';
+  const wantsResearch=G.researchMode&&researchActive();
+  if(wantsResearch&&researchAccess(scen.id).locked){show('scrLevels');toast('이전 실험 단계를 먼저 완료해 주세요.');return;}
+  // 서명란이 생기기 전에 동의한 참여자는 서명이 없다. 재동의를 요구하면 진행이
+  // 멈추므로 다음 시나리오 시작 전에 서명만 한 번 보충받는다.
+  if(wantsResearch&&!(await ensureResearchSignature())){show('scrLevels');return;}
+  try{const r=await api('/api/game/session/start',{scenario_id:scen.id,tier,client:'mobile',research_mode:wantsResearch});
+    G.playPurpose=r.play_purpose||'general';applyState(r.state);G.startedAt=Date.now();telInit();startClock();$('playTitle').textContent=`레벨 ${G.scenIdx+1}${G.playPurpose==='research'?' · 실험':''}`;
+    show('scrPlay');renderPlay();
+    // 1번 시나리오(튜토리얼 walkthrough 맵)는 이전에 안내를 닫았더라도 항상 다시
+    // 띄운다 — 처음 방문 여부(TUT_KEY)와 무관. 그 외 시나리오는 첫 플레이 때만.
+    // PC(index.html)의 walkthrough 시나리오 = 항상 startTutorial 동작과 동일.
+    const alwaysTut=!!(G.scen&&G.scen.walkthrough)||G.scenIdx===0;
+    if(alwaysTut||!localStorage.getItem(TUT_KEY))ov('ovTut');}
+  catch(e){show('scrLevels');toast(e.message||'시작 실패');}}
+$('tutOkBtn').addEventListener('click',()=>{ovHide('ovTut');try{localStorage.setItem(TUT_KEY,'1');}catch(e){}});
+$('howBtn').addEventListener('click',()=>ov('ovTut'));
+
+function applyState(st){G.state=st;G.sessionId=st.session_id;
+  // 배치점 = 크레인의 현재 작업 위치(setup_x/y). 스윕에서 작업한 크레인은 setup_x/y가
+  // 옮겨간 자리로 갱신되므로 마커가 그 위치에 남는다. home = 이번 step 시작 위치(점선 출발점).
+  G.setups={};G.home={};(st.cranes||[]).forEach(c=>{const x=(c.setup_x!=null?c.setup_x:c.x),y=(c.setup_y!=null?c.setup_y:c.y);G.setups[c.id]={x,y};G.home[c.id]={x,y};});
+  // 후보(양중 가능 양중물)가 남은 첫 크레인을 활성화 — 스윕 후에도 반경·후보 정보가 보이도록
+  G.activeCrane=null;
+  for(const c of (st.cranes||[])){if((st.candidates_by_crane[c.id]||[]).length>0){G.activeCrane=c.id;break;}}
+  if(!G.activeCrane&&st.cranes&&st.cranes.length)G.activeCrane=st.cranes[0].id;
+  hideZoneWarn();}
+
+function startClock(){stopClock();G.clockT=setInterval(()=>{const s=Math.floor((Date.now()-G.startedAt)/1000);
+  $('playClock').textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');},500);}
+function stopClock(){if(G.clockT){clearInterval(G.clockT);G.clockT=null;}}
+
+// ── 행동 텔레메트리 — PC index.html과 동일 스키마(step telemetry + session_telemetry + events).
+//    저장 자체는 같지만 숙고시간/상호작용/이벤트 스트림까지 채워 IRL 행동 피처를 PC와 동등하게.
+let TEL=null,EVENTS=[],stepT0=0,stepInter=0,undoUsed=false,firstAt=0;
+const EVENTS_CAP=20000;
+function telInit(){TEL={pointer_events:0,mode_switches:0,zoom_events:0,undos:[]};EVENTS=[];telStepReset();}
+function telStepReset(){stepT0=Date.now();stepInter=0;undoUsed=false;firstAt=0;}
+function stepElapsed(){return stepT0?Math.max(0,Date.now()-stepT0):0;}
+function markAction(){if(!firstAt)firstAt=Date.now();}
+function firstActionMs(){return (firstAt&&stepT0)?Math.max(0,firstAt-stepT0):0;}
+function logEv(type,data){if(!G.startedAt||EVENTS.length>=EVENTS_CAP)return;const e={t:Date.now()-G.startedAt,type};
+  if(data)for(const k in data){const v=data[k];if(v!=null)e[k]=v;}EVENTS.push(e);}
+function stepTelemetry(){return {dt_ms:stepElapsed(),interactions:stepInter,mode:'sweep',undo_used:undoUsed};}
+function sweepSig(setups){return Object.keys(setups||{}).sort().map(id=>{const p=setups[id]||{};
+  return `${id}@${(+p.setup_x||0).toFixed(1)},${(+p.setup_y||0).toFixed(1)}`;}).join('|');}
+
+// ── 배정: 현재 모든 크레인 setup 기준, 각 양중물을 닿는 가장 가까운 크레인에 배정 ──
+//    (백엔드 _execute_sweep 의 nearest-feasible 규칙과 동일). 다음 크레인 배치 시
+//    이미 어떤 크레인이 맡은 양중물을 그 크레인 색으로 보여주기 위함.
+// 반경(거리) 기준 배정 — hard_conflict는 스윕이 지연으로 해소하므로 미리보기에서 제외하지 않는다.
+function assignLifts(){
+  const st=G.state,assign={};
+  (st.cranes||[]).forEach((c,ci)=>{const sp=G.setups[c.id];if(!sp)return;
+    (st.candidates_by_crane[c.id]||[]).forEach(cd=>{
+      const lift=(st.lifts||[]).find(l=>l.id===cd.lift_id);if(!lift||lift.done)return;
+      const d=Math.hypot(sp.x-lift.x,sp.y-lift.y),mr=(cd.max_radius||st.crane_radius||0);
+      if(d>mr+1e-6)return;const cur=assign[cd.lift_id];
+      if(!cur||d<cur.d)assign[cd.lift_id]={craneId:c.id,ci,d};});});
+  return assign;}
+// 활성 크레인 자체 반경 안의 후보(최근접 여부 무관) — 반경 링 표시에 사용
+function activeReachSet(){const st=G.state,sp=G.setups[G.activeCrane],set=new Set();if(!sp)return set;
+  (st.candidates_by_crane[G.activeCrane]||[]).forEach(cd=>{
+    const lift=(st.lifts||[]).find(l=>l.id===cd.lift_id);if(!lift||lift.done)return;
+    const d=Math.hypot(sp.x-lift.x,sp.y-lift.y),mr=(cd.max_radius||st.crane_radius||0);
+    if(d<=mr+1e-6)set.add(cd.lift_id);});return set;}
+function reachCountFor(craneId,assign){assign=assign||assignLifts();return Object.values(assign).filter(x=>x.craneId===craneId).length;}
+function totalReach(assign){assign=assign||assignLifts();return Object.keys(assign).length;}
+
+// ── 렌더 ──
+function craneColor(i){return CRANE_HEX[i%CRANE_HEX.length];}
+function renderPlay(){renderGoalbar();renderSite();renderCraneBar();renderActions();}
+function renderGoalbar(){const r=G.state.raw_counters||{};$('goalDone').textContent=`${r.done||0}/${r.total||0}`;$('goalStep').textContent=G.state.step||0;
+  const soft=r.soft_interference_count||0;$('goalSoft').textContent=soft;$('goalSoftPill').classList.toggle('on',soft>0);}
+
+function craneGlyph(cr,color,idnum,active){
+  return `<line x1="0" y1="0" x2="${cr*1.7}" y2="${-cr*0.9}" stroke="${color}" stroke-width="${cr*0.22}" stroke-linecap="round" opacity=".9"/>
+    <circle cx="${cr*1.7}" cy="${-cr*0.9}" r="${cr*0.22}" fill="${color}"/>
+    <circle r="${cr}" fill="${color}" stroke="${active?'#fff':'#0e1014'}" stroke-width="${active?cr*0.2:cr*0.1}"/>
+    <text x="0" y="${cr*0.34}" font-size="${cr*0.95}" fill="#0e1014" text-anchor="middle" font-family="JetBrains Mono,monospace" font-weight="700">${esc(idnum)}</text>
+    ${active?`<circle r="${cr*1.5}" fill="none" stroke="#fff" stroke-width="${cr*0.09}" stroke-dasharray="${cr*0.5} ${cr*0.35}" stroke-opacity=".8"/>`:''}`;
+}
+// craneAt: 위치 오버라이드(애니메이션). showRadii: 반경/도달 표시(상호작용 중 true).
+function buildScene(st,showRadii,craneAt){
+  const W=st.site_width||100,H=st.site_height||100;
+  const r2=Math.max(W,H)/46,cr=Math.max(W,H)/32,opR=st.crane_radius||cr*3;
+  const assign=showRadii?assignLifts():{};
+  const activeReach=showRadii?activeReachSet():new Set();
+  // 모든 크레인 후보의 합집합 — candSet: 어떤 크레인이든 후보인 양중물, liftMR: 양중 가능 정격반경(>0)
+  const liftMR={},candSet=new Set();
+  (st.cranes||[]).forEach(c=>{(st.candidates_by_crane[c.id]||[]).forEach(cd=>{candSet.add(cd.lift_id);
+    if(+cd.max_radius>0&&(liftMR[cd.lift_id]==null||+cd.max_radius>liftMR[cd.lift_id]))liftMR[cd.lift_id]=+cd.max_radius;});});
+  const craneIdx={};(st.cranes||[]).forEach((c,i)=>craneIdx[c.id]=i);
+  const setupPos=id=>(craneAt&&craneAt[id])||G.setups[id]||{x:0,y:0};
+  let s='';
+  // 제한구역
+  (st.restricted_zones||[]).forEach(z=>{const x=Math.min(z.x1,z.x2),y=Math.min(z.y1,z.y2),w=Math.abs(z.x2-z.x1),h=Math.abs(z.y2-z.y1);
+    s+=`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${W/80}" fill="rgba(239,90,90,.12)" stroke="#ef5a5a" stroke-width="${W/280}" stroke-dasharray="${W/90} ${W/130}"/>`;});
+  // soft 작업반경 = crane_radius(swing 반경, PC의 점선 원과 동일). 모든 크레인에 점선으로 표시 —
+  // 두 크레인의 soft 반경이 겹치면 soft 간섭. 활성은 진하게+옅은 채움.
+  (st.cranes||[]).forEach((c,i)=>{const p=setupPos(c.id),active=c.id===G.activeCrane;
+    s+=`<circle cx="${p.x}" cy="${p.y}" r="${opR}" fill="${craneColor(i)}" fill-opacity="${active&&showRadii?0.06:0}" stroke="${craneColor(i)}" stroke-opacity="${active?.65:.34}" stroke-width="${active?W/280:W/360}" stroke-dasharray="${W/70} ${W/120}"/>`;});
+  // soft 간섭 미리보기 — 작업할(반경 내 양중물 있는) 두 크레인의 soft 반경이 겹치면 경고.
+  // PC 정의: soft 간섭 = 크레인 작업반경(soft) 중첩.
+  if(showRadii){const acting=(st.cranes||[]).filter(c=>reachCountFor(c.id,assign)>0);
+    for(let i2=0;i2<acting.length;i2++)for(let j2=i2+1;j2<acting.length;j2++){
+      const pa=setupPos(acting[i2].id),pb=setupPos(acting[j2].id),dd=Math.hypot(pa.x-pb.x,pa.y-pb.y);
+      if(dd<opR*2-1e-6){const mx=(pa.x+pb.x)/2,my=(pa.y+pb.y)/2;
+        s+=`<line x1="${pa.x}" y1="${pa.y}" x2="${pb.x}" y2="${pb.y}" stroke="#f5a623" stroke-width="${W/210}" stroke-opacity=".9" stroke-dasharray="${W/90} ${W/120}"/>`;
+        s+=`<circle cx="${mx}" cy="${my}" r="${cr*0.72}" fill="#1a1300" stroke="#f5a623" stroke-width="${W/240}"/>`;
+        s+=`<text x="${mx}" y="${my+cr*0.34}" font-size="${cr*0.9}" fill="#ffba42" text-anchor="middle" font-weight="700">!</text>`;}
+    }}
+  // '양중 가능 반경' 링 — 양중 가능한(어느 크레인이든 후보인) 모든 미완료 양중물에 표시.
+  // max_radius는 양중물 무게·정격에 따른 속성이라 활성 크레인과 무관하게 보여준다.
+  // 활성 크레인이 맡을 양중물은 그 색으로 강조 + 연결선.
+  if(showRadii){const ap=setupPos(G.activeCrane),aColor=craneColor(craneIdx[G.activeCrane]||0);
+    (st.lifts||[]).forEach(l=>{if(l.done)return;const mr=liftMR[l.id];if(mr==null)return;
+      const inReach=activeReach.has(l.id),mine=assign[l.id]&&assign[l.id].craneId===G.activeCrane;
+      const rc=mine?aColor:'#2dd4bf';
+      s+=`<circle class="${mine?'reach-ring':''}" cx="${l.x}" cy="${l.y}" r="${mr}" fill="none" stroke="${rc}" stroke-opacity="${mine?.6:(inReach?.32:.2)}" stroke-width="${W/440}" stroke-dasharray="${W/120} ${W/150}"/>`;
+      if(mine)s+=`<line x1="${ap.x}" y1="${ap.y}" x2="${l.x}" y2="${l.y}" stroke="${aColor}" stroke-width="${W/260}" stroke-opacity=".75"/>`;});}
+  // 양중물 — 미완료: 닿는 크레인 색으로 미리보기 / 완료: 양중한 크레인 색으로 체크 표시
+  (st.lifts||[]).forEach(l=>{const done=l.done,a=(!done&&showRadii)?assign[l.id]:null;
+    const mine=a&&a.craneId===G.activeCrane;
+    const locked=(l.locked===true),
+      infeasible=(!done&&!a&&!locked&&candSet.has(l.id)&&liftMR[l.id]==null);
+    let fill='#262b35',fop=1,stroke='#3a4150',op=1,sw=W/320,checkCol='#45c47a',mark='';
+    if(done){
+      const dci=(l.assigned!=null&&craneIdx[l.assigned]!=null)?craneIdx[l.assigned]:-1;
+      const dcol=dci>=0?craneColor(dci):'#45c47a';
+      fill=dcol;fop=.22;stroke=dcol;checkCol=dcol;op=.95;sw=W/220;
+    } else if(a){fill=craneColor(a.ci);fop=mine?.34:.2;stroke=craneColor(a.ci);sw=mine?W/150:W/240;}
+    else if(locked){fill='#2b2533';fop=1;stroke='#7c6f93';op=.6;mark='lock';}
+    else if(infeasible){fill='#3a2326';fop=1;stroke='#ef5a5a';op=.8;mark='no';}
+    else{op=.7;}
+    const num=l.id.replace(/[^0-9]/g,'')||l.id,cx=l.x,cy=l.y;
+    const markSvg = mark==='lock'
+      ? `<rect x="${cx-r2*0.32}" y="${cy}" width="${r2*0.64}" height="${r2*0.5}" rx="${r2*0.1}" fill="#9a8fb5"/><path d="M ${cx-r2*0.18} ${cy} v ${-r2*0.18} a ${r2*0.18} ${r2*0.18} 0 0 1 ${r2*0.36} 0 v ${r2*0.18}" fill="none" stroke="#9a8fb5" stroke-width="${W/340}"/>`
+      : mark==='no'
+      ? `<line x1="${cx-r2*0.42}" y1="${cy-r2*0.42}" x2="${cx+r2*0.42}" y2="${cy+r2*0.42}" stroke="#ef8a8a" stroke-width="${W/240}" stroke-linecap="round"/><line x1="${cx+r2*0.42}" y1="${cy-r2*0.42}" x2="${cx-r2*0.42}" y2="${cy+r2*0.42}" stroke="#ef8a8a" stroke-width="${W/240}" stroke-linecap="round"/>`
+      : '';
+    s+=`<g class="lift-hit" data-lift="${esc(l.id)}" opacity="${op}">
+      <rect x="${l.x-r2}" y="${l.y-r2}" width="${r2*2}" height="${r2*2}" rx="${r2*0.32}" fill="${fill}" fill-opacity="${fop}" stroke="${stroke}" stroke-width="${sw}"/>
+      ${done?`<path d="M ${l.x-r2*0.5} ${l.y} L ${l.x-r2*0.08} ${l.y+r2*0.45} L ${l.x+r2*0.55} ${l.y-r2*0.45}" fill="none" stroke="${checkCol}" stroke-width="${W/220}" stroke-linecap="round" stroke-linejoin="round"/>`
+        : mark? markSvg
+        :`<text x="${l.x}" y="${l.y+r2*0.42}" font-size="${r2*1.0}" fill="${a?'#e7ebf2':'#8a93a3'}" text-anchor="middle" font-family="JetBrains Mono,monospace" font-weight="700">${esc(num)}</text>`}
+    </g>`;});
+  // 드래그로 옮긴 크레인의 이동 경로(현재 위치 → 배치 지점)를 점선 + 출발점 표시
+  if(showRadii)(st.cranes||[]).forEach((c,i)=>{const home=(G.home&&G.home[c.id])||{x:c.x,y:c.y},p=setupPos(c.id),d=Math.hypot(p.x-home.x,p.y-home.y);
+    if(d<r2*0.4)return;const col=craneColor(i),active=c.id===G.activeCrane;
+    s+=`<circle cx="${home.x}" cy="${home.y}" r="${cr*0.5}" fill="none" stroke="${col}" stroke-width="${W/360}" stroke-opacity="${active?.85:.45}"/>`;
+    s+=`<line x1="${home.x}" y1="${home.y}" x2="${p.x}" y2="${p.y}" stroke="${col}" stroke-width="${active?W/230:W/340}" stroke-opacity="${active?.9:.45}" stroke-dasharray="${W/55} ${W/80}" stroke-linecap="round"/>`;});
+  // 크레인 마커(배치 위치)
+  (st.cranes||[]).forEach((c,i)=>{const p=setupPos(c.id),active=c.id===G.activeCrane;const num=c.id.replace(/[^0-9]/g,'')||c.id;
+    s+=`<g class="crane-g${active?' active':''}" id="cr_${esc(c.id)}" data-crane="${esc(c.id)}" transform="translate(${p.x} ${p.y})">${craneGlyph(cr,craneColor(i),num,active&&showRadii)}</g>`;});
+  return {svg:s,W,H,cr};
+}
+function doRender(){const st=G.state;const sc=buildScene(st,true,null);const svg=$('siteSvg');
+  svg.setAttribute('viewBox',`0 0 ${sc.W} ${sc.H}`);svg.innerHTML=sc.svg;G.geom={W:sc.W,H:sc.H,cr:sc.cr};
+  // 양중물 탭 = 진단(크레인 드래그가 아닐 때만). 왜 링/선택이 안 되는지 알려준다.
+  svg.querySelectorAll('.lift-hit').forEach(g=>g.addEventListener('click',()=>{if(!G.drag)liftDiag(g.dataset.lift);}));}
+// 후보에서 빠진 사유 라벨 — 서버 state.blocked_by_crane 이 크레인별로 내려준다.
+// 특히 interference(다른 크레인 작업과 hard 간섭)는 후보 목록에서 통째로 사라져
+// "이 크레인이 양중물을 인식 못한다"로 보이던 사례라, 사유를 그대로 말해 준다.
+const BLOCK_LABELS={interference:'다른 크레인 작업과 반경 충돌',order:'양중 순서 대기',
+  height:'아래 단계 먼저 완료 필요',capacity:'정격하중 초과',reach:'도달 불가(제한구역·거리)'};
+function blockReason(craneId,liftId){return ((G.state&&G.state.blocked_by_crane||{})[craneId]||{})[liftId]||null;}
+// 양중물 상태 진단 토스트 — 인식(후보) 여부 · 사유 · 정격반경 · 현재 배정 크레인
+function liftDiag(liftId){const st=G.state,l=(st.lifts||[]).find(x=>x.id===liftId);if(!l)return;
+  if(l.done)return toast(`${liftId}: 완료됨${l.assigned?(' · '+l.assigned):''}`);
+  if(l.locked===true)return toast(`${liftId}: 잠김 — 양중 순서 대기`);
+  let mr=null;const cw=[];
+  (st.cranes||[]).forEach(c=>{const e=(st.candidates_by_crane[c.id]||[]).find(cd=>cd.lift_id===liftId);
+    if(e){cw.push(c.id);if(+e.max_radius>0&&(mr==null||+e.max_radius>mr))mr=+e.max_radius;}});
+  if(!cw.length){
+    // 어느 크레인도 못 맡는 이유는 크레인마다 다를 수 있다 — 가장 흔한 사유로 말한다.
+    const tally={};(st.cranes||[]).forEach(c=>{const r=blockReason(c.id,liftId);if(r)tally[r]=(tally[r]||0)+1;});
+    const top=Object.entries(tally).sort((a,b)=>b[1]-a[1])[0];
+    return toast(top?`${liftId}: 지금 불가 — ${BLOCK_LABELS[top[0]]||top[0]}`
+                    :`${liftId}: 지금 어느 크레인도 맡을 수 없습니다`);
+  }
+  // 활성 크레인만 막힌 경우 — 사용자가 "이 크레인이 인식 못한다"고 느끼는 지점.
+  const mine=blockReason(G.activeCrane,liftId);
+  if(mine)return toast(`${liftId}: ${G.activeCrane} 불가 — ${BLOCK_LABELS[mine]||mine} · 가능: ${cw.join(', ')}`);
+  if(mr==null)return toast(`${liftId}: 무게 초과로 양중 불가`);
+  const a=assignLifts()[liftId];
+  toast(`${liftId}: 양중 가능 · 반경 ${mr.toFixed(0)} · ${a?('현재 '+a.craneId+' 반경 안'):'반경 안에 든 크레인 없음 — 크레인을 더 가까이'}`);}
+function renderSite(){doRender();}
+function queueRender(){if(G.renderQueued)return;G.renderQueued=true;requestAnimationFrame(()=>{G.renderQueued=false;doRender();});}
+
+function renderCraneBar(){const st=G.state,A=assignLifts();
+  $('craneBar').innerHTML=(st.cranes||[]).map((c,i)=>{const rc=reachCountFor(c.id,A);
+    const cls=['crane-chip'];if(c.id===G.activeCrane)cls.push('active');if(rc>0)cls.push('ready');else cls.push('idle');
+    return `<button class="${cls.join(' ')}" data-crane="${esc(c.id)}" type="button">
+      <span class="cc-id"><span class="cc-dot" style="background:${craneColor(i)}"></span>${esc(c.id)}</span>
+      ${rc>0?`<span class="cc-reach">양중 ${rc}</span>`:`<span class="cc-sub">${c.jobs}건 · 대기 ${(+c.available).toFixed(0)}</span>`}</button>`;}).join('');
+  $('craneBar').querySelectorAll('.crane-chip').forEach(b=>b.addEventListener('click',()=>{if(TEL)TEL.pointer_events++;stepInter++;G.activeCrane=b.dataset.crane;hideZoneWarn();vibrate(6);renderPlay();}));}
+
+function renderActions(){const done=G.state.is_done,n=totalReach();
+  $('sweepBtn').style.display=done?'none':'';$('submitBtn').style.display=done?'':'none';
+  $('sweepBtn').disabled=n===0||G.animating;$('sweepBtn').textContent=n?`배치 실행 (${n})`:'반경 안에 양중물 없음';
+  $('undoBtn').disabled=(G.state.step||0)===0||G.animating;$('restartBtn').disabled=G.animating;
+  $('playHint').textContent=done?'모든 양중 완료 — 제출하세요.'
+    :(G.activeCrane?`크레인 ${G.activeCrane}을 끌어 양중물 가까이 배치`:'크레인을 선택하세요');}
+
+// ── 좌표 변환 ──
+function svgXY(ev){const svg=$('siteSvg'),r=svg.getBoundingClientRect();const W=G.geom.W,H=G.geom.H;
+  const scale=Math.min(r.width/W,r.height/H);const offX=(r.width-W*scale)/2,offY=(r.height-H*scale)/2;
+  const cx=(ev.clientX!=null?ev.clientX:(ev.touches&&ev.touches[0].clientX)),cy=(ev.clientY!=null?ev.clientY:(ev.touches&&ev.touches[0].clientY));
+  let x=(cx-r.left-offX)/scale,y=(cy-r.top-offY)/scale;return {x:Math.max(0,Math.min(W,x)),y:Math.max(0,Math.min(H,y))};}
+
+// ── 제한구역 경고 (PC index.html과 동일 기하 판정) ──
+function _rzB(z){return {x1:Math.min(+z.x1,+z.x2),y1:Math.min(+z.y1,+z.y2),x2:Math.max(+z.x1,+z.x2),y2:Math.max(+z.y1,+z.y2)};}
+function _ptInRZ(x,y,z){const b=_rzB(z);return x>=b.x1&&x<=b.x2&&y>=b.y1&&y<=b.y2;}
+function _segHit(ax,ay,bx,by,cx,cy,dx,dy){const orient=(px,py,qx,qy,rx,ry)=>(qx-px)*(ry-py)-(qy-py)*(rx-px);
+  const on=(px,py,qx,qy,rx,ry)=>Math.min(px,qx)-1e-9<=rx&&rx<=Math.max(px,qx)+1e-9&&Math.min(py,qy)-1e-9<=ry&&ry<=Math.max(py,qy)+1e-9;
+  const o1=orient(ax,ay,bx,by,cx,cy),o2=orient(ax,ay,bx,by,dx,dy),o3=orient(cx,cy,dx,dy,ax,ay),o4=orient(cx,cy,dx,dy,bx,by);
+  if((o1>0)!==(o2>0)&&(o3>0)!==(o4>0))return true;
+  return (Math.abs(o1)<1e-9&&on(ax,ay,bx,by,cx,cy))||(Math.abs(o2)<1e-9&&on(ax,ay,bx,by,dx,dy))||(Math.abs(o3)<1e-9&&on(cx,cy,dx,dy,ax,ay))||(Math.abs(o4)<1e-9&&on(cx,cy,dx,dy,bx,by));}
+function _segCrossRZ(ax,ay,bx,by,z){if(_ptInRZ(ax,ay,z)||_ptInRZ(bx,by,z))return true;const b=_rzB(z);
+  return _segHit(ax,ay,bx,by,b.x1,b.y1,b.x2,b.y1)||_segHit(ax,ay,bx,by,b.x2,b.y1,b.x2,b.y2)||_segHit(ax,ay,bx,by,b.x2,b.y2,b.x1,b.y2)||_segHit(ax,ay,bx,by,b.x1,b.y2,b.x1,b.y1);}
+function zoneViolation(fromX,fromY,toX,toY){const zs=(G.state&&G.state.restricted_zones)||[];if(!zs.length)return null;
+  if(zs.some(z=>_ptInRZ(toX,toY,z)))return 'inside';
+  if(fromX!=null&&zs.some(z=>_segCrossRZ(fromX,fromY,toX,toY,z)))return 'cross';return null;}
+function showZoneWarn(kind){const box=$('playBanner');
+  const t=kind==='inside'?['제한구역 위에는 설치할 수 없습니다','영역 밖으로 옮기세요']
+    :['제한구역을 가로지르는 이동입니다','영역을 피해 설치하세요'];
+  box.innerHTML=`<span class="bn-t">⚠ ${t[0]}</span><span class="bn-s">${t[1]}</span>`;
+  box.classList.add('show');}
+function hideZoneWarn(){const box=$('playBanner');if(box)box.classList.remove('show');}
+function updateZoneWarn(id){const home=(G.home&&G.home[id])||null,p=G.setups[id]||{};
+  const v=home?zoneViolation(home.x,home.y,p.x,p.y):zoneViolation(null,null,p.x,p.y);
+  if(v)showZoneWarn(v);else hideZoneWarn();}
+
+// 드래그: 지도의 크레인을 직접 잡아 끌기. 누른 지점에서 가장 가까운 크레인을
+// 터치 반경 안에서 잡고, 잡은 오프셋을 유지한 채 손가락을 따라 이동.
+function clampXY(x,y){const W=G.geom.W,H=G.geom.H;return {x:Math.max(0,Math.min(W,x)),y:Math.max(0,Math.min(H,y))};}
+function grabCraneAt(p){let best=null,bestD=Infinity;
+  (G.state.cranes||[]).forEach(c=>{const sp=G.setups[c.id];if(!sp)return;const d=Math.hypot(sp.x-p.x,sp.y-p.y);if(d<bestD){bestD=d;best=c.id;}});
+  const grabR=(G.geom&&G.geom.cr?G.geom.cr*2.8:8);
+  return (best!=null&&bestD<=grabR)?best:null;}
+function onPointerDown(ev){if(G.animating)return;const p=svgXY(ev);const id=grabCraneAt(p);
+  if(!id)return;                          // 빈 공간/양중물 누름 → 무시 (위치 클릭으로 이동 안 함)
+  ev.preventDefault();
+  const sp=G.setups[id];G.drag={id,offX:sp.x-p.x,offY:sp.y-p.y,sx:sp.x,sy:sp.y};
+  if(TEL)TEL.pointer_events++;stepInter++;markAction();
+  if(G.activeCrane!==id){G.activeCrane=id;renderPlay();}else queueRender();
+  const svg=$('siteSvg');try{svg.setPointerCapture(ev.pointerId);}catch(e){}vibrate(6);}
+function onPointerMove(ev){if(!G.drag)return;ev.preventDefault();const p=svgXY(ev);
+  G.setups[G.drag.id]=clampXY(p.x+G.drag.offX,p.y+G.drag.offY);updateZoneWarn(G.drag.id);queueRender();}
+function onPointerUp(ev){if(!G.drag)return;const d=G.drag,ep=G.setups[d.id]||{};
+  const dist=Math.hypot((+ep.x||0)-d.sx,(+ep.y||0)-d.sy);
+  if(dist>=0.01)logEv('crane_move',{step:G.state.step||0,crane:d.id,from_x:+d.sx.toFixed(2),from_y:+d.sy.toFixed(2),to_x:+(+ep.x).toFixed(2),to_y:+(+ep.y).toFixed(2),distance:+dist.toFixed(3)});
+  G.drag=null;renderPlay();updateZoneWarn(d.id);vibrate(8);}
+(function bindDrag(){const svg=$('siteSvg');
+  svg.addEventListener('pointerdown',onPointerDown);svg.addEventListener('pointermove',onPointerMove);
+  svg.addEventListener('pointerup',onPointerUp);svg.addEventListener('pointercancel',onPointerUp);})();
+
+// ── 배치 실행 + 동선 애니메이션 ──
+async function doSweep(){
+  if(totalReach()===0){toast('반경 안에 양중물이 없습니다 — 크레인을 더 가까이');return;}
+  const setups={};Object.entries(G.setups).forEach(([id,p])=>{setups[id]={setup_x:p.x,setup_y:p.y};});
+  const sig=sweepSig(setups);
+  const prev=G.state;G.animating=true;renderActions();
+  let res;try{res=await api('/api/game/session/sweep-step',{session_id:G.sessionId,setups,telemetry:stepTelemetry()});}
+  catch(e){G.animating=false;toast(e.message||'배치 실행 실패');renderActions();return;}
+  logEv('sweep',{step:prev.step||0,mode:'sweep',decision_ms:stepElapsed(),first_action_ms:firstActionMs(),interactions:stepInter,undo_used:undoUsed,decision_sig:sig});
+  const newState=res.state,events=(newState.last_step_events||[]).filter(e=>e&&e.craneId);
+  const prevSoft=(prev.raw_counters||{}).soft_interference_count||0,newSoft=(newState.raw_counters||{}).soft_interference_count||0;
+  await animateCranes(prev,events);
+  applyState(newState);renderPlay();telStepReset();G.animating=false;renderActions();
+  vibrate(20);
+  if(newSoft>prevSoft)toast(`작업반경 겹침 ${newSoft-prevSoft}건 발생 — 크레인 작업반경이 겹쳤습니다`);
+  else if(newState.is_done)toast('완료 — 제출하세요');}
+
+function pathLerp(pts,t){if(!pts||pts.length===0)return null;if(pts.length===1)return{x:pts[0][0],y:pts[0][1]};
+  const seg=[];let total=0;for(let i=1;i<pts.length;i++){const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);seg.push(d);total+=d;}
+  if(total<=0)return{x:pts[0][0],y:pts[0][1]};let want=t*total,acc=0;
+  for(let i=1;i<pts.length;i++){if(acc+seg[i-1]>=want){const f=(want-acc)/(seg[i-1]||1);return{x:pts[i-1][0]+(pts[i][0]-pts[i-1][0])*f,y:pts[i-1][1]+(pts[i][1]-pts[i-1][1])*f};}acc+=seg[i-1];}
+  return{x:pts[pts.length-1][0],y:pts[pts.length-1][1]};}
+
+function animateCranes(prevState,events){
+  return new Promise(resolve=>{
+    if(REDUCED||!events.length){resolve();return;}
+    // 크레인별 첫 이동 경로(가장 긴 movePath)
+    const paths={};events.forEach(e=>{const p=e.movePath&&e.movePath.length?e.movePath:[[e.fromX,e.fromY],[e.toX,e.toY]];
+      if(!paths[e.craneId]||p.length>paths[e.craneId].length)paths[e.craneId]=p;});
+    const sc=buildScene(prevState,false,null);const svg=$('siteSvg');
+    svg.setAttribute('viewBox',`0 0 ${sc.W} ${sc.H}`);svg.innerHTML=sc.svg;
+    const maxLen=Object.values(paths).reduce((m,p)=>Math.max(m,p.length),0);
+    const dur=Math.min(1200,650+maxLen*36),t0=performance.now();
+    function frame(now){const t=Math.min(1,(now-t0)/dur);const e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+      Object.keys(paths).forEach(cid=>{const g=$('cr_'+cid);if(!g)return;const pos=pathLerp(paths[cid],e);if(pos)g.setAttribute('transform',`translate(${pos.x} ${pos.y})`);});
+      if(t<1)requestAnimationFrame(frame);else resolve();}
+    requestAnimationFrame(frame);});}
+
+async function doUndo(){if(G.animating)return;try{const r=await api('/api/game/session/undo',{session_id:G.sessionId});
+  if(TEL)TEL.undos.push(stepElapsed());undoUsed=true;logEv('undo',{step:G.state.step||0});
+  applyState(r.state);renderPlay();}catch(e){toast(e.message);}}
+async function doRestart(){if(G.animating)return;try{const r=await api('/api/game/session/restart',{session_id:G.sessionId});
+  logEv('restart',{step:G.state.step||0});applyState(r.state);renderPlay();telStepReset();toast('처음부터');}catch(e){toast(e.message);}}
+async function doSubmit(){
+  if(G.submitting)return;G.submitting=true;
+  const b=$('submitBtn');b.disabled=true;b.textContent='제출 중…';
+  try{
+    try{const rc=G.state.raw_counters||{};logEv('final',{step:G.state.step||0,completed:!!G.state.is_done,done_count:rc.done||0,total_count:rc.total||0,
+      makespan:rc.makespan||0,soft_interference:rc.soft_interference_count||0,play_ms:G.startedAt?Math.max(0,Date.now()-G.startedAt):0});}catch(e){}
+    // 20초 타임아웃 — 응답이 안 와도 버튼이 영원히 멈추지 않도록
+    const r=await api('/api/game/session/submit',{session_id:G.sessionId,session_telemetry:TEL||undefined,events:EVENTS},20000);
+    if(r.research_status){
+      G.research={study:r.research_status.study||G.research.study||null,participation:r.research_status.participation||null,
+        progress:r.research_status.progress||null,loaded:true};
+      renderResearch();renderLevels();
+    }
+    // 3D 다시 보기용 데이터 보관: 동선은 응답의 events, 레이아웃은 최종 상태(G.state)
+    const st=G.state||{},oc=r.outcome||{};
+    G.lastReplay={events:(oc.events||[]),lifts:(st.lifts||[]),cranes:(st.cranes||[]),
+      zones:(st.restricted_zones||[]),W:st.site_width||100,H:st.site_height||100,
+      craneRadius:st.crane_radius||18,makespan:oc.makespan||0,curve:(st.crane_capacity_curve||[])};
+    stopClock();G.sessionId=null;   // 서버에서 이미 세션이 제출·삭제됨
+    try{showWin(r);}catch(e){toast('제출 완료 — 결과 표시 생략');gotoLevels();}
+  }catch(e){
+    toast(e.name==='AbortError'?'제출 응답이 지연됩니다 — 다시 시도하세요':(e.message||'제출 실패'));
+  }finally{
+    G.submitting=false;
+    if(!$('ovWin').classList.contains('show')){b.disabled=false;b.textContent='제출';}
+  }
+}
+$('sweepBtn').addEventListener('click',doSweep);$('undoBtn').addEventListener('click',doUndo);
+$('restartBtn').addEventListener('click',doRestart);$('submitBtn').addEventListener('click',doSubmit);
+$('backBtn').addEventListener('click',async()=>{if(G.animating)return;try{if(G.sessionId)await api('/api/game/session/drop',{session_id:G.sessionId});}catch(e){}stopClock();G.sessionId=null;gotoLevels();});
+
+// ── 승리 ──
+function showWin(r){const snap=r.scorer_snapshot||{};
+  const isResearch=(r.meta&&r.meta.play_purpose||G.playPurpose)==='research';
+  const grade=snap.grade||'-';if(G.scen)saveBestScore(G.scen.id,snap.totalScore,grade);
+  $('winGrade').textContent=grade;
+  $('winScore').textContent=snap.totalScore!=null?(+snap.totalScore).toFixed(1):'-';
+  // 카테고리별(완료/Makespan/간섭/균형) 가중 점수 막대는 제출 팝업에서 노출하지
+  // 않는다 — 항목별 가중 분해는 anchoring 방지 취지로 관리자 검토용(PC 데이터·연구
+  // 탭 Plays 상세)이며, 사용자에겐 총점·등급만 보인다. 컨테이너는 비우고 숨긴다.
+  const catsHost=$('winScoreCats');if(catsHost){catsHost.innerHTML='';catsHost.style.display='none';}
+  // 실시간 순위 — 제출된 플레이는 이미 서버에 저장돼 있어 바로 집계 가능.
+  const thisScore=+snap.totalScore,wr=$('winRank');
+  // 실험 플레이도 리더보드에 함께 집계되므로 순위를 똑같이 보여준다. 다만
+  // 진행 단계는 실험 참여자에게만 의미가 있어 순위 위에 한 줄 덧붙인다.
+  const researchProgressRow=(()=>{
+    if(!isResearch)return '';
+    const p=r.research_status&&r.research_status.progress;
+    return `<div class="wr best"><div class="v">${p?p.completed_count:'-'}<small> / ${p?p.total_count:'-'}단계</small></div><div class="k">실험 데이터 제출 완료</div></div>`;
+  })();
+  if(G.scen&&Number.isFinite(thisScore)){
+    wr.style.display='';wr.innerHTML=researchProgressRow+'<div class="wr"><div class="v">…</div><div class="k">순위 집계 중</div></div>';
+    loadWinRank(G.scen.id,thisScore).then(info=>{
+      if(!$('ovWin').classList.contains('show'))return;
+      if(!info){wr.innerHTML=researchProgressRow;wr.style.display=researchProgressRow?'':'none';return;}
+      const bestCls=info.isBest?' best':'';
+      wr.innerHTML=researchProgressRow
+        +`<div class="wr${bestCls}"><div class="v">${info.overallRank}<small> / ${info.overallTotal}위</small></div><div class="k">실시간 전체 순위</div></div>
+        <div class="wr${bestCls}"><div class="v">${info.myRank}<small> / ${info.myCount}판</small></div><div class="k">${info.isBest?'내 최고 기록!':'내 플레이 중 순위'}</div></div>`;
+    });
+  }else if(researchProgressRow){
+    wr.style.display='';wr.innerHTML=researchProgressRow;
+  }else{wr.style.display='none';}
+  $('ovWin').querySelector('.sheet').scrollTop=0;
+  ov('ovWin');
+  // 축하 연출도 제출 목적과 무관하게 붙인다 (PC의 _celebrateResult 분기와 동일).
+  if(!REDUCED)setTimeout(confetti,160);
+  $('winNextBtn').style.display=(G.scenIdx+1<G.levels.length)?'':'none';
+  // 완료 안내는 점수 시트를 닫은 뒤에 띄운다 (PC와 같은 순서). 여기서 바로
+  // 띄우면 두 시트가 겹쳐 아래쪽 제출 버튼을 누를 수 없다. 조건 판정은
+  // maybeShowResearchDone 이 하므로 여기서는 예약만 한다.
+  _pendingResearchDone=!!isResearch;}
+// 점수 시트를 닫는 유일한 경로 — 닫은 뒤 예약된 완료 안내가 있으면 이어서 띄운다.
+let _pendingResearchDone=false;
+function closeWin(){
+  ovHide('ovWin');
+  if(!_pendingResearchDone)return;
+  _pendingResearchDone=false;
+  maybeShowResearchDone();
+}
+// 이번 시나리오의 플레이 피드를 받아 (1) 전체 순위(플레이어별 베스트 기준)와
+// (2) 본인 플레이들 중 이번 점수의 순위를 계산. 실패 시 null.
+async function loadWinRank(scenId,thisScore){
+  try{
+    const r=await api('/api/game/plays?scenario='+encodeURIComponent(scenId));
+    const plays=r.plays||[];if(!plays.length)return null;
+    const best=new Map();
+    plays.forEach(p=>{const k=playerKey(p);if(!k)return;const s=+p.totalScore;if(!Number.isFinite(s))return;
+      best.set(k,Math.max(best.get(k)??-Infinity,s));});
+    const myScores=plays.filter(p=>p.is_mine&&Number.isFinite(+p.totalScore)).map(p=>+p.totalScore);
+    const myBest=myScores.length?Math.max(...myScores):thisScore;
+    const allBest=[...best.values()];
+    const overallTotal=allBest.length||1;
+    const overallRank=allBest.filter(s=>s>myBest+1e-9).length+1;
+    const myCount=myScores.length||1;
+    const myRank=myScores.filter(s=>s>thisScore+1e-9).length+1;
+    return {overallRank,overallTotal,myRank,myCount,isBest:myRank===1};
+  }catch(e){return null;}
+}
+// 완료 시트에는 제출 버튼만 남았다 — 닫기/일반 모드 전환 버튼과 그 리스너는
+// 함께 제거했다 (요소 없이 addEventListener를 걸면 스크립트가 그 자리에서 멈춘다).
+$('winRetryBtn').addEventListener('click',()=>{closeWin();startScenario(G.scen);});
+$('winListBtn').addEventListener('click',()=>{closeWin();gotoLevels();});
+$('winNextBtn').addEventListener('click',()=>{closeWin();const ni=G.scenIdx+1;if(ni<G.levels.length)openGoal(ni);else gotoLevels();});
+
+function confetti(){const box=$('confetti'),cols=['#f5a623','#4aa3ff','#2dd4bf','#45c47a','#b07cff'];
+  for(let i=0;i<56;i++){const d=document.createElement('div');d.className='cft';
+    d.style.left=Math.random()*100+'vw';d.style.top=(-8-Math.random()*16)+'vh';d.style.background=cols[i%cols.length];
+    d.style.animation=`confall ${1.5+Math.random()*1.3}s ${Math.random()*0.4}s ease-in forwards`;
+    d.style.transform=`rotate(${Math.random()*360}deg)`;box.appendChild(d);setTimeout(()=>d.remove(),3400);}}
+
+// ════════════════════════════════════════════════════════════
+//  3D 다시 보기 — promo.html 엔진 이식 + outcome.events 구동
+// ════════════════════════════════════════════════════════════
+$('winReplayBtn').addEventListener('click',openReplay);
+$('replayClose').addEventListener('click',closeReplay);
+$('replayLandscape').addEventListener('click',toggleReplayLandscape);
+let RP=null;
+async function openReplay(){
+  if(!G.lastReplay||!(G.lastReplay.events||[]).length){toast('다시 보기 데이터가 없습니다');return;}
+  ov('ovReplay');const stage=$('replayStage');
+  stage.innerHTML='<div class="center" style="position:absolute;inset:0"><div class="spin"></div></div>';
+  let T;
+  try{T=await import('https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js');}
+  catch(e){stage.innerHTML='<div class="center" style="position:absolute;inset:0;color:#9aa4b4">3D를 불러올 수 없습니다 — 네트워크 확인</div>';return;}
+  stage.innerHTML='';
+  try{RP=buildReplay(T,stage,G.lastReplay);}
+  catch(e){stage.innerHTML='<div class="center" style="position:absolute;inset:0;color:#9aa4b4">다시 보기 오류: '+esc(e.message||e)+'</div>';}
+}
+async function toggleReplayLandscape(){
+  const sheet=$('ovReplay').querySelector('.replay-sheet');
+  try{
+    if(document.fullscreenElement){
+      if(screen.orientation&&screen.orientation.unlock)screen.orientation.unlock();
+      await document.exitFullscreen();
+      $('replayLandscape').textContent='↔ 가로보기';
+      setTimeout(()=>{if(RP)RP.fitView();},180);
+      return;
+    }
+    if(!document.fullscreenElement&&sheet.requestFullscreen)await sheet.requestFullscreen();
+    if(screen.orientation&&screen.orientation.lock)await screen.orientation.lock('landscape');
+    $('replayLandscape').textContent='↕ 세로보기';
+    setTimeout(()=>{if(RP)RP.fitView();},180);
+  }catch(e){
+    toast('화면을 가로로 돌려 주세요');
+    if(RP)RP.fitView();
+  }
+}
+function closeReplay(){
+  if(RP){try{RP.dispose();}catch(e){}RP=null;}
+  try{if(screen.orientation&&screen.orientation.unlock)screen.orientation.unlock();}catch(e){}
+  if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(()=>{});
+  $('replayLandscape').textContent='↔ 가로보기';ovHide('ovReplay');
+}
+
+function buildReplay(T,stage,data){
+  const W=data.W||100,H=data.H||100,SP=Math.max(W,H);
+  const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+  const lerpAngle=(a,b,t)=>{let d=((b-a+Math.PI)%(2*Math.PI))-Math.PI;if(d<-Math.PI)d+=2*Math.PI;return a+d*t;};
+  const hexNum=c=>parseInt(String(c||'').replace('#','')||'888888',16);
+  const LMI_HEX=[0x22c55e,0xf59e0b,0xef4444];
+  const curve=(data.curve||[]).map(p=>({r:+p.radius,c:+p.capacityT})).filter(p=>p.r>=0).sort((a,b)=>a.r-b.r);
+  const capAt=r=>{if(!curve.length)return null;if(r<=curve[0].r)return curve[0].c;for(let i=1;i<curve.length;i++)if(curve[i-1].r<r&&r<=curve[i].r)return curve[i].c;return curve[curve.length-1].c;};
+
+  const scene=new T.Scene();scene.background=new T.Color(0x020617);scene.fog=new T.Fog(0x020617,SP*2.2,SP*6.5);
+  const site=new T.Group();site.position.set(-W/2,-H/2,0);scene.add(site);
+  const ground=new T.Mesh(new T.PlaneGeometry(W*3,H*3),new T.MeshLambertMaterial({color:0x8f98a6}));
+  ground.position.set(W/2,H/2,-0.05);site.add(ground);
+  const grid=new T.GridHelper(SP,Math.max(4,Math.round(SP/10)),0x334155,0x1e293b);
+  grid.rotation.x=Math.PI/2;grid.position.set(W/2,H/2,0);site.add(grid);
+  scene.add(new T.HemisphereLight(0xe2e8f0,0x0b1220,1.0));
+  const sun=new T.DirectionalLight(0xfff7ed,1.3);sun.position.set(W,-H*0.5,H);scene.add(sun);
+  (data.zones||[]).forEach(z=>{const x1=Math.min(z.x1,z.x2),y1=Math.min(z.y1,z.y2),w=Math.abs(z.x2-z.x1),h=Math.abs(z.y2-z.y1);
+    const m=new T.Mesh(new T.BoxGeometry(w,h,4),new T.MeshLambertMaterial({color:0xef5a5a,transparent:true,opacity:0.2}));m.position.set(x1+w/2,y1+h/2,2);site.add(m);});
+
+  function buildCrane(colorHex){
+    const root=new T.Group();const mat=new T.MeshLambertMaterial({color:colorHex});
+    const dark=new T.MeshLambertMaterial({color:0x1f2937});const gray=new T.MeshLambertMaterial({color:0x94a3b8});
+    const carrier=new T.Group();root.add(carrier);
+    const chassis=new T.Mesh(new T.BoxGeometry(7,2.4,1.1),mat);chassis.position.z=1.05;carrier.add(chassis);
+    const cab=new T.Mesh(new T.BoxGeometry(1.7,2.2,1.4),mat);cab.position.set(2.9,0,2.0);carrier.add(cab);
+    [-2.6,-0.9,0.8,2.5].forEach(wx=>{const ax=new T.Mesh(new T.CylinderGeometry(0.55,0.55,2.9,10),dark);ax.position.set(wx,0,0.55);carrier.add(ax);});
+    const outriggers=new T.Group();const outParts=[];
+    [[-2.4,1],[-2.4,-1],[2.4,1],[2.4,-1]].forEach(([ox,sgn])=>{const bg=new T.BoxGeometry(0.45,1.7,0.32);bg.translate(0,0.85,0);
+      const beam=new T.Mesh(bg,gray);beam.position.set(ox,sgn*1.15,0.75);if(sgn<0)beam.rotation.z=Math.PI;outriggers.add(beam);
+      const pad=new T.Mesh(new T.CylinderGeometry(0.5,0.5,0.5,8),gray);pad.rotation.x=Math.PI/2;pad.position.set(ox,sgn*2.9,0.28);outriggers.add(pad);outParts.push({beam,pad,sgn});});
+    carrier.add(outriggers);
+    const sup=new T.Group();sup.position.set(-0.8,0,2.0);carrier.add(sup);
+    const cwt=new T.Mesh(new T.BoxGeometry(1.6,2.0,1.3),mat);cwt.position.set(-1.9,0,0.4);sup.add(cwt);
+    const supCab=new T.Mesh(new T.BoxGeometry(2.1,1.1,1.0),mat);supCab.position.set(0.7,-0.85,0.35);sup.add(supCab);
+    const boomPivot=new T.Group();boomPivot.position.set(0.3,0,0.7);sup.add(boomPivot);
+    const boomMat=new T.MeshLambertMaterial({color:colorHex});const boomSecs=[];
+    [0.78,0.62,0.48].forEach(w=>{const sg=new T.BoxGeometry(1,w,w);sg.translate(0.5,0,0);const m=new T.Mesh(sg,boomMat);boomPivot.add(m);boomSecs.push(m);});
+    const tip=new T.Object3D();tip.position.x=1;boomSecs[2].add(tip);
+    const beacon=new T.Mesh(new T.CylinderGeometry(0.24,0.24,0.4,8),new T.MeshLambertMaterial({color:0x7c5806,emissive:0xf59e0b,emissiveIntensity:0}));
+    beacon.rotation.x=Math.PI/2;beacon.position.set(0.7,-0.85,1.05);sup.add(beacon);
+    const tailPts=[];for(let k=0;k<=56;k++){const a=k/56*Math.PI*2;tailPts.push(new T.Vector3(Math.cos(a)*3.6,Math.sin(a)*3.6,0.1));}
+    const tailRing=new T.Line(new T.BufferGeometry().setFromPoints(tailPts),new T.LineDashedMaterial({color:0xef4444,dashSize:1.1,gapSize:0.8,transparent:true,opacity:0.75}));
+    tailRing.computeLineDistances();tailRing.visible=false;root.add(tailRing);
+    const cable=new T.Line(new T.BufferGeometry().setFromPoints([new T.Vector3(),new T.Vector3()]),new T.LineBasicMaterial({color:0xe2e8f0}));cable.visible=false;
+    const hook=new T.Mesh(new T.BoxGeometry(0.5,0.5,0.7),dark);hook.visible=false;
+    const slings=new T.LineSegments(new T.BufferGeometry().setFromPoints(Array.from({length:8},()=>new T.Vector3())),new T.LineBasicMaterial({color:0x94a3b8,transparent:true,opacity:0.9}));slings.visible=false;
+    const shadow=new T.Mesh(new T.CircleGeometry(3.8,24),new T.MeshBasicMaterial({color:0x020617,transparent:true,opacity:0.4,depthWrite:false}));shadow.position.z=0.04;root.add(shadow);
+    const disc=new T.Mesh(new T.CircleGeometry(1,48),new T.MeshBasicMaterial({color:colorHex,transparent:true,opacity:0.08,depthWrite:false}));disc.position.z=0.06;disc.visible=false;site.add(disc);
+    const rPts=[];for(let k=0;k<=48;k++){const a=k/48*Math.PI*2;rPts.push(new T.Vector3(Math.cos(a),Math.sin(a),0));}
+    const ring=new T.Line(new T.BufferGeometry().setFromPoints(rPts),new T.LineBasicMaterial({color:0x22c55e,transparent:true,opacity:0.85}));ring.position.z=0.08;ring.visible=false;site.add(ring);
+    site.add(root);site.add(cable);site.add(hook);site.add(slings);
+    return {root,carrier,sup,boomPivot,boomSecs,boomMat,tip,outriggers,outParts,cable,hook,slings,beacon,tailRing,disc,ring,baseColor:colorHex};
+  }
+  function setBoom(cr,L,defl){let x=0,z=0,a=0;const segL=L/3;for(let i=0;i<3;i++){const m=cr.boomSecs[i];m.position.set(x,0,z);m.rotation.y=a;m.scale.x=segL+(i<2?0.5:0);a+=defl/3;x+=Math.cos(a)*segL;z+=-Math.sin(a)*segL;}}
+  function deployOut(cr,k){if(cr._outK===k)return;cr._outK=k;cr.outriggers.visible=k>0.02;cr.outParts.forEach(p=>{p.beam.scale.y=Math.max(0.08,k);p.pad.position.y=p.sgn*(1.15+1.75*k);p.pad.position.z=0.95-0.67*k;p.pad.visible=k>0.4;});}
+
+  const craneList=data.cranes||[];const idxById={};craneList.forEach((c,i)=>idxById[c.id]=i);
+  const cranes=craneList.map((c,i)=>buildCrane(hexNum(CRANE_HEX[i%CRANE_HEX.length])));
+  const craneInit=craneList.map(c=>({x:+c.x||W/2,y:+c.y||H/2}));
+  const lifts=(data.lifts||[]).map(l=>({x:+l.x,y:+l.y,w:+l.weight_t||10,id:l.id}));
+  const liftIdx={};lifts.forEach((l,i)=>liftIdx[l.id]=i);
+  const liftObjs=lifts.map(L=>{const s=1.4+Math.min(2.4,L.w/10);const m=new T.Mesh(new T.BoxGeometry(s,s,s*0.8),new T.MeshLambertMaterial({color:0xf59e0b}));m.position.set(L.x,L.y,s*0.4);site.add(m);return {mesh:m,size:s,baseZ:s*0.4,bx:L.x,by:L.y};});
+  const evs=(data.events||[]).slice().sort((a,b)=>(+a.start||0)-(+b.start||0));
+  const jobs=evs.map(e=>{const ci=idxById[e.craneId];if(ci==null)return null;const li=liftIdx[e.liftId];if(li==null)return null;
+    const from={x:+e.fromX,y:+e.fromY},to={x:+e.toX,y:+e.toY},L=lifts[li];
+    const t0=+(e.travelStart!=null?e.travelStart:e.start)||0;let t1=+(e.finish!=null?e.finish:e.liftFinish)||(t0+1);
+    return {ci,li,from,to,t0,t1:Math.max(t1,t0+0.6),az:Math.atan2(L.y-to.y,L.x-to.x),r:Math.max(2,Math.hypot(L.x-to.x,L.y-to.y)),heading:Math.atan2(to.y-from.y,to.x-from.x)};}).filter(Boolean);
+  const total=Math.max(data.makespan||0,1,...jobs.map(j=>j.t1));
+
+  function pose(tt){
+    liftObjs.forEach((o,i)=>{const doneBy=jobs.find(j=>j.li===i&&tt>=j.t1);o.mesh.material.color.set(doneBy?0x475569:0xf59e0b);o.mesh.position.set(o.bx,o.by,o.baseZ);o.mesh.rotation.z=0;});
+    cranes.forEach((cr,ci)=>{const myJobs=jobs.filter(j=>j.ci===ci);const active=myJobs.find(j=>tt>=j.t0&&tt<j.t1);const lastDone=[...myJobs].reverse().find(j=>tt>=j.t1);
+      let x,y,heading,az,radius,outK=1,hoist=0,lift=null,util=null;
+      if(active){const p=(tt-active.t0)/(active.t1-active.t0);lift=lifts[active.li];
+        if(p<0.45){const e=ease(p/0.45);x=active.from.x+(active.to.x-active.from.x)*e;y=active.from.y+(active.to.y-active.from.y)*e;heading=active.heading;az=heading;radius=6;outK=0;}
+        else if(p<0.57){const k=ease((p-0.45)/0.12);x=active.to.x;y=active.to.y;heading=active.heading;az=heading;radius=6;outK=k;}
+        else if(p<0.75){const k=ease((p-0.57)/0.18);x=active.to.x;y=active.to.y;heading=active.heading;az=lerpAngle(heading,active.az,k);radius=6+(active.r-6)*k;}
+        else{x=active.to.x;y=active.to.y;heading=active.heading;az=active.az;radius=active.r;hoist=(p-0.75)/0.25;}}
+      else{const base=lastDone||null;x=base?base.to.x:craneInit[ci].x;y=base?base.to.y:craneInit[ci].y;heading=base?base.heading:-Math.PI/2;az=base?base.az:-Math.PI/2;radius=base?base.r:7;}
+      cr.root.position.set(x,y,0);cr.carrier.rotation.z=heading;cr.sup.rotation.z=az-heading;deployOut(cr,outK);
+      cr.beacon.material.emissiveIntensity=active?(0.35+0.55*(0.5+0.5*Math.sin(performance.now()/1000*9))):0;
+      const work=!!active&&(tt-active.t0)/(active.t1-active.t0)>=0.45;cr.tailRing.visible=work;
+      if(lift){const cap=capAt(radius);util=(cap==null||cap<=0)?null:lift.w/cap;}
+      const level=util==null?0:(util>1?2:(util>=0.8?1:0));
+      cr.boomMat.color.setHex(work&&level>0?LMI_HEX[level]:cr.baseColor);
+      if(work){cr.disc.visible=cr.ring.visible=true;cr.disc.position.set(x,y,0.06);cr.disc.scale.set(radius,radius,1);cr.ring.position.set(x,y,0.08);cr.ring.scale.set(radius,radius,1);cr.ring.material.color.setHex(level>0?LMI_HEX[level]:0x22c55e);}
+      else{cr.disc.visible=cr.ring.visible=false;}
+      const luff=Math.max(0.32,Math.min(1.1,Math.atan2(12,radius)));cr.boomPivot.rotation.y=-luff;
+      let defl=0;if(lift&&hoist>0){const lf=util==null?Math.min(1,lift.w/35):Math.min(1.2,util);defl=(0.035+0.075*lf)*Math.min(1,hoist*4);}
+      setBoom(cr,radius/Math.cos(luff),defl);
+      const tipPos=new T.Vector3();cr.tip.getWorldPosition(tipPos);
+      if(lift&&hoist>0){const lo=liftObjs[active.li];const riseT=Math.max(0,Math.min(1,(hoist-0.25)/0.6));const rise=Math.sin(riseT*Math.PI)*3.2;
+        const sway=riseT>0?Math.sin(riseT*Math.PI*3)*Math.pow(1-riseT,1.5)*0.85:0;const px=Math.cos(az+Math.PI/2),py=Math.sin(az+Math.PI/2);
+        const lx2=lo.bx+px*sway,ly2=lo.by+py*sway;lo.mesh.position.set(lx2,ly2,lo.baseZ+rise);lo.mesh.rotation.z=0.07*Math.sin(riseT*Math.PI*2.4)*(1-riseT);
+        const top=lo.mesh.position.z+lo.size*0.4,apexZ=top+1.15;cr.hook.visible=cr.cable.visible=cr.slings.visible=true;cr.hook.position.set(lx2,ly2,apexZ);
+        const pts=cr.cable.geometry.attributes.position.array,tl=cr.cable.parent.worldToLocal(tipPos.clone());pts[0]=tl.x;pts[1]=tl.y;pts[2]=tl.z;pts[3]=lx2;pts[4]=ly2;pts[5]=apexZ;cr.cable.geometry.attributes.position.needsUpdate=true;
+        const hw=lo.size*0.42,sp=cr.slings.geometry.attributes.position.array;[[-hw,-hw],[hw,-hw],[-hw,hw],[hw,hw]].forEach(([cx2,cy2],i)=>{sp[i*6]=lx2;sp[i*6+1]=ly2;sp[i*6+2]=apexZ;sp[i*6+3]=lx2+cx2;sp[i*6+4]=ly2+cy2;sp[i*6+5]=top;});cr.slings.geometry.attributes.position.needsUpdate=true;}
+      else{cr.cable.visible=cr.hook.visible=cr.slings.visible=false;}});
+  }
+
+  const renderer=new T.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));stage.appendChild(renderer.domElement);
+  const camera=new T.PerspectiveCamera(45,1,0.5,SP*8);camera.up.set(0,0,1);
+  let camR=SP*2.2,fitR=camR,camTheta=-2.2,camPhiV=0.6,auto=true,viewTouched=false;
+  const clampR=r=>Math.max(SP*0.8,Math.min(SP*5.5,r));
+  function sceneFitDistance(){
+    const v=T.MathUtils.degToRad(camera.fov),halfV=v/2,halfH=Math.atan(Math.tan(halfV)*camera.aspect);
+    return clampR((SP*0.78)/Math.tan(Math.max(0.12,Math.min(halfV,halfH))));
+  }
+  function syncZoom(){const pct=Math.max(50,Math.min(220,Math.round(fitR/camR*100)));$('replayZoom').value=pct;}
+  function fitView(){viewTouched=false;fitR=sceneFitDistance();camR=fitR;$('replayZoom').value=100;}
+  function fit(){const w=stage.clientWidth,h=stage.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
+    const oldFit=fitR;fitR=sceneFitDistance();if(!viewTouched)camR=fitR;else if(oldFit>0)camR=clampR(camR*fitR/oldFit);syncZoom();}
+  fit();const ro=new ResizeObserver(fit);ro.observe(stage);
+  // 제스처: 1손가락 회전 · 2손가락 핀치 줌
+  const el=renderer.domElement,ptrs=new Map();let pinchD=0;
+  const pd=e=>{ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});auto=false;viewTouched=true;try{el.setPointerCapture(e.pointerId);}catch(_){}};
+  const pm=e=>{if(!ptrs.has(e.pointerId))return;const pv=ptrs.get(e.pointerId);
+    if(ptrs.size>=2){ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});const ks=[...ptrs.values()];const d=Math.hypot(ks[0].x-ks[1].x,ks[0].y-ks[1].y);if(pinchD){camR=clampR(camR*(pinchD/d));syncZoom();}pinchD=d;e.preventDefault();return;}
+    camTheta-=(e.clientX-pv.x)*0.006;camPhiV=Math.max(0.16,Math.min(1.3,camPhiV+(e.clientY-pv.y)*0.004));ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});e.preventDefault();};
+  const pu=e=>{ptrs.delete(e.pointerId);if(ptrs.size<2)pinchD=0;};
+  el.addEventListener('pointerdown',pd);el.addEventListener('pointermove',pm);el.addEventListener('pointerup',pu);el.addEventListener('pointercancel',pu);
+
+  let playing=true,speed=1,clock=0,raf=null,last=performance.now();const speeds=[1,2,4];
+  const onPlay=()=>{if(clock>=total)clock=0;playing=!playing;$('replayPlay').textContent=playing?'⏸':'▶';last=performance.now();};
+  const onScrub=()=>{clock=(+$('replayScrub').value/1000)*total;playing=false;$('replayPlay').textContent='▶';pose(clock);$('replayTime').textContent=clock.toFixed(1)+'s';};
+  const onSpeed=()=>{speed=speeds[(speeds.indexOf(speed)+1)%speeds.length];$('replaySpeed').textContent='×'+speed;};
+  const onZoom=()=>{viewTouched=true;camR=clampR(fitR*100/(+$('replayZoom').value||100));};
+  const onFit=()=>fitView();
+  $('replayPlay').addEventListener('click',onPlay);$('replayScrub').addEventListener('input',onScrub);$('replaySpeed').addEventListener('click',onSpeed);
+  $('replayZoom').addEventListener('input',onZoom);$('replayFit').addEventListener('click',onFit);
+  $('replayPlay').textContent='⏸';$('replaySpeed').textContent='×1';$('replayScrub').value=0;
+  function loop(now){raf=requestAnimationFrame(loop);const dt=Math.min(0.05,(now-last)/1000);last=now;
+    if(playing){clock+=dt*speed;if(clock>=total){clock=total;playing=false;$('replayPlay').textContent='▶';}}
+    if(auto&&!ptrs.size)camTheta+=dt*0.12;
+    pose(clock);$('replayScrub').value=Math.round(clock/total*1000);$('replayTime').textContent=clock.toFixed(1)+'s';
+    camera.position.set(camR*Math.cos(camTheta)*Math.cos(camPhiV),camR*Math.sin(camTheta)*Math.cos(camPhiV),camR*Math.sin(camPhiV));camera.lookAt(0,0,2);
+    renderer.render(scene,camera);}
+  raf=requestAnimationFrame(loop);
+
+  return {fitView,dispose(){if(raf)cancelAnimationFrame(raf);try{ro.disconnect();}catch(_){}
+    el.removeEventListener('pointerdown',pd);el.removeEventListener('pointermove',pm);el.removeEventListener('pointerup',pu);el.removeEventListener('pointercancel',pu);
+    $('replayPlay').removeEventListener('click',onPlay);$('replayScrub').removeEventListener('input',onScrub);$('replaySpeed').removeEventListener('click',onSpeed);
+    $('replayZoom').removeEventListener('input',onZoom);$('replayFit').removeEventListener('click',onFit);
+    try{renderer.dispose();}catch(_){}stage.innerHTML='';}};
+}
+
+boot();
+</script>
+</body>
+</html>

@@ -1,0 +1,5422 @@
+{
+ "D1_1": {
+  "ok": true,
+  "path": "human_plays\\D1_1\\tutorial\\20260729-210721_verify_cd187fa3eb.json",
+  "meta": {
+   "tier": "tutorial",
+   "scenario_id": "D1_1",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:21",
+   "submitted_at": "2026-07-29T21:07:21",
+   "play_seconds": 0.01,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L2",
+     "liftIndex": 1,
+     "start": 0.0,
+     "finish": 35.88829384842073,
+     "teardown": 0.0,
+     "travel": 0.8882938484207326,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.8882938484207326,
+     "setupStart": 0.8882938484207326,
+     "setupFinish": 10.888293848420732,
+     "liftStart": 10.888293848420732,
+     "liftFinish": 35.88829384842073,
+     "fromX": 50.0,
+     "fromY": 18.0,
+     "toX": 58.34033849609853,
+     "toY": 21.057016500562014,
+     "radiusCenterX": 58.34033849609853,
+     "radiusCenterY": 21.057016500562014,
+     "liftX": 75.1,
+     "liftY": 27.2,
+     "actualLiftRadius": 17.849999999992267,
+     "ratedMaxRadius": 20.999999999990905,
+     "loadWeightT": 10.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 3.0,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 8.882938484207326,
+     "directMove": 8.882938484207326,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 50.0,
+       "y": 18.0
+      },
+      {
+       "x": 58.34033849609853,
+       "y": 21.057016500562014
+      }
+     ]
+    },
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L3",
+     "liftIndex": 2,
+     "start": 35.88829384842073,
+     "finish": 79.12761756681448,
+     "teardown": 5.0,
+     "travel": 3.239323718393753,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 35.88829384842073,
+     "teardownFinish": 40.88829384842073,
+     "travelStart": 40.88829384842073,
+     "travelFinish": 44.127617566814486,
+     "setupStart": 44.127617566814486,
+     "setupFinish": 54.127617566814486,
+     "liftStart": 54.127617566814486,
+     "liftFinish": 79.12761756681448,
+     "fromX": 58.34033849609853,
+     "fromY": 21.057016500562014,
+     "toX": 58.44327678699908,
+     "toY": 53.450090126926945,
+     "radiusCenterX": 58.44327678699908,
+     "radiusCenterY": 53.450090126926945,
+     "liftX": 58.5,
+     "liftY": 71.3,
+     "actualLiftRadius": 17.849999999992267,
+     "ratedMaxRadius": 20.999999999990905,
+     "loadWeightT": 10.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 3.0,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 32.39323718393753,
+     "directMove": 32.39323718393753,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 58.34033849609853,
+       "y": 21.057016500562014
+      },
+      {
+       "x": 58.44327678699908,
+       "y": 53.450090126926945
+      }
+     ]
+    }
+   ],
+   "makespan": 125.222,
+   "done": 3,
+   "total": 3,
+   "raw": {
+    "soft_interference_count": 0,
+    "idle_steps_total": 0,
+    "idle_steps_per_crane": [
+     0
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 3
+    },
+    "per_crane_busy": {
+     "C1": 125.22
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 3/3 → 100 × 3/3 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 59.89,
+     "weighted": 17.97,
+     "detail": "makespan 125.2분 ((양중 3건 / 크레인 1대) × 25.0분 = 75.0분 기준) → 100 × 75.0 / 125.2 = 59.9"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "soft 간섭 0건 → 100 × (1 − 0/3) = 100.0"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 100.0,
+     "weighted": 10.0,
+     "detail": "크레인 2대 미만 또는 이벤트 없음 — 만점 처리"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 100.0,
+     "weighted": 10.0,
+     "detail": "크레인 2대 미만 또는 이벤트 없음 — 만점 처리"
+    }
+   },
+   "totalScore": 87.97,
+   "grade": "A"
+  }
+ },
+ "D1_2": {
+  "ok": true,
+  "path": "human_plays\\D1_2\\tutorial\\20260729-210721_verify_e7b82a9ed4.json",
+  "meta": {
+   "tier": "tutorial",
+   "scenario_id": "D1_2",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:21",
+   "submitted_at": "2026-07-29T21:07:21",
+   "play_seconds": 0.01,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L3",
+     "liftIndex": 2,
+     "start": 0.0,
+     "finish": 35.0,
+     "teardown": 0.0,
+     "travel": 0.0,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.0,
+     "setupStart": 0.0,
+     "setupFinish": 10.0,
+     "liftStart": 10.0,
+     "liftFinish": 35.0,
+     "fromX": 50.0,
+     "fromY": 18.0,
+     "toX": 50.0,
+     "toY": 18.0,
+     "radiusCenterX": 50.0,
+     "radiusCenterY": 18.0,
+     "liftX": 33.7,
+     "liftY": 17.5,
+     "actualLiftRadius": 16.307666908543354,
+     "ratedMaxRadius": 20.999999999990905,
+     "loadWeightT": 10.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 3.0,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": true,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 0.0,
+     "directMove": 0.0,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 50.0,
+       "y": 18.0
+      },
+      {
+       "x": 50.0,
+       "y": 18.0
+      }
+     ]
+    },
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L1",
+     "liftIndex": 0,
+     "start": 35.0,
+     "finish": 75.70967432744314,
+     "teardown": 5.0,
+     "travel": 0.7096743274431345,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 35.0,
+     "teardownFinish": 40.0,
+     "travelStart": 40.0,
+     "travelFinish": 40.70967432744313,
+     "setupStart": 40.70967432744313,
+     "setupFinish": 50.70967432744313,
+     "liftStart": 50.70967432744313,
+     "liftFinish": 75.70967432744314,
+     "fromX": 50.0,
+     "fromY": 18.0,
+     "toX": 45.87510175788138,
+     "toY": 23.77485753896607,
+     "radiusCenterX": 45.87510175788138,
+     "radiusCenterY": 23.77485753896607,
+     "liftX": 35.5,
+     "liftY": 38.3,
+     "actualLiftRadius": 17.84999999999227,
+     "ratedMaxRadius": 20.999999999990905,
+     "loadWeightT": 10.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 3.0,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 7.096743274431345,
+     "directMove": 7.096743274431345,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 50.0,
+       "y": 18.0
+      },
+      {
+       "x": 45.87510175788138,
+       "y": 23.77485753896607
+      }
+     ]
+    }
+   ],
+   "makespan": 122.094,
+   "done": 3,
+   "total": 3,
+   "raw": {
+    "soft_interference_count": 0,
+    "idle_steps_total": 0,
+    "idle_steps_per_crane": [
+     0
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 3
+    },
+    "per_crane_busy": {
+     "C1": 122.09
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 3/3 → 100 × 3/3 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 61.43,
+     "weighted": 18.43,
+     "detail": "makespan 122.1분 ((양중 3건 / 크레인 1대) × 25.0분 = 75.0분 기준) → 100 × 75.0 / 122.1 = 61.4"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "soft 간섭 0건 → 100 × (1 − 0/3) = 100.0"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 100.0,
+     "weighted": 10.0,
+     "detail": "크레인 2대 미만 또는 이벤트 없음 — 만점 처리"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 100.0,
+     "weighted": 10.0,
+     "detail": "크레인 2대 미만 또는 이벤트 없음 — 만점 처리"
+    }
+   },
+   "totalScore": 88.43,
+   "grade": "A"
+  }
+ },
+ "D1_3": {
+  "ok": true,
+  "path": "human_plays\\D1_3\\tutorial\\20260729-210721_verify_d532fd647d.json",
+  "meta": {
+   "tier": "tutorial",
+   "scenario_id": "D1_3",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:21",
+   "submitted_at": "2026-07-29T21:07:21",
+   "play_seconds": 0.01,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L1",
+     "liftIndex": 0,
+     "start": 0.0,
+     "finish": 35.0,
+     "teardown": 0.0,
+     "travel": 0.0,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.0,
+     "setupStart": 0.0,
+     "setupFinish": 10.0,
+     "liftStart": 10.0,
+     "liftFinish": 35.0,
+     "fromX": 50.0,
+     "fromY": 18.0,
+     "toX": 50.0,
+     "toY": 18.0,
+     "radiusCenterX": 50.0,
+     "radiusCenterY": 18.0,
+     "liftX": 59.4,
+     "liftY": 30.6,
+     "actualLiftRadius": 15.720050890502868,
+     "ratedMaxRadius": 20.999999999990905,
+     "loadWeightT": 10.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 3.0,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": true,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 0.0,
+     "directMove": 0.0,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 50.0,
+       "y": 18.0
+      },
+      {
+       "x": 50.0,
+       "y": 18.0
+      }
+     ]
+    },
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L3",
+     "liftIndex": 2,
+     "start": 35.0,
+     "finish": 75.62358879844686,
+     "teardown": 5.0,
+     "travel": 0.6235887984468673,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 35.0,
+     "teardownFinish": 40.0,
+     "travelStart": 40.0,
+     "travelFinish": 40.62358879844687,
+     "setupStart": 40.62358879844687,
+     "setupFinish": 50.62358879844687,
+     "liftStart": 50.62358879844687,
+     "liftFinish": 75.62358879844686,
+     "fromX": 50.0,
+     "fromY": 18.0,
+     "toX": 50.95793792437379,
+     "toY": 24.161870972998965,
+     "radiusCenterX": 50.95793792437379,
+     "radiusCenterY": 24.161870972998965,
+     "liftX": 53.7,
+     "liftY": 41.8,
+     "actualLiftRadius": 17.849999999992267,
+     "ratedMaxRadius": 20.999999999990905,
+     "loadWeightT": 10.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 3.0,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 6.235887984468674,
+     "directMove": 6.235887984468674,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 50.0,
+       "y": 18.0
+      },
+      {
+       "x": 50.95793792437379,
+       "y": 24.161870972998965
+      }
+     ]
+    }
+   ],
+   "makespan": 120.85,
+   "done": 3,
+   "total": 3,
+   "raw": {
+    "soft_interference_count": 0,
+    "idle_steps_total": 0,
+    "idle_steps_per_crane": [
+     0
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 3
+    },
+    "per_crane_busy": {
+     "C1": 120.85
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 3/3 → 100 × 3/3 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 62.06,
+     "weighted": 18.62,
+     "detail": "makespan 120.8분 ((양중 3건 / 크레인 1대) × 25.0분 = 75.0분 기준) → 100 × 75.0 / 120.8 = 62.1"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "soft 간섭 0건 → 100 × (1 − 0/3) = 100.0"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 100.0,
+     "weighted": 10.0,
+     "detail": "크레인 2대 미만 또는 이벤트 없음 — 만점 처리"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 100.0,
+     "weighted": 10.0,
+     "detail": "크레인 2대 미만 또는 이벤트 없음 — 만점 처리"
+    }
+   },
+   "totalScore": 88.62,
+   "grade": "A"
+  }
+ },
+ "D2_1": {
+  "ok": true,
+  "path": "human_plays\\D2_1\\tutorial\\20260729-210721_verify_f4be6c245f.json",
+  "meta": {
+   "tier": "tutorial",
+   "scenario_id": "D2_1",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:21",
+   "submitted_at": "2026-07-29T21:07:21",
+   "play_seconds": 0.02,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L5",
+     "liftIndex": 4,
+     "start": 0.0,
+     "finish": 35.67300732301672,
+     "teardown": 0.0,
+     "travel": 0.6730073230167161,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.6730073230167161,
+     "setupStart": 0.6730073230167161,
+     "setupFinish": 10.673007323016716,
+     "liftStart": 10.673007323016716,
+     "liftFinish": 35.67300732301672,
+     "fromX": 18.0,
+     "fromY": 22.0,
+     "toX": 22.024889411723514,
+     "toY": 27.393899415711104,
+     "radiusCenterX": 22.024889411723514,
+     "radiusCenterY": 27.393899415711104,
+     "liftX": 32.7,
+     "liftY": 41.7,
+     "actualLiftRadius": 17.849999999992267,
+     "ratedMaxRadius": 20.999999999990905,
+     "loadWeightT": 10.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 3.0,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 6.730073230167161,
+     "directMove": 6.730073230167161,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 18.0,
+       "y": 22.0
+      },
+      {
+       "x": 22.024889411723514,
+       "y": 27.393899415711104
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L6",
+     "liftIndex": 5,
+     "start": 0.0,
+     "finish": 35.778679276124436,
+     "teardown": 0.0,
+     "travel": 0.7786792761244312,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.7786792761244312,
+     "setupStart": 0.7786792761244312,
+     "setupFinish": 10.778679276124432,
+     "liftStart": 10.778679276124432,
+     "liftFinish": 35.778679276124436,
+     "fromX": 82.0,
+     "fromY": 22.0,
+     "toX": 77.88514209532335,
+     "toY": 28.61075532226741,
+     "radiusCenterX": 77.88514209532335,
+     "radiusCenterY": 28.61075532226741,
+     "liftX": 69.8,
+     "liftY": 41.6,
+     "actualLiftRadius": 15.299999999986083,
+     "ratedMaxRadius": 17.99999999998363,
+     "loadWeightT": 12.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 1.0,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 7.786792761244312,
+     "directMove": 7.786792761244312,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 82.0,
+       "y": 22.0
+      },
+      {
+       "x": 77.88514209532335,
+       "y": 28.61075532226741
+      }
+     ]
+    }
+   ],
+   "makespan": 203.403,
+   "done": 7,
+   "total": 7,
+   "raw": {
+    "soft_interference_count": 2,
+    "idle_steps_total": 3,
+    "idle_steps_per_crane": [
+     0,
+     3
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 5,
+     "C2": 2
+    },
+    "per_crane_busy": {
+     "C1": 203.4,
+     "C2": 82.46
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 7/7 → 100 × 7/7 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 43.02,
+     "weighted": 12.91,
+     "detail": "makespan 203.4분 ((양중 7건 / 크레인 2대) × 25.0분 = 87.5분 기준) → 100 × 87.5 / 203.4 = 43.0"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 71.43,
+     "weighted": 17.86,
+     "detail": "soft 간섭 2건 → 100 × (1 − 2/7) = 71.4"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 53.33,
+     "weighted": 5.33,
+     "detail": "양중 개수 [C1:5, C2:2] → 100 × (2/5) / (3/4) = 53.3"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 40.54,
+     "weighted": 4.05,
+     "detail": "작업 시간 [C1:203.4, C2:82.5] → 100 × 82.5/203.4 = 40.5"
+    }
+   },
+   "totalScore": 65.15,
+   "grade": "C"
+  }
+ },
+ "D2_2": {
+  "ok": true,
+  "path": "human_plays\\D2_2\\tutorial\\20260729-210721_verify_e8229aa5e2.json",
+  "meta": {
+   "tier": "tutorial",
+   "scenario_id": "D2_2",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:21",
+   "submitted_at": "2026-07-29T21:07:21",
+   "play_seconds": 0.02,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L5",
+     "liftIndex": 4,
+     "start": 0.0,
+     "finish": 36.39147603485449,
+     "teardown": 0.0,
+     "travel": 1.3914760348544912,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 1.3914760348544912,
+     "setupStart": 1.3914760348544912,
+     "setupFinish": 11.391476034854492,
+     "liftStart": 11.391476034854492,
+     "liftFinish": 36.39147603485449,
+     "fromX": 18.0,
+     "fromY": 22.0,
+     "toX": 30.61602775027857,
+     "toY": 27.86995735603239,
+     "radiusCenterX": 30.61602775027857,
+     "radiusCenterY": 27.86995735603239,
+     "liftX": 46.8,
+     "liftY": 35.4,
+     "actualLiftRadius": 17.849999999992267,
+     "ratedMaxRadius": 20.999999999990905,
+     "loadWeightT": 10.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 3.0,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 13.914760348544911,
+     "directMove": 13.914760348544911,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 18.0,
+       "y": 22.0
+      },
+      {
+       "x": 30.61602775027857,
+       "y": 27.86995735603239
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L4",
+     "liftIndex": 3,
+     "start": 0.0,
+     "finish": 35.0,
+     "teardown": 0.0,
+     "travel": 0.0,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.0,
+     "setupStart": 0.0,
+     "setupFinish": 10.0,
+     "liftStart": 10.0,
+     "liftFinish": 35.0,
+     "fromX": 82.0,
+     "fromY": 22.0,
+     "toX": 82.0,
+     "toY": 22.0,
+     "radiusCenterX": 82.0,
+     "radiusCenterY": 22.0,
+     "liftX": 79.1,
+     "liftY": 33.9,
+     "actualLiftRadius": 12.24826518328208,
+     "ratedMaxRadius": 20.999999999990905,
+     "loadWeightT": 8.0,
+     "capacityAtActualT": null,
+     "capacityMarginT": null,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": true,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 0.0,
+     "directMove": 0.0,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 82.0,
+       "y": 22.0
+      },
+      {
+       "x": 82.0,
+       "y": 22.0
+      }
+     ]
+    }
+   ],
+   "makespan": 165.72,
+   "done": 7,
+   "total": 7,
+   "raw": {
+    "soft_interference_count": 4,
+    "idle_steps_total": 1,
+    "idle_steps_per_crane": [
+     0,
+     1
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 4,
+     "C2": 3
+    },
+    "per_crane_busy": {
+     "C1": 165.72,
+     "C2": 121.92
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 7/7 → 100 × 7/7 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 52.8,
+     "weighted": 15.84,
+     "detail": "makespan 165.7분 ((양중 7건 / 크레인 2대) × 25.0분 = 87.5분 기준) → 100 × 87.5 / 165.7 = 52.8"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 42.86,
+     "weighted": 10.71,
+     "detail": "soft 간섭 4건 → 100 × (1 − 4/7) = 42.9"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 100.0,
+     "weighted": 10.0,
+     "detail": "양중 개수 [C1:4, C2:3] → 100 × (3/4) / (3/4) = 100.0"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 73.57,
+     "weighted": 7.36,
+     "detail": "작업 시간 [C1:165.7, C2:121.9] → 100 × 121.9/165.7 = 73.6"
+    }
+   },
+   "totalScore": 68.91,
+   "grade": "C"
+  }
+ },
+ "D2_3": {
+  "ok": true,
+  "path": "human_plays\\D2_3\\tutorial\\20260729-210721_verify_4eaca8f348.json",
+  "meta": {
+   "tier": "tutorial",
+   "scenario_id": "D2_3",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:21",
+   "submitted_at": "2026-07-29T21:07:21",
+   "play_seconds": 0.02,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L7",
+     "liftIndex": 6,
+     "start": 0.0,
+     "finish": 37.168965737344394,
+     "teardown": 0.0,
+     "travel": 2.1689657373443967,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 2.1689657373443967,
+     "setupStart": 2.1689657373443967,
+     "setupFinish": 12.168965737344397,
+     "liftStart": 12.168965737344397,
+     "liftFinish": 37.168965737344394,
+     "fromX": 18.0,
+     "fromY": 22.0,
+     "toX": 33.55574526525961,
+     "toY": 37.11489418486764,
+     "radiusCenterX": 33.55574526525961,
+     "radiusCenterY": 37.11489418486764,
+     "liftX": 42.7,
+     "liftY": 46.0,
+     "actualLiftRadius": 12.749999999996904,
+     "ratedMaxRadius": 14.999999999996362,
+     "loadWeightT": 14.0,
+     "capacityAtActualT": null,
+     "capacityMarginT": null,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 21.689657373443968,
+     "directMove": 21.689657373443968,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 18.0,
+       "y": 22.0
+      },
+      {
+       "x": 33.55574526525961,
+       "y": 37.11489418486764
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L5",
+     "liftIndex": 4,
+     "start": 0.0,
+     "finish": 35.11531576323593,
+     "teardown": 0.0,
+     "travel": 0.11531576323592592,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.11531576323592592,
+     "setupStart": 0.11531576323592592,
+     "setupFinish": 10.115315763235927,
+     "liftStart": 10.115315763235927,
+     "liftFinish": 35.11531576323593,
+     "fromX": 82.0,
+     "fromY": 22.0,
+     "toX": 81.24753796616876,
+     "toY": 22.873826877997566,
+     "radiusCenterX": 81.24753796616876,
+     "radiusCenterY": 22.873826877997566,
+     "liftX": 69.6,
+     "liftY": 36.4,
+     "actualLiftRadius": 17.849999999992267,
+     "ratedMaxRadius": 20.999999999990905,
+     "loadWeightT": 10.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 3.0,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 1.1531576323592592,
+     "directMove": 1.1531576323592592,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 82.0,
+       "y": 22.0
+      },
+      {
+       "x": 81.24753796616876,
+       "y": 22.873826877997566
+      }
+     ]
+    }
+   ],
+   "makespan": 165.658,
+   "done": 7,
+   "total": 7,
+   "raw": {
+    "soft_interference_count": 0,
+    "idle_steps_total": 1,
+    "idle_steps_per_crane": [
+     0,
+     1
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 4,
+     "C2": 3
+    },
+    "per_crane_busy": {
+     "C1": 165.66,
+     "C2": 121.6
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 7/7 → 100 × 7/7 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 52.82,
+     "weighted": 15.85,
+     "detail": "makespan 165.7분 ((양중 7건 / 크레인 2대) × 25.0분 = 87.5분 기준) → 100 × 87.5 / 165.7 = 52.8"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "soft 간섭 0건 → 100 × (1 − 0/7) = 100.0"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 100.0,
+     "weighted": 10.0,
+     "detail": "양중 개수 [C1:4, C2:3] → 100 × (3/4) / (3/4) = 100.0"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 73.4,
+     "weighted": 7.34,
+     "detail": "작업 시간 [C1:165.7, C2:121.6] → 100 × 121.6/165.7 = 73.4"
+    }
+   },
+   "totalScore": 83.19,
+   "grade": "A"
+  }
+ },
+ "D2_4": {
+  "ok": true,
+  "path": "human_plays\\D2_4\\tutorial\\20260729-210721_verify_cc56d4382a.json",
+  "meta": {
+   "tier": "tutorial",
+   "scenario_id": "D2_4",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:21",
+   "submitted_at": "2026-07-29T21:07:21",
+   "play_seconds": 0.02,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L3",
+     "liftIndex": 2,
+     "start": 0.0,
+     "finish": 36.078720459188276,
+     "teardown": 0.0,
+     "travel": 1.0787204591882733,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 1.0787204591882733,
+     "setupStart": 1.0787204591882733,
+     "setupFinish": 11.078720459188274,
+     "liftStart": 11.078720459188274,
+     "liftFinish": 36.078720459188276,
+     "fromX": 18.0,
+     "fromY": 22.0,
+     "toX": 20.29152203477985,
+     "toY": 32.54100135998731,
+     "radiusCenterX": 20.29152203477985,
+     "radiusCenterY": 32.54100135998731,
+     "liftX": 23.0,
+     "liftY": 45.0,
+     "actualLiftRadius": 12.749999999996906,
+     "ratedMaxRadius": 14.999999999996362,
+     "loadWeightT": 14.0,
+     "capacityAtActualT": null,
+     "capacityMarginT": null,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": false,
+     "softConflict": 1,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 10.787204591882734,
+     "directMove": 10.787204591882734,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 18.0,
+       "y": 22.0
+      },
+      {
+       "x": 20.29152203477985,
+       "y": 32.54100135998731
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L1",
+     "liftIndex": 0,
+     "start": 0.0,
+     "finish": 38.052406329843244,
+     "teardown": 0.0,
+     "travel": 3.0524063298432433,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 3.0524063298432433,
+     "setupStart": 3.0524063298432433,
+     "setupFinish": 13.052406329843244,
+     "liftStart": 13.052406329843244,
+     "liftFinish": 38.052406329843244,
+     "fromX": 82.0,
+     "fromY": 22.0,
+     "toX": 56.381375360776985,
+     "toY": 38.59531596087599,
+     "radiusCenterX": 56.381375360776985,
+     "radiusCenterY": 38.59531596087599,
+     "liftX": 41.4,
+     "liftY": 48.3,
+     "actualLiftRadius": 17.849999999992267,
+     "ratedMaxRadius": 20.999999999990905,
+     "loadWeightT": 10.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 3.0,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": false,
+     "softConflict": 1,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 30.524063298432434,
+     "directMove": 30.524063298432434,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 82.0,
+       "y": 22.0
+      },
+      {
+       "x": 56.381375360776985,
+       "y": 38.59531596087599
+      }
+     ]
+    }
+   ],
+   "makespan": 205.638,
+   "done": 7,
+   "total": 7,
+   "raw": {
+    "soft_interference_count": 4,
+    "idle_steps_total": 3,
+    "idle_steps_per_crane": [
+     0,
+     3
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 5,
+     "C2": 2
+    },
+    "per_crane_busy": {
+     "C1": 205.64,
+     "C2": 84.45
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 7/7 → 100 × 7/7 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 42.55,
+     "weighted": 12.77,
+     "detail": "makespan 205.6분 ((양중 7건 / 크레인 2대) × 25.0분 = 87.5분 기준) → 100 × 87.5 / 205.6 = 42.6"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 42.86,
+     "weighted": 10.71,
+     "detail": "soft 간섭 4건 → 100 × (1 − 4/7) = 42.9"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 53.33,
+     "weighted": 5.33,
+     "detail": "양중 개수 [C1:5, C2:2] → 100 × (2/5) / (3/4) = 53.3"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 41.07,
+     "weighted": 4.11,
+     "detail": "작업 시간 [C1:205.6, C2:84.5] → 100 × 84.5/205.6 = 41.1"
+    }
+   },
+   "totalScore": 57.92,
+   "grade": "D"
+  }
+ },
+ "D2_5": {
+  "ok": true,
+  "path": "human_plays\\D2_5\\tutorial\\20260729-210721_verify_50d43dd96a.json",
+  "meta": {
+   "tier": "tutorial",
+   "scenario_id": "D2_5",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:21",
+   "submitted_at": "2026-07-29T21:07:21",
+   "play_seconds": 0.02,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L5",
+     "liftIndex": 4,
+     "start": 0.0,
+     "finish": 35.45939301371294,
+     "teardown": 0.0,
+     "travel": 0.4593930137129444,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.4593930137129444,
+     "setupStart": 0.4593930137129444,
+     "setupFinish": 10.459393013712944,
+     "liftStart": 10.459393013712944,
+     "liftFinish": 35.45939301371294,
+     "fromX": 18.0,
+     "fromY": 22.0,
+     "toX": 20.82464949342943,
+     "toY": 25.622920002442093,
+     "radiusCenterX": 20.82464949342943,
+     "radiusCenterY": 25.622920002442093,
+     "liftX": 31.8,
+     "liftY": 39.7,
+     "actualLiftRadius": 17.849999999992267,
+     "ratedMaxRadius": 20.999999999990905,
+     "loadWeightT": 10.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 3.0,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 4.593930137129444,
+     "directMove": 4.593930137129444,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 18.0,
+       "y": 22.0
+      },
+      {
+       "x": 20.82464949342943,
+       "y": 25.622920002442093
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L2",
+     "liftIndex": 1,
+     "start": 0.0,
+     "finish": 35.82261556570693,
+     "teardown": 0.0,
+     "travel": 0.8226155657069322,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.8226155657069322,
+     "setupStart": 0.8226155657069322,
+     "setupFinish": 10.822615565706933,
+     "liftStart": 10.822615565706933,
+     "liftFinish": 35.82261556570693,
+     "fromX": 82.0,
+     "fromY": 22.0,
+     "toX": 74.027751932138,
+     "toY": 24.02802801726314,
+     "radiusCenterX": 74.027751932138,
+     "radiusCenterY": 24.02802801726314,
+     "liftX": 59.2,
+     "liftY": 27.8,
+     "actualLiftRadius": 15.29999999998608,
+     "ratedMaxRadius": 17.99999999998363,
+     "loadWeightT": 12.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 1.0,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 8.226155657069322,
+     "directMove": 8.226155657069322,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 82.0,
+       "y": 22.0
+      },
+      {
+       "x": 74.027751932138,
+       "y": 24.02802801726314
+      }
+     ]
+    }
+   ],
+   "makespan": 163.918,
+   "done": 7,
+   "total": 7,
+   "raw": {
+    "soft_interference_count": 4,
+    "idle_steps_total": 0,
+    "idle_steps_per_crane": [
+     0,
+     0
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 4,
+     "C2": 3
+    },
+    "per_crane_busy": {
+     "C1": 163.92,
+     "C2": 122.68
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 7/7 → 100 × 7/7 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 53.38,
+     "weighted": 16.01,
+     "detail": "makespan 163.9분 ((양중 7건 / 크레인 2대) × 25.0분 = 87.5분 기준) → 100 × 87.5 / 163.9 = 53.4"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 42.86,
+     "weighted": 10.71,
+     "detail": "soft 간섭 4건 → 100 × (1 − 4/7) = 42.9"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 100.0,
+     "weighted": 10.0,
+     "detail": "양중 개수 [C1:4, C2:3] → 100 × (3/4) / (3/4) = 100.0"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 74.84,
+     "weighted": 7.48,
+     "detail": "작업 시간 [C1:163.9, C2:122.7] → 100 × 122.7/163.9 = 74.8"
+    }
+   },
+   "totalScore": 69.21,
+   "grade": "C"
+  }
+ },
+ "ORD_1": {
+  "ok": true,
+  "path": "human_plays\\ORD_1\\tutorial\\20260729-210721_verify_b0d9a14581.json",
+  "meta": {
+   "tier": "tutorial",
+   "scenario_id": "ORD_1",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:21",
+   "submitted_at": "2026-07-29T21:07:21",
+   "play_seconds": 0.02,
+   "undo_count": 0,
+   "order_mode": true,
+   "order_seed": "",
+   "order_perm": [
+    "L7",
+    "L4",
+    "L1"
+   ],
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L5",
+     "liftIndex": 4,
+     "start": 0.0,
+     "finish": 35.67300732301672,
+     "teardown": 0.0,
+     "travel": 0.6730073230167161,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.6730073230167161,
+     "setupStart": 0.6730073230167161,
+     "setupFinish": 10.673007323016716,
+     "liftStart": 10.673007323016716,
+     "liftFinish": 35.67300732301672,
+     "fromX": 18.0,
+     "fromY": 22.0,
+     "toX": 22.024889411723514,
+     "toY": 27.393899415711104,
+     "radiusCenterX": 22.024889411723514,
+     "radiusCenterY": 27.393899415711104,
+     "liftX": 32.7,
+     "liftY": 41.7,
+     "actualLiftRadius": 17.849999999992267,
+     "ratedMaxRadius": 20.999999999990905,
+     "loadWeightT": 10.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 3.0,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 6.730073230167161,
+     "directMove": 6.730073230167161,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 18.0,
+       "y": 22.0
+      },
+      {
+       "x": 22.024889411723514,
+       "y": 27.393899415711104
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L6",
+     "liftIndex": 5,
+     "start": 0.0,
+     "finish": 35.778679276124436,
+     "teardown": 0.0,
+     "travel": 0.7786792761244312,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.7786792761244312,
+     "setupStart": 0.7786792761244312,
+     "setupFinish": 10.778679276124432,
+     "liftStart": 10.778679276124432,
+     "liftFinish": 35.778679276124436,
+     "fromX": 82.0,
+     "fromY": 22.0,
+     "toX": 77.88514209532335,
+     "toY": 28.61075532226741,
+     "radiusCenterX": 77.88514209532335,
+     "radiusCenterY": 28.61075532226741,
+     "liftX": 69.8,
+     "liftY": 41.6,
+     "actualLiftRadius": 15.299999999986083,
+     "ratedMaxRadius": 17.99999999998363,
+     "loadWeightT": 12.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 1.0,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 7.786792761244312,
+     "directMove": 7.786792761244312,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 82.0,
+       "y": 22.0
+      },
+      {
+       "x": 77.88514209532335,
+       "y": 28.61075532226741
+      }
+     ]
+    }
+   ],
+   "makespan": 203.259,
+   "done": 7,
+   "total": 7,
+   "raw": {
+    "soft_interference_count": 2,
+    "idle_steps_total": 3,
+    "idle_steps_per_crane": [
+     0,
+     3
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 5,
+     "C2": 2
+    },
+    "per_crane_busy": {
+     "C1": 203.26,
+     "C2": 82.46
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 7/7 → 100 × 7/7 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 43.05,
+     "weighted": 12.91,
+     "detail": "makespan 203.3분 ((양중 7건 / 크레인 2대) × 25.0분 = 87.5분 기준) → 100 × 87.5 / 203.3 = 43.0"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 71.43,
+     "weighted": 17.86,
+     "detail": "soft 간섭 2건 → 100 × (1 − 2/7) = 71.4"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 53.33,
+     "weighted": 5.33,
+     "detail": "양중 개수 [C1:5, C2:2] → 100 × (2/5) / (3/4) = 53.3"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 40.57,
+     "weighted": 4.06,
+     "detail": "작업 시간 [C1:203.3, C2:82.5] → 100 × 82.5/203.3 = 40.6"
+    }
+   },
+   "totalScore": 65.16,
+   "grade": "C"
+  }
+ },
+ "D3_1": {
+  "ok": true,
+  "path": "human_plays\\D3_1\\standard\\20260729-210721_verify_896a05e517.json",
+  "meta": {
+   "tier": "standard",
+   "scenario_id": "D3_1",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:21",
+   "submitted_at": "2026-07-29T21:07:21",
+   "play_seconds": 0.04,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L1",
+     "liftIndex": 0,
+     "start": 0.0,
+     "finish": 36.99737744894946,
+     "teardown": 0.0,
+     "travel": 1.9973774489494578,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 1.9973774489494578,
+     "setupStart": 1.9973774489494578,
+     "setupFinish": 11.997377448949457,
+     "liftStart": 11.997377448949457,
+     "liftFinish": 36.99737744894946,
+     "fromX": 18.0,
+     "fromY": 22.0,
+     "toX": 29.290486097086138,
+     "toY": 38.47654669670465,
+     "radiusCenterX": 29.290486097086138,
+     "radiusCenterY": 38.47654669670465,
+     "liftX": 38.9,
+     "liftY": 52.5,
+     "actualLiftRadius": 17.0,
+     "ratedMaxRadius": 20.0,
+     "loadWeightT": 8.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 5.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 19.973774489494577,
+     "directMove": 19.973774489494577,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 18.0,
+       "y": 22.0
+      },
+      {
+       "x": 29.290486097086138,
+       "y": 38.47654669670465
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L3",
+     "liftIndex": 2,
+     "start": 0.0,
+     "finish": 35.0,
+     "teardown": 0.0,
+     "travel": 0.0,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.0,
+     "setupStart": 0.0,
+     "setupFinish": 10.0,
+     "liftStart": 10.0,
+     "liftFinish": 35.0,
+     "fromX": 82.0,
+     "fromY": 22.0,
+     "toX": 82.0,
+     "toY": 22.0,
+     "radiusCenterX": 82.0,
+     "radiusCenterY": 22.0,
+     "liftX": 76.8,
+     "liftY": 32.0,
+     "actualLiftRadius": 11.271202242884298,
+     "ratedMaxRadius": 15.0,
+     "loadWeightT": 16.0,
+     "capacityAtActualT": 24.0,
+     "capacityMarginT": 8.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": true,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 0.0,
+     "directMove": 0.0,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 82.0,
+       "y": 22.0
+      },
+      {
+       "x": 82.0,
+       "y": 22.0
+      }
+     ]
+    }
+   ],
+   "makespan": 288.662,
+   "done": 10,
+   "total": 10,
+   "raw": {
+    "soft_interference_count": 4,
+    "idle_steps_total": 4,
+    "idle_steps_per_crane": [
+     0,
+     4
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 7,
+     "C2": 3
+    },
+    "per_crane_busy": {
+     "C1": 288.66,
+     "C2": 121.93
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 10/10 → 100 × 10/10 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 43.3,
+     "weighted": 12.99,
+     "detail": "makespan 288.7분 ((양중 10건 / 크레인 2대) × 25.0분 = 125.0분 기준) → 100 × 125.0 / 288.7 = 43.3"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 60.0,
+     "weighted": 15.0,
+     "detail": "soft 간섭 4건 → 100 × (1 − 4/10) = 60.0"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 42.86,
+     "weighted": 4.29,
+     "detail": "양중 개수 [C1:7, C2:3] → 100 × (3/7) / (5/5) = 42.9"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 42.24,
+     "weighted": 4.22,
+     "detail": "작업 시간 [C1:288.7, C2:121.9] → 100 × 121.9/288.7 = 42.2"
+    }
+   },
+   "totalScore": 61.5,
+   "grade": "C"
+  }
+ },
+ "D3_2": {
+  "ok": true,
+  "path": "human_plays\\D3_2\\standard\\20260729-210721_verify_aaace01a00.json",
+  "meta": {
+   "tier": "standard",
+   "scenario_id": "D3_2",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:21",
+   "submitted_at": "2026-07-29T21:07:21",
+   "play_seconds": 0.04,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L4",
+     "liftIndex": 3,
+     "start": 0.0,
+     "finish": 35.0,
+     "teardown": 0.0,
+     "travel": 0.0,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.0,
+     "setupStart": 0.0,
+     "setupFinish": 10.0,
+     "liftStart": 10.0,
+     "liftFinish": 35.0,
+     "fromX": 18.0,
+     "fromY": 22.0,
+     "toX": 18.0,
+     "toY": 22.0,
+     "radiusCenterX": 18.0,
+     "radiusCenterY": 22.0,
+     "liftX": 19.1,
+     "liftY": 27.4,
+     "actualLiftRadius": 5.510898293381941,
+     "ratedMaxRadius": 11.999999999989086,
+     "loadWeightT": 20.0,
+     "capacityAtActualT": 38.0,
+     "capacityMarginT": 18.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": true,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 0.0,
+     "directMove": 0.0,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 18.0,
+       "y": 22.0
+      },
+      {
+       "x": 18.0,
+       "y": 22.0
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L9",
+     "liftIndex": 8,
+     "start": 0.0,
+     "finish": 36.42000000000062,
+     "teardown": 0.0,
+     "travel": 1.4200000000006179,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 1.4200000000006179,
+     "setupStart": 1.4200000000006179,
+     "setupFinish": 11.420000000000618,
+     "liftStart": 11.420000000000618,
+     "liftFinish": 36.42000000000062,
+     "fromX": 82.0,
+     "fromY": 22.0,
+     "toX": 73.4799999999963,
+     "toY": 33.360000000004945,
+     "radiusCenterX": 73.4799999999963,
+     "radiusCenterY": 33.360000000004945,
+     "liftX": 64.3,
+     "liftY": 45.6,
+     "actualLiftRadius": 15.299999999993824,
+     "ratedMaxRadius": 17.999999999992724,
+     "loadWeightT": 8.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 5.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 14.20000000000618,
+     "directMove": 14.20000000000618,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 82.0,
+       "y": 22.0
+      },
+      {
+       "x": 73.4799999999963,
+       "y": 33.360000000004945
+      }
+     ]
+    }
+   ],
+   "makespan": 204.77,
+   "done": 10,
+   "total": 10,
+   "raw": {
+    "soft_interference_count": 4,
+    "idle_steps_total": 0,
+    "idle_steps_per_crane": [
+     0,
+     0
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 5,
+     "C2": 5
+    },
+    "per_crane_busy": {
+     "C1": 203.6,
+     "C2": 204.77
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 10/10 → 100 × 10/10 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 61.04,
+     "weighted": 18.31,
+     "detail": "makespan 204.8분 ((양중 10건 / 크레인 2대) × 25.0분 = 125.0분 기준) → 100 × 125.0 / 204.8 = 61.0"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 60.0,
+     "weighted": 15.0,
+     "detail": "soft 간섭 4건 → 100 × (1 − 4/10) = 60.0"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 100.0,
+     "weighted": 10.0,
+     "detail": "양중 개수 [C1:5, C2:5] → 100 × (5/5) / (5/5) = 100.0"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 99.43,
+     "weighted": 9.94,
+     "detail": "작업 시간 [C1:203.6, C2:204.8] → 100 × 203.6/204.8 = 99.4"
+    }
+   },
+   "totalScore": 78.26,
+   "grade": "B"
+  }
+ },
+ "D3_3": {
+  "ok": true,
+  "path": "human_plays\\D3_3\\standard\\20260729-210721_verify_73f91145b3.json",
+  "meta": {
+   "tier": "standard",
+   "scenario_id": "D3_3",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:21",
+   "submitted_at": "2026-07-29T21:07:21",
+   "play_seconds": 0.04,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L10",
+     "liftIndex": 9,
+     "start": 0.0,
+     "finish": 35.0,
+     "teardown": 0.0,
+     "travel": 0.0,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.0,
+     "setupStart": 0.0,
+     "setupFinish": 10.0,
+     "liftStart": 10.0,
+     "liftFinish": 35.0,
+     "fromX": 18.0,
+     "fromY": 22.0,
+     "toX": 18.0,
+     "toY": 22.0,
+     "radiusCenterX": 18.0,
+     "radiusCenterY": 22.0,
+     "liftX": 26.0,
+     "liftY": 25.1,
+     "actualLiftRadius": 8.57962703152066,
+     "ratedMaxRadius": 15.099668871989707,
+     "loadWeightT": 12.0,
+     "capacityAtActualT": 30.0,
+     "capacityMarginT": 18.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": true,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 0.0,
+     "directMove": 0.0,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 18.0,
+       "y": 22.0
+      },
+      {
+       "x": 18.0,
+       "y": 22.0
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L5",
+     "liftIndex": 4,
+     "start": 0.0,
+     "finish": 36.52309280977748,
+     "teardown": 0.0,
+     "travel": 1.5230928097774845,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 1.5230928097774845,
+     "setupStart": 1.5230928097774845,
+     "setupFinish": 11.523092809777484,
+     "liftStart": 11.523092809777484,
+     "liftFinish": 36.52309280977748,
+     "fromX": 82.0,
+     "fromY": 22.0,
+     "toX": 75.07412792213866,
+     "toY": 35.56515634560427,
+     "radiusCenterX": 75.07412792213866,
+     "radiusCenterY": 35.56515634560427,
+     "liftX": 67.5,
+     "liftY": 50.4,
+     "actualLiftRadius": 16.65653025186475,
+     "ratedMaxRadius": 19.595917943370296,
+     "loadWeightT": 8.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 5.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 15.230928097774845,
+     "directMove": 15.230928097774845,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 82.0,
+       "y": 22.0
+      },
+      {
+       "x": 75.07412792213866,
+       "y": 35.56515634560427
+      }
+     ]
+    }
+   ],
+   "makespan": 286.735,
+   "done": 10,
+   "total": 10,
+   "raw": {
+    "soft_interference_count": 2,
+    "idle_steps_total": 4,
+    "idle_steps_per_crane": [
+     0,
+     4
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 7,
+     "C2": 3
+    },
+    "per_crane_busy": {
+     "C1": 286.74,
+     "C2": 125.42
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 10/10 → 100 × 10/10 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 43.59,
+     "weighted": 13.08,
+     "detail": "makespan 286.7분 ((양중 10건 / 크레인 2대) × 25.0분 = 125.0분 기준) → 100 × 125.0 / 286.7 = 43.6"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 80.0,
+     "weighted": 20.0,
+     "detail": "soft 간섭 2건 → 100 × (1 − 2/10) = 80.0"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 42.86,
+     "weighted": 4.29,
+     "detail": "양중 개수 [C1:7, C2:3] → 100 × (3/7) / (5/5) = 42.9"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 43.74,
+     "weighted": 4.37,
+     "detail": "작업 시간 [C1:286.7, C2:125.4] → 100 × 125.4/286.7 = 43.7"
+    }
+   },
+   "totalScore": 66.74,
+   "grade": "C"
+  }
+ },
+ "D3_4": {
+  "ok": true,
+  "path": "human_plays\\D3_4\\standard\\20260729-210722_verify_f0a9b9873b.json",
+  "meta": {
+   "tier": "standard",
+   "scenario_id": "D3_4",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:21",
+   "submitted_at": "2026-07-29T21:07:22",
+   "play_seconds": 0.03,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L10",
+     "liftIndex": 9,
+     "start": 0.0,
+     "finish": 35.0,
+     "teardown": 0.0,
+     "travel": 0.0,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.0,
+     "setupStart": 0.0,
+     "setupFinish": 10.0,
+     "liftStart": 10.0,
+     "liftFinish": 35.0,
+     "fromX": 18.0,
+     "fromY": 22.0,
+     "toX": 18.0,
+     "toY": 22.0,
+     "radiusCenterX": 18.0,
+     "radiusCenterY": 22.0,
+     "liftX": 26.1,
+     "liftY": 15.8,
+     "actualLiftRadius": 10.20049018429997,
+     "ratedMaxRadius": 15.0,
+     "loadWeightT": 12.0,
+     "capacityAtActualT": 24.0,
+     "capacityMarginT": 12.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": true,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 0.0,
+     "directMove": 0.0,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 18.0,
+       "y": 22.0
+      },
+      {
+       "x": 18.0,
+       "y": 22.0
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L8",
+     "liftIndex": 7,
+     "start": 0.0,
+     "finish": 37.756996160973294,
+     "teardown": 0.0,
+     "travel": 2.7569961609732947,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 2.7569961609732947,
+     "setupStart": 2.7569961609732947,
+     "setupFinish": 12.756996160973294,
+     "liftStart": 12.756996160973294,
+     "liftFinish": 37.756996160973294,
+     "fromX": 82.0,
+     "fromY": 22.0,
+     "toX": 63.82439126690516,
+     "toY": 42.730413173489694,
+     "radiusCenterX": 63.82439126690516,
+     "radiusCenterY": 42.730413173489694,
+     "liftX": 57.1,
+     "liftY": 50.4,
+     "actualLiftRadius": 10.199999999990723,
+     "ratedMaxRadius": 11.999999999989086,
+     "loadWeightT": 20.0,
+     "capacityAtActualT": 24.0,
+     "capacityMarginT": 4.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 27.569961609732946,
+     "directMove": 27.569961609732946,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 82.0,
+       "y": 22.0
+      },
+      {
+       "x": 63.82439126690516,
+       "y": 42.730413173489694
+      }
+     ]
+    }
+   ],
+   "makespan": 245.167,
+   "done": 10,
+   "total": 10,
+   "raw": {
+    "soft_interference_count": 4,
+    "idle_steps_total": 2,
+    "idle_steps_per_crane": [
+     0,
+     2
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 6,
+     "C2": 4
+    },
+    "per_crane_busy": {
+     "C1": 245.17,
+     "C2": 164.6
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 10/10 → 100 × 10/10 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 50.99,
+     "weighted": 15.3,
+     "detail": "makespan 245.2분 ((양중 10건 / 크레인 2대) × 25.0분 = 125.0분 기준) → 100 × 125.0 / 245.2 = 51.0"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 60.0,
+     "weighted": 15.0,
+     "detail": "soft 간섭 4건 → 100 × (1 − 4/10) = 60.0"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 66.67,
+     "weighted": 6.67,
+     "detail": "양중 개수 [C1:6, C2:4] → 100 × (4/6) / (5/5) = 66.7"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 67.14,
+     "weighted": 6.71,
+     "detail": "작업 시간 [C1:245.2, C2:164.6] → 100 × 164.6/245.2 = 67.1"
+    }
+   },
+   "totalScore": 68.68,
+   "grade": "C"
+  }
+ },
+ "D3_5": {
+  "ok": true,
+  "path": "human_plays\\D3_5\\standard\\20260729-210722_verify_ff16777d6d.json",
+  "meta": {
+   "tier": "standard",
+   "scenario_id": "D3_5",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:22",
+   "submitted_at": "2026-07-29T21:07:22",
+   "play_seconds": 0.04,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L1",
+     "liftIndex": 0,
+     "start": 0.0,
+     "finish": 36.916973873281364,
+     "teardown": 0.0,
+     "travel": 1.9169738732813648,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 1.9169738732813648,
+     "setupStart": 1.9169738732813648,
+     "setupFinish": 11.916973873281364,
+     "liftStart": 11.916973873281364,
+     "liftFinish": 36.916973873281364,
+     "fromX": 18.0,
+     "fromY": 22.0,
+     "toX": 27.963884197204475,
+     "toY": 38.376809664554166,
+     "radiusCenterX": 27.963884197204475,
+     "radiusCenterY": 38.376809664554166,
+     "liftX": 36.8,
+     "liftY": 52.9,
+     "actualLiftRadius": 17.0,
+     "ratedMaxRadius": 20.0,
+     "loadWeightT": 8.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 5.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 19.16973873281365,
+     "directMove": 19.16973873281365,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 18.0,
+       "y": 22.0
+      },
+      {
+       "x": 27.963884197204475,
+       "y": 38.376809664554166
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L9",
+     "liftIndex": 8,
+     "start": 0.0,
+     "finish": 35.0,
+     "teardown": 0.0,
+     "travel": 0.0,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.0,
+     "setupStart": 0.0,
+     "setupFinish": 10.0,
+     "liftStart": 10.0,
+     "liftFinish": 35.0,
+     "fromX": 82.0,
+     "fromY": 22.0,
+     "toX": 82.0,
+     "toY": 22.0,
+     "radiusCenterX": 82.0,
+     "radiusCenterY": 22.0,
+     "liftX": 77.1,
+     "liftY": 35.4,
+     "actualLiftRadius": 14.267795905464867,
+     "ratedMaxRadius": 17.999999999992724,
+     "loadWeightT": 8.0,
+     "capacityAtActualT": 14.0,
+     "capacityMarginT": 6.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": true,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 0.0,
+     "directMove": 0.0,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 82.0,
+       "y": 22.0
+      },
+      {
+       "x": 82.0,
+       "y": 22.0
+      }
+     ]
+    }
+   ],
+   "makespan": 248.417,
+   "done": 10,
+   "total": 10,
+   "raw": {
+    "soft_interference_count": 4,
+    "idle_steps_total": 2,
+    "idle_steps_per_crane": [
+     0,
+     2
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 6,
+     "C2": 4
+    },
+    "per_crane_busy": {
+     "C1": 248.42,
+     "C2": 162.92
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 10/10 → 100 × 10/10 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 50.32,
+     "weighted": 15.1,
+     "detail": "makespan 248.4분 ((양중 10건 / 크레인 2대) × 25.0분 = 125.0분 기준) → 100 × 125.0 / 248.4 = 50.3"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 60.0,
+     "weighted": 15.0,
+     "detail": "soft 간섭 4건 → 100 × (1 − 4/10) = 60.0"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 66.67,
+     "weighted": 6.67,
+     "detail": "양중 개수 [C1:6, C2:4] → 100 × (4/6) / (5/5) = 66.7"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 65.58,
+     "weighted": 6.56,
+     "detail": "작업 시간 [C1:248.4, C2:162.9] → 100 × 162.9/248.4 = 65.6"
+    }
+   },
+   "totalScore": 68.32,
+   "grade": "C"
+  }
+ },
+ "ORD_2": {
+  "ok": true,
+  "path": "human_plays\\ORD_2\\standard\\20260729-210722_verify_fc485fcc22.json",
+  "meta": {
+   "tier": "standard",
+   "scenario_id": "ORD_2",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:22",
+   "submitted_at": "2026-07-29T21:07:22",
+   "play_seconds": 0.04,
+   "undo_count": 0,
+   "order_mode": true,
+   "order_seed": "",
+   "order_perm": [
+    "L1",
+    "L3",
+    "L4",
+    "L6"
+   ],
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L1",
+     "liftIndex": 0,
+     "start": 0.0,
+     "finish": 36.99737744894946,
+     "teardown": 0.0,
+     "travel": 1.9973774489494578,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 1.9973774489494578,
+     "setupStart": 1.9973774489494578,
+     "setupFinish": 11.997377448949457,
+     "liftStart": 11.997377448949457,
+     "liftFinish": 36.99737744894946,
+     "fromX": 18.0,
+     "fromY": 22.0,
+     "toX": 29.290486097086138,
+     "toY": 38.47654669670465,
+     "radiusCenterX": 29.290486097086138,
+     "radiusCenterY": 38.47654669670465,
+     "liftX": 38.9,
+     "liftY": 52.5,
+     "actualLiftRadius": 17.0,
+     "ratedMaxRadius": 20.0,
+     "loadWeightT": 8.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 5.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 1,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 19.973774489494577,
+     "directMove": 19.973774489494577,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 18.0,
+       "y": 22.0
+      },
+      {
+       "x": 29.290486097086138,
+       "y": 38.47654669670465
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L8",
+     "liftIndex": 7,
+     "start": 0.0,
+     "finish": 36.880000000000926,
+     "teardown": 0.0,
+     "travel": 1.880000000000928,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 1.880000000000928,
+     "setupStart": 1.880000000000928,
+     "setupFinish": 11.880000000000928,
+     "liftStart": 11.880000000000928,
+     "liftFinish": 36.880000000000926,
+     "fromX": 82.0,
+     "fromY": 22.0,
+     "toX": 63.459310344818434,
+     "toY": 25.11172413793257,
+     "radiusCenterX": 63.459310344818434,
+     "radiusCenterY": 25.11172413793257,
+     "liftX": 53.4,
+     "liftY": 26.8,
+     "actualLiftRadius": 10.199999999990721,
+     "ratedMaxRadius": 11.999999999989086,
+     "loadWeightT": 20.0,
+     "capacityAtActualT": 24.0,
+     "capacityMarginT": 4.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 1,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 18.80000000000928,
+     "directMove": 18.80000000000928,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 82.0,
+       "y": 22.0
+      },
+      {
+       "x": 63.459310344818434,
+       "y": 25.11172413793257
+      }
+     ]
+    }
+   ],
+   "makespan": 327.965,
+   "done": 10,
+   "total": 10,
+   "raw": {
+    "soft_interference_count": 4,
+    "idle_steps_total": 6,
+    "idle_steps_per_crane": [
+     0,
+     6
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 8,
+     "C2": 2
+    },
+    "per_crane_busy": {
+     "C1": 327.97,
+     "C2": 86.5
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 10/10 → 100 × 10/10 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 38.11,
+     "weighted": 11.43,
+     "detail": "makespan 328.0분 ((양중 10건 / 크레인 2대) × 25.0분 = 125.0분 기준) → 100 × 125.0 / 328.0 = 38.1"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 60.0,
+     "weighted": 15.0,
+     "detail": "soft 간섭 4건 → 100 × (1 − 4/10) = 60.0"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 25.0,
+     "weighted": 2.5,
+     "detail": "양중 개수 [C1:8, C2:2] → 100 × (2/8) / (5/5) = 25.0"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 26.38,
+     "weighted": 2.64,
+     "detail": "작업 시간 [C1:328.0, C2:86.5] → 100 × 86.5/328.0 = 26.4"
+    }
+   },
+   "totalScore": 56.57,
+   "grade": "D"
+  }
+ },
+ "CORRIDOR_1": {
+  "ok": true,
+  "path": "human_plays\\CORRIDOR_1\\expert\\20260729-210722_verify_15714f4b68.json",
+  "meta": {
+   "tier": "expert",
+   "scenario_id": "CORRIDOR_1",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:22",
+   "submitted_at": "2026-07-29T21:07:22",
+   "play_seconds": 0.05,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L7",
+     "liftIndex": 6,
+     "start": 0.0,
+     "finish": 35.624065922855195,
+     "teardown": 0.0,
+     "travel": 0.624065922855193,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.624065922855193,
+     "setupStart": 0.624065922855193,
+     "setupFinish": 10.624065922855193,
+     "liftStart": 10.624065922855193,
+     "liftFinish": 35.624065922855195,
+     "fromX": 12.0,
+     "fromY": 50.0,
+     "toX": 14.317722651787381,
+     "toY": 55.79430662946845,
+     "radiusCenterX": 14.317722651787381,
+     "radiusCenterY": 55.79430662946845,
+     "liftX": 20.0,
+     "liftY": 70.0,
+     "actualLiftRadius": 15.299999999986087,
+     "ratedMaxRadius": 17.99999999998363,
+     "loadWeightT": 8.0,
+     "capacityAtActualT": 10.0,
+     "capacityMarginT": 2.0,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 6.24065922855193,
+     "directMove": 6.24065922855193,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 12.0,
+       "y": 50.0
+      },
+      {
+       "x": 14.317722651787381,
+       "y": 55.79430662946845
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L6",
+     "liftIndex": 5,
+     "start": 0.0,
+     "finish": 35.624065922855195,
+     "teardown": 0.0,
+     "travel": 0.6240659228551929,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.6240659228551929,
+     "setupStart": 0.6240659228551929,
+     "setupFinish": 10.624065922855193,
+     "liftStart": 10.624065922855193,
+     "liftFinish": 35.624065922855195,
+     "fromX": 88.0,
+     "fromY": 50.0,
+     "toX": 85.68227734821262,
+     "toY": 44.20569337053155,
+     "radiusCenterX": 85.68227734821262,
+     "radiusCenterY": 44.20569337053155,
+     "liftX": 80.0,
+     "liftY": 30.0,
+     "actualLiftRadius": 15.299999999986087,
+     "ratedMaxRadius": 17.99999999998363,
+     "loadWeightT": 12.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 1.0,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 6.240659228551929,
+     "directMove": 6.240659228551929,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 88.0,
+       "y": 50.0
+      },
+      {
+       "x": 85.68227734821262,
+       "y": 44.20569337053155
+      }
+     ]
+    }
+   ],
+   "makespan": 287.561,
+   "done": 12,
+   "total": 12,
+   "raw": {
+    "soft_interference_count": 6,
+    "idle_steps_total": 2,
+    "idle_steps_per_crane": [
+     0,
+     2
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 7,
+     "C2": 5
+    },
+    "per_crane_busy": {
+     "C1": 287.56,
+     "C2": 204.96
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 12/12 → 100 × 12/12 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 52.16,
+     "weighted": 15.65,
+     "detail": "makespan 287.6분 ((양중 12건 / 크레인 2대) × 25.0분 = 150.0분 기준) → 100 × 150.0 / 287.6 = 52.2"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 50.0,
+     "weighted": 12.5,
+     "detail": "soft 간섭 6건 → 100 × (1 − 6/12) = 50.0"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 71.43,
+     "weighted": 7.14,
+     "detail": "양중 개수 [C1:7, C2:5] → 100 × (5/7) / (6/6) = 71.4"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 71.27,
+     "weighted": 7.13,
+     "detail": "작업 시간 [C1:287.6, C2:205.0] → 100 × 205.0/287.6 = 71.3"
+    }
+   },
+   "totalScore": 67.42,
+   "grade": "C"
+  }
+ },
+ "D4_1": {
+  "ok": true,
+  "path": "human_plays\\D4_1\\expert\\20260729-210722_verify_aece044433.json",
+  "meta": {
+   "tier": "expert",
+   "scenario_id": "D4_1",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:22",
+   "submitted_at": "2026-07-29T21:07:22",
+   "play_seconds": 0.08,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L10",
+     "liftIndex": 9,
+     "start": 0.0,
+     "finish": 36.812086004632846,
+     "teardown": 0.0,
+     "travel": 1.8120860046328477,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 1.8120860046328477,
+     "setupStart": 1.8120860046328477,
+     "setupFinish": 11.812086004632848,
+     "liftStart": 11.812086004632848,
+     "liftFinish": 36.812086004632846,
+     "fromX": 16.0,
+     "fromY": 18.0,
+     "toX": 30.968223447222435,
+     "toY": 28.213611293398838,
+     "radiusCenterX": 30.968223447222435,
+     "radiusCenterY": 28.213611293398838,
+     "liftX": 41.5,
+     "liftY": 35.4,
+     "actualLiftRadius": 12.75,
+     "ratedMaxRadius": 15.0,
+     "loadWeightT": 16.0,
+     "capacityAtActualT": 18.0,
+     "capacityMarginT": 2.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 18.120860046328477,
+     "directMove": 18.120860046328477,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 16.0,
+       "y": 18.0
+      },
+      {
+       "x": 30.968223447222435,
+       "y": 28.213611293398838
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L4",
+     "liftIndex": 3,
+     "start": 0.0,
+     "finish": 35.73419867821227,
+     "teardown": 0.0,
+     "travel": 0.7341986782122751,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.7341986782122751,
+     "setupStart": 0.7341986782122751,
+     "setupFinish": 10.734198678212275,
+     "liftStart": 10.734198678212275,
+     "liftFinish": 35.73419867821227,
+     "fromX": 84.0,
+     "fromY": 18.0,
+     "toX": 76.69476663187366,
+     "toY": 18.73371339505199,
+     "radiusCenterX": 76.69476663187366,
+     "radiusCenterY": 18.73371339505199,
+     "liftX": 61.1,
+     "liftY": 20.3,
+     "actualLiftRadius": 15.673225578400885,
+     "ratedMaxRadius": 18.43908891576575,
+     "loadWeightT": 8.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 5.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 7.341986782122751,
+     "directMove": 7.341986782122751,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 84.0,
+       "y": 18.0
+      },
+      {
+       "x": 76.69476663187366,
+       "y": 18.73371339505199
+      }
+     ]
+    }
+   ],
+   "makespan": 245.751,
+   "done": 13,
+   "total": 13,
+   "raw": {
+    "soft_interference_count": 7,
+    "idle_steps_total": 5,
+    "idle_steps_per_crane": [
+     0,
+     2,
+     3
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 6,
+     "C2": 4,
+     "C3": 3
+    },
+    "per_crane_busy": {
+     "C1": 245.75,
+     "C2": 150.23,
+     "C3": 106.53
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 13/13 → 100 × 13/13 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 44.08,
+     "weighted": 13.22,
+     "detail": "makespan 245.8분 ((양중 13건 / 크레인 3대) × 25.0분 = 108.3분 기준) → 100 × 108.3 / 245.8 = 44.1"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 46.15,
+     "weighted": 11.54,
+     "detail": "soft 간섭 7건 → 100 × (1 − 7/13) = 46.2"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 62.5,
+     "weighted": 6.25,
+     "detail": "양중 개수 [C1:6, C2:4, C3:3] → 100 × (3/6) / (4/5) = 62.5"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 43.35,
+     "weighted": 4.33,
+     "detail": "작업 시간 [C1:245.8, C2:150.2, C3:106.5] → 100 × 106.5/245.8 = 43.3"
+    }
+   },
+   "totalScore": 60.35,
+   "grade": "C"
+  }
+ },
+ "D4_2": {
+  "ok": true,
+  "path": "human_plays\\D4_2\\expert\\20260729-210722_verify_2485501f24.json",
+  "meta": {
+   "tier": "expert",
+   "scenario_id": "D4_2",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:22",
+   "submitted_at": "2026-07-29T21:07:22",
+   "play_seconds": 0.17,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L1",
+     "liftIndex": 0,
+     "start": 0.0,
+     "finish": 36.21870878777716,
+     "teardown": 0.0,
+     "travel": 1.2187087877771632,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 1.2187087877771632,
+     "setupStart": 1.2187087877771632,
+     "setupFinish": 11.218708787777164,
+     "liftStart": 11.218708787777164,
+     "liftFinish": 36.21870878777716,
+     "fromX": 16.0,
+     "fromY": 18.0,
+     "toX": 22.872312663512933,
+     "toY": 28.06461273946733,
+     "radiusCenterX": 22.872312663512933,
+     "radiusCenterY": 28.06461273946733,
+     "liftX": 31.5,
+     "liftY": 40.7,
+     "actualLiftRadius": 15.299999999993814,
+     "ratedMaxRadius": 17.999999999992724,
+     "loadWeightT": 8.0,
+     "capacityAtActualT": 10.0,
+     "capacityMarginT": 2.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 12.187087877771631,
+     "directMove": 12.187087877771631,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 16.0,
+       "y": 18.0
+      },
+      {
+       "x": 22.872312663512933,
+       "y": 28.06461273946733
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L13",
+     "liftIndex": 12,
+     "start": 0.0,
+     "finish": 36.884272068056184,
+     "teardown": 0.0,
+     "travel": 1.884272068056184,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 1.884272068056184,
+     "setupStart": 1.884272068056184,
+     "setupFinish": 11.884272068056184,
+     "liftStart": 11.884272068056184,
+     "liftFinish": 36.884272068056184,
+     "fromX": 84.0,
+     "fromY": 18.0,
+     "toX": 76.6639599446239,
+     "toY": 35.355997204182486,
+     "radiusCenterX": 76.6639599446239,
+     "radiusCenterY": 35.355997204182486,
+     "liftX": 71.7,
+     "liftY": 47.1,
+     "actualLiftRadius": 12.750000000000004,
+     "ratedMaxRadius": 15.0,
+     "loadWeightT": 12.0,
+     "capacityAtActualT": 14.0,
+     "capacityMarginT": 2.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 18.84272068056184,
+     "directMove": 18.84272068056184,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 84.0,
+       "y": 18.0
+      },
+      {
+       "x": 76.6639599446239,
+       "y": 35.355997204182486
+      }
+     ]
+    }
+   ],
+   "makespan": 247.939,
+   "done": 13,
+   "total": 13,
+   "raw": {
+    "soft_interference_count": 3,
+    "idle_steps_total": 5,
+    "idle_steps_per_crane": [
+     0,
+     2,
+     3
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 6,
+     "C2": 4,
+     "C3": 3
+    },
+    "per_crane_busy": {
+     "C1": 247.94,
+     "C2": 165.79,
+     "C3": 105.65
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 13/13 → 100 × 13/13 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 43.69,
+     "weighted": 13.11,
+     "detail": "makespan 247.9분 ((양중 13건 / 크레인 3대) × 25.0분 = 108.3분 기준) → 100 × 108.3 / 247.9 = 43.7"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 76.92,
+     "weighted": 19.23,
+     "detail": "soft 간섭 3건 → 100 × (1 − 3/13) = 76.9"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 62.5,
+     "weighted": 6.25,
+     "detail": "양중 개수 [C1:6, C2:4, C3:3] → 100 × (3/6) / (4/5) = 62.5"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 42.61,
+     "weighted": 4.26,
+     "detail": "작업 시간 [C1:247.9, C2:165.8, C3:105.7] → 100 × 105.7/247.9 = 42.6"
+    }
+   },
+   "totalScore": 67.85,
+   "grade": "C"
+  }
+ },
+ "D4_3": {
+  "ok": true,
+  "path": "human_plays\\D4_3\\expert\\20260729-210722_verify_549740408f.json",
+  "meta": {
+   "tier": "expert",
+   "scenario_id": "D4_3",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:22",
+   "submitted_at": "2026-07-29T21:07:22",
+   "play_seconds": 0.14,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L4",
+     "liftIndex": 3,
+     "start": 0.0,
+     "finish": 36.13637092073657,
+     "teardown": 0.0,
+     "travel": 1.1363709207365673,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 1.1363709207365673,
+     "setupStart": 1.1363709207365673,
+     "setupFinish": 11.136370920736567,
+     "liftStart": 11.136370920736567,
+     "liftFinish": 36.13637092073657,
+     "fromX": 16.0,
+     "fromY": 18.0,
+     "toX": 27.09779904816844,
+     "toY": 20.44391964598655,
+     "radiusCenterX": 27.09779904816844,
+     "radiusCenterY": 20.44391964598655,
+     "liftX": 43.7,
+     "liftY": 24.1,
+     "actualLiftRadius": 17.0,
+     "ratedMaxRadius": 20.0,
+     "loadWeightT": 8.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 5.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 11.363709207365673,
+     "directMove": 11.363709207365673,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 16.0,
+       "y": 18.0
+      },
+      {
+       "x": 27.09779904816844,
+       "y": 20.44391964598655
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L12",
+     "liftIndex": 11,
+     "start": 0.0,
+     "finish": 35.0,
+     "teardown": 0.0,
+     "travel": 0.0,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.0,
+     "setupStart": 0.0,
+     "setupFinish": 10.0,
+     "liftStart": 10.0,
+     "liftFinish": 35.0,
+     "fromX": 84.0,
+     "fromY": 18.0,
+     "toX": 84.0,
+     "toY": 18.0,
+     "radiusCenterX": 84.0,
+     "radiusCenterY": 18.0,
+     "liftX": 87.4,
+     "liftY": 27.9,
+     "actualLiftRadius": 10.467568963231148,
+     "ratedMaxRadius": 20.0,
+     "loadWeightT": 8.0,
+     "capacityAtActualT": 26.0,
+     "capacityMarginT": 18.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": true,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 0.0,
+     "directMove": 0.0,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 84.0,
+       "y": 18.0
+      },
+      {
+       "x": 84.0,
+       "y": 18.0
+      }
+     ]
+    }
+   ],
+   "makespan": 207.604,
+   "done": 13,
+   "total": 13,
+   "raw": {
+    "soft_interference_count": 7,
+    "idle_steps_total": 1,
+    "idle_steps_per_crane": [
+     0,
+     0,
+     1
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 5,
+     "C2": 4,
+     "C3": 4
+    },
+    "per_crane_busy": {
+     "C1": 207.6,
+     "C2": 166.37,
+     "C3": 130.47
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 13/13 → 100 × 13/13 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 52.18,
+     "weighted": 15.65,
+     "detail": "makespan 207.6분 ((양중 13건 / 크레인 3대) × 25.0분 = 108.3분 기준) → 100 × 108.3 / 207.6 = 52.2"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 46.15,
+     "weighted": 11.54,
+     "detail": "soft 간섭 7건 → 100 × (1 − 7/13) = 46.2"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 100.0,
+     "weighted": 10.0,
+     "detail": "양중 개수 [C1:5, C2:4, C3:4] → 100 × (4/5) / (4/5) = 100.0"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 62.84,
+     "weighted": 6.28,
+     "detail": "작업 시간 [C1:207.6, C2:166.4, C3:130.5] → 100 × 130.5/207.6 = 62.8"
+    }
+   },
+   "totalScore": 68.48,
+   "grade": "C"
+  }
+ },
+ "D4_4": {
+  "ok": true,
+  "path": "human_plays\\D4_4\\expert\\20260729-210722_verify_d30ed9ab74.json",
+  "meta": {
+   "tier": "expert",
+   "scenario_id": "D4_4",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:22",
+   "submitted_at": "2026-07-29T21:07:22",
+   "play_seconds": 0.1,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L12",
+     "liftIndex": 11,
+     "start": 0.0,
+     "finish": 36.91083967017864,
+     "teardown": 0.0,
+     "travel": 1.9108396701786372,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 1.9108396701786372,
+     "setupStart": 1.9108396701786372,
+     "setupFinish": 11.910839670178637,
+     "liftStart": 11.910839670178637,
+     "liftFinish": 36.91083967017864,
+     "fromX": 16.0,
+     "fromY": 18.0,
+     "toX": 23.10589110004639,
+     "toY": 35.738013873800014,
+     "radiusCenterX": 23.10589110004639,
+     "radiusCenterY": 35.738013873800014,
+     "liftX": 29.3,
+     "liftY": 51.2,
+     "actualLiftRadius": 16.656530251864748,
+     "ratedMaxRadius": 19.595917943370296,
+     "loadWeightT": 8.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 5.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 19.108396701786372,
+     "directMove": 19.108396701786372,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 16.0,
+       "y": 18.0
+      },
+      {
+       "x": 23.10589110004639,
+       "y": 35.738013873800014
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L4",
+     "liftIndex": 3,
+     "start": 0.0,
+     "finish": 37.65422035748659,
+     "teardown": 0.0,
+     "travel": 2.6542203574865857,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 2.6542203574865857,
+     "setupStart": 2.6542203574865857,
+     "setupFinish": 12.654220357486587,
+     "liftStart": 12.654220357486587,
+     "liftFinish": 37.65422035748659,
+     "fromX": 84.0,
+     "fromY": 18.0,
+     "toX": 76.00730992943573,
+     "toY": 43.31018522345353,
+     "radiusCenterX": 76.00730992943573,
+     "radiusCenterY": 43.31018522345353,
+     "liftX": 71.4,
+     "liftY": 57.9,
+     "actualLiftRadius": 15.299999999993815,
+     "ratedMaxRadius": 17.999999999992724,
+     "loadWeightT": 8.0,
+     "capacityAtActualT": 10.0,
+     "capacityMarginT": 2.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 26.54220357486586,
+     "directMove": 26.54220357486586,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 84.0,
+       "y": 18.0
+      },
+      {
+       "x": 76.00730992943573,
+       "y": 43.31018522345353
+      }
+     ]
+    }
+   ],
+   "makespan": 245.884,
+   "done": 13,
+   "total": 13,
+   "raw": {
+    "soft_interference_count": 5,
+    "idle_steps_total": 5,
+    "idle_steps_per_crane": [
+     0,
+     3,
+     2
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 6,
+     "C2": 3,
+     "C3": 4
+    },
+    "per_crane_busy": {
+     "C1": 245.88,
+     "C2": 124.21,
+     "C3": 147.58
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 13/13 → 100 × 13/13 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 44.06,
+     "weighted": 13.22,
+     "detail": "makespan 245.9분 ((양중 13건 / 크레인 3대) × 25.0분 = 108.3분 기준) → 100 × 108.3 / 245.9 = 44.1"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 61.54,
+     "weighted": 15.38,
+     "detail": "soft 간섭 5건 → 100 × (1 − 5/13) = 61.5"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 62.5,
+     "weighted": 6.25,
+     "detail": "양중 개수 [C1:6, C2:3, C3:4] → 100 × (3/6) / (4/5) = 62.5"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 50.51,
+     "weighted": 5.05,
+     "detail": "작업 시간 [C1:245.9, C2:124.2, C3:147.6] → 100 × 124.2/245.9 = 50.5"
+    }
+   },
+   "totalScore": 64.9,
+   "grade": "C"
+  }
+ },
+ "D4_5": {
+  "ok": true,
+  "path": "human_plays\\D4_5\\expert\\20260729-210722_verify_7f99438aa4.json",
+  "meta": {
+   "tier": "expert",
+   "scenario_id": "D4_5",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:22",
+   "submitted_at": "2026-07-29T21:07:22",
+   "play_seconds": 0.1,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L8",
+     "liftIndex": 7,
+     "start": 0.0,
+     "finish": 35.933514761682574,
+     "teardown": 0.0,
+     "travel": 0.9335147616825694,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.9335147616825694,
+     "setupStart": 0.9335147616825694,
+     "setupFinish": 10.93351476168257,
+     "liftStart": 10.93351476168257,
+     "liftFinish": 35.933514761682574,
+     "fromX": 16.0,
+     "fromY": 18.0,
+     "toX": 22.274204922711235,
+     "toY": 24.91225966061407,
+     "radiusCenterX": 22.274204922711235,
+     "radiusCenterY": 24.91225966061407,
+     "liftX": 33.7,
+     "liftY": 37.5,
+     "actualLiftRadius": 17.000000000000004,
+     "ratedMaxRadius": 20.0,
+     "loadWeightT": 8.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 5.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 9.335147616825694,
+     "directMove": 9.335147616825694,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 16.0,
+       "y": 18.0
+      },
+      {
+       "x": 22.274204922711235,
+       "y": 24.91225966061407
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L7",
+     "liftIndex": 6,
+     "start": 0.0,
+     "finish": 36.0023748416166,
+     "teardown": 0.0,
+     "travel": 1.0023748416165963,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 1.0023748416165963,
+     "setupStart": 1.0023748416165963,
+     "setupFinish": 11.002374841616597,
+     "liftStart": 11.002374841616597,
+     "liftFinish": 36.0023748416166,
+     "fromX": 84.0,
+     "fromY": 18.0,
+     "toX": 76.9618770674657,
+     "toY": 25.137251424541827,
+     "radiusCenterX": 76.9618770674657,
+     "radiusCenterY": 25.137251424541827,
+     "liftX": 69.8,
+     "liftY": 32.4,
+     "actualLiftRadius": 10.199999999990723,
+     "ratedMaxRadius": 11.999999999989086,
+     "loadWeightT": 20.0,
+     "capacityAtActualT": 24.0,
+     "capacityMarginT": 4.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 10.023748416165963,
+     "directMove": 10.023748416165963,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 84.0,
+       "y": 18.0
+      },
+      {
+       "x": 76.9618770674657,
+       "y": 25.137251424541827
+      }
+     ]
+    }
+   ],
+   "makespan": 203.568,
+   "done": 13,
+   "total": 13,
+   "raw": {
+    "soft_interference_count": 3,
+    "idle_steps_total": 2,
+    "idle_steps_per_crane": [
+     0,
+     0,
+     2
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 5,
+     "C2": 5,
+     "C3": 3
+    },
+    "per_crane_busy": {
+     "C1": 203.44,
+     "C2": 203.57,
+     "C3": 122.73
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 13/13 → 100 × 13/13 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 53.22,
+     "weighted": 15.97,
+     "detail": "makespan 203.6분 ((양중 13건 / 크레인 3대) × 25.0분 = 108.3분 기준) → 100 × 108.3 / 203.6 = 53.2"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 76.92,
+     "weighted": 19.23,
+     "detail": "soft 간섭 3건 → 100 × (1 − 3/13) = 76.9"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 75.0,
+     "weighted": 7.5,
+     "detail": "양중 개수 [C1:5, C2:5, C3:3] → 100 × (3/5) / (4/5) = 75.0"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 60.29,
+     "weighted": 6.03,
+     "detail": "작업 시간 [C1:203.4, C2:203.6, C3:122.7] → 100 × 122.7/203.6 = 60.3"
+    }
+   },
+   "totalScore": 73.72,
+   "grade": "B"
+  }
+ },
+ "FLEET_1": {
+  "ok": true,
+  "path": "human_plays\\FLEET_1\\expert\\20260729-210722_verify_caa69f3d08.json",
+  "meta": {
+   "tier": "expert",
+   "scenario_id": "FLEET_1",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:22",
+   "submitted_at": "2026-07-29T21:07:22",
+   "play_seconds": 0.06,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L9",
+     "liftIndex": 8,
+     "start": 0.0,
+     "finish": 35.0,
+     "teardown": 0.0,
+     "travel": 0.0,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.0,
+     "setupStart": 0.0,
+     "setupFinish": 10.0,
+     "liftStart": 10.0,
+     "liftFinish": 35.0,
+     "fromX": 30.0,
+     "fromY": 30.0,
+     "toX": 30.0,
+     "toY": 30.0,
+     "radiusCenterX": 30.0,
+     "radiusCenterY": 30.0,
+     "liftX": 20.0,
+     "liftY": 24.0,
+     "actualLiftRadius": 11.661903789690601,
+     "ratedMaxRadius": 17.99999999998363,
+     "loadWeightT": 12.0,
+     "capacityAtActualT": 26.0,
+     "capacityMarginT": 14.0,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": true,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 0.0,
+     "directMove": 0.0,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 30.0,
+       "y": 30.0
+      },
+      {
+       "x": 30.0,
+       "y": 30.0
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L10",
+     "liftIndex": 9,
+     "start": 0.0,
+     "finish": 35.0,
+     "teardown": 0.0,
+     "travel": 0.0,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.0,
+     "setupStart": 0.0,
+     "setupFinish": 10.0,
+     "liftStart": 10.0,
+     "liftFinish": 35.0,
+     "fromX": 70.0,
+     "fromY": 70.0,
+     "toX": 70.0,
+     "toY": 70.0,
+     "radiusCenterX": 70.0,
+     "radiusCenterY": 70.0,
+     "liftX": 80.0,
+     "liftY": 76.0,
+     "actualLiftRadius": 11.661903789690601,
+     "ratedMaxRadius": 17.99999999998363,
+     "loadWeightT": 12.0,
+     "capacityAtActualT": 26.0,
+     "capacityMarginT": 14.0,
+     "craneRadius": 22.0,
+     "dangerRadius": 22.0,
+     "sameRadius": true,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 0.0,
+     "directMove": 0.0,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 70.0,
+       "y": 70.0
+      },
+      {
+       "x": 70.0,
+       "y": 70.0
+      }
+     ]
+    }
+   ],
+   "makespan": 202.004,
+   "done": 10,
+   "total": 10,
+   "raw": {
+    "soft_interference_count": 6,
+    "idle_steps_total": 0,
+    "idle_steps_per_crane": [
+     0,
+     0
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 5,
+     "C2": 5
+    },
+    "per_crane_busy": {
+     "C1": 202.0,
+     "C2": 202.0
+    }
+   },
+   "cost": {
+    "totalCost": 1236813.87,
+    "currency": "KRW",
+    "items": {
+     "rental": {
+      "label": "크레인 임대비 (가동)",
+      "cost": 750000.0,
+      "detail": "Σ 크레인별 양중시간 250.0분 × 임대단가 = 750,000 KRW"
+     },
+     "idle": {
+      "label": "유휴 손실비",
+      "cost": 0.33,
+      "detail": "Σ 크레인별 대기시간 (makespan 202.0분 - 작업시간) × 유휴단가 = 0 KRW"
+     },
+     "fuel": {
+      "label": "운행/연료비",
+      "cost": 2003.95,
+      "detail": "이동거리 40.1 × 50/단위 = 2,004 KRW"
+     },
+     "labor": {
+      "label": "노무비",
+      "cost": 484809.6,
+      "detail": "Σ 크레인별 전체 공정시간 404.0분 × 1,200/분 = 484,810 KRW"
+     }
+    },
+    "perCrane": [
+     {
+      "craneId": "C1",
+      "type": "default",
+      "hoistMin": 125.0,
+      "busyMin": 202.0,
+      "idleMin": 0.0,
+      "onsiteMin": 202.0,
+      "rentalRate": 3000.0,
+      "idleRate": 3000.0,
+      "rentalCost": 375000.0,
+      "idleCost": 0.16
+     },
+     {
+      "craneId": "C2",
+      "type": "default",
+      "hoistMin": 125.0,
+      "busyMin": 202.0,
+      "idleMin": 0.0,
+      "onsiteMin": 202.0,
+      "rentalRate": 3000.0,
+      "idleRate": 3000.0,
+      "rentalCost": 375000.0,
+      "idleCost": 0.16
+     }
+    ],
+    "totals": {
+     "makespanMin": 202.0,
+     "moveTotal": 40.08,
+     "setupMin": 100.0,
+     "teardownMin": 50.0,
+     "hoistMin": 250.0,
+     "onsiteMin": 404.01
+    },
+    "rates": {
+     "currency": "KRW",
+     "rentalPerMin": {
+      "_default": 3000.0
+     },
+     "idlePerMin": null,
+     "fuelPerMoveUnit": 50.0,
+     "laborPerMin": 1200.0
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 10/10 → 100 × 10/10 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 61.88,
+     "weighted": 18.56,
+     "detail": "makespan 202.0분 ((양중 10건 / 크레인 2대) × 25.0분 = 125.0분 기준) → 100 × 125.0 / 202.0 = 61.9"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 40.0,
+     "weighted": 10.0,
+     "detail": "soft 간섭 6건 → 100 × (1 − 6/10) = 40.0"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 100.0,
+     "weighted": 10.0,
+     "detail": "양중 개수 [C1:5, C2:5] → 100 × (5/5) / (5/5) = 100.0"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 100.0,
+     "weighted": 10.0,
+     "detail": "작업 시간 [C1:202.0, C2:202.0] → 100 × 202.0/202.0 = 100.0"
+    }
+   },
+   "totalScore": 73.56,
+   "grade": "B"
+  }
+ },
+ "ORD_3": {
+  "ok": true,
+  "path": "human_plays\\ORD_3\\expert\\20260729-210722_verify_71afc0b388.json",
+  "meta": {
+   "tier": "expert",
+   "scenario_id": "ORD_3",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:22",
+   "submitted_at": "2026-07-29T21:07:22",
+   "play_seconds": 0.08,
+   "undo_count": 0,
+   "order_mode": true,
+   "order_seed": "",
+   "order_perm": [
+    "L13",
+    "L5",
+    "L8",
+    "L7"
+   ],
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L10",
+     "liftIndex": 9,
+     "start": 0.0,
+     "finish": 36.812086004632846,
+     "teardown": 0.0,
+     "travel": 1.8120860046328477,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 1.8120860046328477,
+     "setupStart": 1.8120860046328477,
+     "setupFinish": 11.812086004632848,
+     "liftStart": 11.812086004632848,
+     "liftFinish": 36.812086004632846,
+     "fromX": 16.0,
+     "fromY": 18.0,
+     "toX": 30.968223447222435,
+     "toY": 28.213611293398838,
+     "radiusCenterX": 30.968223447222435,
+     "radiusCenterY": 28.213611293398838,
+     "liftX": 41.5,
+     "liftY": 35.4,
+     "actualLiftRadius": 12.75,
+     "ratedMaxRadius": 15.0,
+     "loadWeightT": 16.0,
+     "capacityAtActualT": 18.0,
+     "capacityMarginT": 2.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 18.120860046328477,
+     "directMove": 18.120860046328477,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 16.0,
+       "y": 18.0
+      },
+      {
+       "x": 30.968223447222435,
+       "y": 28.213611293398838
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L4",
+     "liftIndex": 3,
+     "start": 0.0,
+     "finish": 35.73419867821227,
+     "teardown": 0.0,
+     "travel": 0.7341986782122751,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.7341986782122751,
+     "setupStart": 0.7341986782122751,
+     "setupFinish": 10.734198678212275,
+     "liftStart": 10.734198678212275,
+     "liftFinish": 35.73419867821227,
+     "fromX": 84.0,
+     "fromY": 18.0,
+     "toX": 76.69476663187366,
+     "toY": 18.73371339505199,
+     "radiusCenterX": 76.69476663187366,
+     "radiusCenterY": 18.73371339505199,
+     "liftX": 61.1,
+     "liftY": 20.3,
+     "actualLiftRadius": 15.673225578400885,
+     "ratedMaxRadius": 18.43908891576575,
+     "loadWeightT": 8.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 5.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 7.341986782122751,
+     "directMove": 7.341986782122751,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 84.0,
+       "y": 18.0
+      },
+      {
+       "x": 76.69476663187366,
+       "y": 18.73371339505199
+      }
+     ]
+    }
+   ],
+   "makespan": 205.714,
+   "done": 13,
+   "total": 13,
+   "raw": {
+    "soft_interference_count": 8,
+    "idle_steps_total": 1,
+    "idle_steps_per_crane": [
+     0,
+     0,
+     1
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 5,
+     "C2": 4,
+     "C3": 4
+    },
+    "per_crane_busy": {
+     "C1": 205.71,
+     "C2": 166.56,
+     "C3": 147.93
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 13/13 → 100 × 13/13 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 52.66,
+     "weighted": 15.8,
+     "detail": "makespan 205.7분 ((양중 13건 / 크레인 3대) × 25.0분 = 108.3분 기준) → 100 × 108.3 / 205.7 = 52.7"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 38.46,
+     "weighted": 9.62,
+     "detail": "soft 간섭 8건 → 100 × (1 − 8/13) = 38.5"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 100.0,
+     "weighted": 10.0,
+     "detail": "양중 개수 [C1:5, C2:4, C3:4] → 100 × (4/5) / (4/5) = 100.0"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 71.91,
+     "weighted": 7.19,
+     "detail": "작업 시간 [C1:205.7, C2:166.6, C3:147.9] → 100 × 147.9/205.7 = 71.9"
+    }
+   },
+   "totalScore": 67.61,
+   "grade": "C"
+  }
+ },
+ "D5_1": {
+  "ok": true,
+  "path": "human_plays\\D5_1\\expert\\20260729-210723_verify_56aaf55c3c.json",
+  "meta": {
+   "tier": "expert",
+   "scenario_id": "D5_1",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:22",
+   "submitted_at": "2026-07-29T21:07:23",
+   "play_seconds": 0.47,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L10",
+     "liftIndex": 9,
+     "start": 0.0,
+     "finish": 35.78935335815888,
+     "teardown": 0.0,
+     "travel": 0.7893533581588787,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.7893533581588787,
+     "setupStart": 0.7893533581588787,
+     "setupFinish": 10.789353358158879,
+     "liftStart": 10.789353358158879,
+     "liftFinish": 35.78935335815888,
+     "fromX": 16.0,
+     "fromY": 18.0,
+     "toX": 18.9609003698494,
+     "toY": 25.317167580662314,
+     "radiusCenterX": 18.9609003698494,
+     "radiusCenterY": 25.317167580662314,
+     "liftX": 24.7,
+     "liftY": 39.5,
+     "actualLiftRadius": 15.299999999993817,
+     "ratedMaxRadius": 17.999999999992724,
+     "loadWeightT": 8.0,
+     "capacityAtActualT": 10.0,
+     "capacityMarginT": 2.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 7.8935335815887875,
+     "directMove": 7.8935335815887875,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 16.0,
+       "y": 18.0
+      },
+      {
+       "x": 18.9609003698494,
+       "y": 25.317167580662314
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L5",
+     "liftIndex": 4,
+     "start": 0.0,
+     "finish": 36.432785851188655,
+     "teardown": 0.0,
+     "travel": 1.4327858511886518,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 1.4327858511886518,
+     "setupStart": 1.4327858511886518,
+     "setupFinish": 11.432785851188651,
+     "liftStart": 11.432785851188651,
+     "liftFinish": 36.432785851188655,
+     "fromX": 84.0,
+     "fromY": 18.0,
+     "toX": 71.91014670690656,
+     "toY": 25.689146694407427,
+     "radiusCenterX": 71.91014670690656,
+     "radiusCenterY": 25.689146694407427,
+     "liftX": 59.0,
+     "liftY": 33.9,
+     "actualLiftRadius": 15.299999999993815,
+     "ratedMaxRadius": 17.999999999992724,
+     "loadWeightT": 8.0,
+     "capacityAtActualT": 10.0,
+     "capacityMarginT": 2.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 14.327858511886518,
+     "directMove": 14.327858511886518,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 84.0,
+       "y": 18.0
+      },
+      {
+       "x": 71.91014670690656,
+       "y": 25.689146694407427
+      }
+     ]
+    }
+   ],
+   "makespan": 284.363,
+   "done": 17,
+   "total": 17,
+   "raw": {
+    "soft_interference_count": 9,
+    "idle_steps_total": 4,
+    "idle_steps_per_crane": [
+     0,
+     1,
+     3
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 7,
+     "C2": 6,
+     "C3": 4
+    },
+    "per_crane_busy": {
+     "C1": 284.36,
+     "C2": 231.78,
+     "C3": 150.39
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 17/17 → 100 × 17/17 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 49.82,
+     "weighted": 14.95,
+     "detail": "makespan 284.4분 ((양중 17건 / 크레인 3대) × 25.0분 = 141.7분 기준) → 100 × 141.7 / 284.4 = 49.8"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 47.06,
+     "weighted": 11.76,
+     "detail": "soft 간섭 9건 → 100 × (1 − 9/17) = 47.1"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 68.57,
+     "weighted": 6.86,
+     "detail": "양중 개수 [C1:7, C2:6, C3:4] → 100 × (4/7) / (5/6) = 68.6"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 52.89,
+     "weighted": 5.29,
+     "detail": "작업 시간 [C1:284.4, C2:231.8, C3:150.4] → 100 × 150.4/284.4 = 52.9"
+    }
+   },
+   "totalScore": 63.86,
+   "grade": "C"
+  }
+ },
+ "D5_2": {
+  "ok": true,
+  "path": "human_plays\\D5_2\\expert\\20260729-210723_verify_b08157750d.json",
+  "meta": {
+   "tier": "expert",
+   "scenario_id": "D5_2",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:23",
+   "submitted_at": "2026-07-29T21:07:23",
+   "play_seconds": 0.13,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L10",
+     "liftIndex": 9,
+     "start": 0.0,
+     "finish": 36.18217070531371,
+     "teardown": 0.0,
+     "travel": 1.1821707053137114,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 1.1821707053137114,
+     "setupStart": 1.1821707053137114,
+     "setupFinish": 11.18217070531371,
+     "liftStart": 11.18217070531371,
+     "liftFinish": 36.18217070531371,
+     "fromX": 16.0,
+     "fromY": 18.0,
+     "toX": 27.41562732550765,
+     "toY": 21.071841534863875,
+     "radiusCenterX": 27.41562732550765,
+     "radiusCenterY": 21.071841534863875,
+     "liftX": 43.5,
+     "liftY": 25.4,
+     "actualLiftRadius": 16.65653025186475,
+     "ratedMaxRadius": 19.595917943370296,
+     "loadWeightT": 8.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 5.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 11.821707053137114,
+     "directMove": 11.821707053137114,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 16.0,
+       "y": 18.0
+      },
+      {
+       "x": 27.41562732550765,
+       "y": 21.071841534863875
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L12",
+     "liftIndex": 11,
+     "start": 0.0,
+     "finish": 35.0,
+     "teardown": 0.0,
+     "travel": 0.0,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.0,
+     "setupStart": 0.0,
+     "setupFinish": 10.0,
+     "liftStart": 10.0,
+     "liftFinish": 35.0,
+     "fromX": 84.0,
+     "fromY": 18.0,
+     "toX": 84.0,
+     "toY": 18.0,
+     "radiusCenterX": 84.0,
+     "radiusCenterY": 18.0,
+     "liftX": 82.2,
+     "liftY": 26.7,
+     "actualLiftRadius": 8.884255736976508,
+     "ratedMaxRadius": 15.0,
+     "loadWeightT": 16.0,
+     "capacityAtActualT": 33.0,
+     "capacityMarginT": 17.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": true,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 0.0,
+     "directMove": 0.0,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 84.0,
+       "y": 18.0
+      },
+      {
+       "x": 84.0,
+       "y": 18.0
+      }
+     ]
+    }
+   ],
+   "makespan": 244.428,
+   "done": 17,
+   "total": 17,
+   "raw": {
+    "soft_interference_count": 8,
+    "idle_steps_total": 1,
+    "idle_steps_per_crane": [
+     0,
+     0,
+     1
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 6,
+     "C2": 6,
+     "C3": 5
+    },
+    "per_crane_busy": {
+     "C1": 244.43,
+     "C2": 212.22,
+     "C3": 203.41
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 17/17 → 100 × 17/17 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 57.96,
+     "weighted": 17.39,
+     "detail": "makespan 244.4분 ((양중 17건 / 크레인 3대) × 25.0분 = 141.7분 기준) → 100 × 141.7 / 244.4 = 58.0"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 52.94,
+     "weighted": 13.24,
+     "detail": "soft 간섭 8건 → 100 × (1 − 8/17) = 52.9"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 100.0,
+     "weighted": 10.0,
+     "detail": "양중 개수 [C1:6, C2:6, C3:5] → 100 × (5/6) / (5/6) = 100.0"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 83.22,
+     "weighted": 8.32,
+     "detail": "작업 시간 [C1:244.4, C2:212.2, C3:203.4] → 100 × 203.4/244.4 = 83.2"
+    }
+   },
+   "totalScore": 73.94,
+   "grade": "B"
+  }
+ },
+ "D5_3": {
+  "ok": true,
+  "path": "human_plays\\D5_3\\expert\\20260729-210723_verify_8398607a13.json",
+  "meta": {
+   "tier": "expert",
+   "scenario_id": "D5_3",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:23",
+   "submitted_at": "2026-07-29T21:07:23",
+   "play_seconds": 0.13,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "L4",
+     "liftIndex": 3,
+     "start": 0.0,
+     "finish": 37.70869083562428,
+     "teardown": 0.0,
+     "travel": 2.708690835624279,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 2.708690835624279,
+     "setupStart": 2.708690835624279,
+     "setupFinish": 12.708690835624278,
+     "liftStart": 12.708690835624278,
+     "liftFinish": 37.70869083562428,
+     "fromX": 16.0,
+     "fromY": 18.0,
+     "toX": 20.85670013432711,
+     "toY": 44.64794678966322,
+     "radiusCenterX": 20.85670013432711,
+     "radiusCenterY": 44.64794678966322,
+     "liftX": 23.6,
+     "liftY": 59.7,
+     "actualLiftRadius": 15.299999999993812,
+     "ratedMaxRadius": 17.999999999992724,
+     "loadWeightT": 8.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 5.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 27.086908356242787,
+     "directMove": 27.086908356242787,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 16.0,
+       "y": 18.0
+      },
+      {
+       "x": 20.85670013432711,
+       "y": 44.64794678966322
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "L16",
+     "liftIndex": 15,
+     "start": 0.0,
+     "finish": 35.088919392682044,
+     "teardown": 0.0,
+     "travel": 0.08891939268204474,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.08891939268204474,
+     "setupStart": 0.08891939268204474,
+     "setupFinish": 10.088919392682044,
+     "liftStart": 10.088919392682044,
+     "liftFinish": 35.088919392682044,
+     "fromX": 84.0,
+     "fromY": 18.0,
+     "toX": 83.20358530528557,
+     "toY": 18.395461089789237,
+     "radiusCenterX": 83.20358530528557,
+     "radiusCenterY": 18.395461089789237,
+     "liftX": 69.5,
+     "liftY": 25.2,
+     "actualLiftRadius": 15.29999999999382,
+     "ratedMaxRadius": 17.999999999992724,
+     "loadWeightT": 12.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 1.0,
+     "craneRadius": 20.0,
+     "dangerRadius": 20.0,
+     "sameRadius": false,
+     "softConflict": 0,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 0.8891939268204474,
+     "directMove": 0.8891939268204474,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 84.0,
+       "y": 18.0
+      },
+      {
+       "x": 83.20358530528557,
+       "y": 18.395461089789237
+      }
+     ]
+    }
+   ],
+   "makespan": 248.968,
+   "done": 17,
+   "total": 17,
+   "raw": {
+    "soft_interference_count": 9,
+    "idle_steps_total": 1,
+    "idle_steps_per_crane": [
+     0,
+     0,
+     1
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 6,
+     "C2": 6,
+     "C3": 5
+    },
+    "per_crane_busy": {
+     "C1": 248.97,
+     "C2": 245.54,
+     "C3": 186.7
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 17/17 → 100 × 17/17 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 56.9,
+     "weighted": 17.07,
+     "detail": "makespan 249.0분 ((양중 17건 / 크레인 3대) × 25.0분 = 141.7분 기준) → 100 × 141.7 / 249.0 = 56.9"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 47.06,
+     "weighted": 11.76,
+     "detail": "soft 간섭 9건 → 100 × (1 − 9/17) = 47.1"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 100.0,
+     "weighted": 10.0,
+     "detail": "양중 개수 [C1:6, C2:6, C3:5] → 100 × (5/6) / (5/6) = 100.0"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 74.99,
+     "weighted": 7.5,
+     "detail": "작업 시간 [C1:249.0, C2:245.5, C3:186.7] → 100 × 186.7/249.0 = 75.0"
+    }
+   },
+   "totalScore": 71.33,
+   "grade": "B"
+  }
+ },
+ "SF_3F": {
+  "ok": true,
+  "path": "human_plays\\SF_3F\\expert\\20260729-210726_verify_6cba7e41e9.json",
+  "meta": {
+   "tier": "expert",
+   "scenario_id": "SF_3F",
+   "user_id": null,
+   "display_name": "verify",
+   "nickname": "verify",
+   "role": "대학생·3학년",
+   "client": "pc",
+   "play_purpose": "general",
+   "started_at": "2026-07-29T21:07:23",
+   "submitted_at": "2026-07-29T21:07:26",
+   "play_seconds": 2.66,
+   "undo_count": 0,
+   "order_mode": false,
+   "order_seed": "",
+   "order_perm": null,
+   "role_kind": "student",
+   "role_grade": "3학년",
+   "role_years": null
+  },
+  "outcome": {
+   "events": [
+    {
+     "craneId": "C1",
+     "craneIndex": 0,
+     "liftId": "F1C00",
+     "liftIndex": 0,
+     "start": 0.0,
+     "finish": 35.0,
+     "teardown": 0.0,
+     "travel": 0.0,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.0,
+     "setupStart": 0.0,
+     "setupFinish": 10.0,
+     "liftStart": 10.0,
+     "liftFinish": 35.0,
+     "fromX": 50.0,
+     "fromY": 27.0,
+     "toX": 50.0,
+     "toY": 27.0,
+     "radiusCenterX": 50.0,
+     "radiusCenterY": 27.0,
+     "liftX": 39.5,
+     "liftY": 39.5,
+     "actualLiftRadius": 16.32482771731451,
+     "ratedMaxRadius": 23.999999999994543,
+     "loadWeightT": 3.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 10.0,
+     "craneRadius": 27.0,
+     "dangerRadius": 27.0,
+     "sameRadius": true,
+     "softConflict": 1,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 0.0,
+     "directMove": 0.0,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 50.0,
+       "y": 27.0
+      },
+      {
+       "x": 50.0,
+       "y": 27.0
+      }
+     ]
+    },
+    {
+     "craneId": "C2",
+     "craneIndex": 1,
+     "liftId": "F1C03",
+     "liftIndex": 3,
+     "start": 0.0,
+     "finish": 35.0,
+     "teardown": 0.0,
+     "travel": 0.0,
+     "setup": 10.0,
+     "duration": 25.0,
+     "teardownStart": 0.0,
+     "teardownFinish": 0.0,
+     "travelStart": 0.0,
+     "travelFinish": 0.0,
+     "setupStart": 0.0,
+     "setupFinish": 10.0,
+     "liftStart": 10.0,
+     "liftFinish": 35.0,
+     "fromX": 50.0,
+     "fromY": 73.0,
+     "toX": 50.0,
+     "toY": 73.0,
+     "radiusCenterX": 50.0,
+     "radiusCenterY": 73.0,
+     "liftX": 39.5,
+     "liftY": 60.5,
+     "actualLiftRadius": 16.32482771731451,
+     "ratedMaxRadius": 23.999999999994543,
+     "loadWeightT": 3.0,
+     "capacityAtActualT": 13.0,
+     "capacityMarginT": 10.0,
+     "craneRadius": 27.0,
+     "dangerRadius": 27.0,
+     "sameRadius": true,
+     "softConflict": 1,
+     "hardMask": 0,
+     "restrictedMask": 0,
+     "restrictedViolation": false,
+     "move": 0.0,
+     "directMove": 0.0,
+     "restrictedDetourDistance": 0.0,
+     "movePath": [
+      {
+       "x": 50.0,
+       "y": 73.0
+      },
+      {
+       "x": 50.0,
+       "y": 73.0
+      }
+     ]
+    }
+   ],
+   "makespan": 1655.667,
+   "done": 120,
+   "total": 120,
+   "raw": {
+    "soft_interference_count": 116,
+    "idle_steps_total": 4,
+    "idle_steps_per_crane": [
+     0,
+     4
+    ],
+    "restricted_executed": 0,
+    "per_crane_jobs": {
+     "C1": 62,
+     "C2": 58
+    },
+    "per_crane_busy": {
+     "C1": 1655.67,
+     "C2": 1525.57
+    }
+   }
+  },
+  "scorer_snapshot": {
+   "weights": {
+    "completion": 25,
+    "makespan": 30,
+    "softInterference": 25,
+    "jobBalance": 10,
+    "timeBalance": 10
+   },
+   "categories": {
+    "completion": {
+     "weight": 25.0,
+     "score": 100.0,
+     "weighted": 25.0,
+     "detail": "완료 120/120 → 100 × 120/120 = 100.0"
+    },
+    "makespan": {
+     "weight": 30.0,
+     "score": 90.6,
+     "weighted": 27.18,
+     "detail": "makespan 1655.7분 ((양중 120건 / 크레인 2대) × 25.0분 = 1500.0분 기준) → 100 × 1500.0 / 1655.7 = 90.6"
+    },
+    "softInterference": {
+     "weight": 25.0,
+     "score": 3.33,
+     "weighted": 0.83,
+     "detail": "soft 간섭 116건 → 100 × (1 − 116/120) = 3.3"
+    },
+    "jobBalance": {
+     "weight": 10.0,
+     "score": 93.55,
+     "weighted": 9.35,
+     "detail": "양중 개수 [C1:62, C2:58] → 100 × (58/62) / (60/60) = 93.5"
+    },
+    "timeBalance": {
+     "weight": 10.0,
+     "score": 92.14,
+     "weighted": 9.21,
+     "detail": "작업 시간 [C1:1655.7, C2:1525.6] → 100 × 1525.6/1655.7 = 92.1"
+    }
+   },
+   "totalScore": 71.58,
+   "grade": "B"
+  }
+ }
+}
